@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <script async src="https://www.googletagmanager.com/gtagadmin/js?id=UA-52115242-14"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52115242-14');
+    </script>
+    <meta charset="UTF-8">
+    <title>Task Management</title>
+    <link rel="shortcut icon" type="image/svg" th:href="@{web/img/logo/logo.svg}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
+    <link th:href="@{admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body>
+<div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" th:fragment="navbar_top">
+
+    <a class="navbar-brand" href="index.html">
+        <img alt="Pipeline" th:src="@{/img/logo/logo.svg}"/>
+    </a>
+    <div class="d-flex align-items-center">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+                aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-block d-lg-none ml-2">
+            <div class="dropdown">
+                <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar"/>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="nav-side-user.html" class="dropdown-item">Profile</a>
+                    <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
+                    <a href="#" class="dropdown-item">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
+        <ul class="navbar-nav d-lg-block">
+
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/home}">Team Overview</a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/projects_overview}">Project</a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/tasks_overview}">Single Task</a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/home}">Kanban Board</a>
+
+            </li>
+
+
+        </ul>
+        <hr>
+        <div>
+            <form>
+                <div class="input-group input-group-dark input-group-round">
+                    <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="material-icons">search</i>
+                  </span>
+                    </div>
+                    <input type="search" class="form-control form-control-dark" placeholder="Search"
+                           aria-label="Search app">
+                </div>
+            </form>
+            <div class="dropdown mt-2">
+                <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="newContentButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add New
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Team</a>
+                    <a class="dropdown-item" href="#">Project</a>
+                    <a class="dropdown-item" href="#">Task</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-lg-block">
+        <div class="dropup">
+            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar"/>
+            </a>
+            <div class="dropdown-menu">
+                <a href="nav-side-user.html" class="dropdown-item">Profile</a>
+                <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
+                <a href="#" class="dropdown-item">Log Out</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="navbar bg-white breadcrumb-bar" th:fragment="navbar">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Overview</a>
+            </li>
+            <li class="breadcrumb-item"><a href="pages-app.html#">App Pages</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Team</li>
+        </ol>
+    </nav>
+
+    <div class="dropdown">
+        <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+            <i class="material-icons">settings</i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+            <a class="dropdown-item" href="#">Share</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#">Leave</a>
+
+        </div>
+    </div>
+
+</div>
+<script th:fragment="script">
+    <script type="text/javascript" th:src="@{admin/js/jquery.min.js}"></script>
+
+<script type="text/javascript" th:src="@{admin/js/popper.min.js}"></script>
+
+<script type="text/javascript" th:src="@{admin/js/bootstrap.js}"></script>
+
+<script type="text/javascript" th:src="@{admin/js/autosize.min.js}"></script>
+<!-- Flatpickr (calendar/date/time picker UI) -->
+<script type="text/javascript" th:src="@{admin/js/flatpickr.min.js}"></script>
+<!-- Prism - displays formatted code boxes -->
+<script type="text/javascript" th:src="@{admin/js/prism.js}"></script>
+<!-- Shopify Draggable - drag, drop and sort items on page -->
+<script type="text/javascript" th:src="@{admin/js/draggable.bundle.legacy.js}"></script>
+
+<script type="text/javascript" th:src="@{admin/js/swap-animation.js}"></script>
+<!-- Dropzone - drag and drop files onto the page for uploading -->
+<script type="text/javascript" th:src="@{admin/js/dropzone.min.js}"></script>
+<!-- List.js} - filter list elements -->
+<script type="text/javascript" th:src="@{admin/js/list.min.js}"></script>
+
+<!-- Required theme scripts (Do not remove) -->
+<script type="text/javascript" th:src="@{admin/js/theme.js}"></script>
+
+
+</body>
+</html>

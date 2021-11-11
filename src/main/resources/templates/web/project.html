@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="web/fragments :: head">
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+<div class="page-container">
+    <!-- sidebar menu area start -->
+    <div th:replace="web/fragments ::sidebar"></div>
+
+    <!-- main content area start -->
+    <div class="main-content">
+        <div th:replace="web/fragments ::header"></div>
+
+        <!-- page title area end -->
+        <div class="main-content-inner">
+            <div class="row">
+                <!-- data table start -->
+                <div class="col-12 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Data Table Default</h4>
+                            <div class="data-tables">
+                                <table id="dataTable" class="text-center">
+                                    <thead class="bg-light text-capitalize">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Office</th>
+                                        <th>Age</th>
+                                        <th>Start Date</th>
+                                        <th>salary</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="web/fragments :: footer"></footer>
+
+<div th:replace="web/fragments :: setting"></div>
+
+<div th:replace="web/fragments :: script"></div>
+</body>
+</html>
