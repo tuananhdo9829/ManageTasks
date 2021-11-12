@@ -6,15 +6,10 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A project management Bootstrap theme by Medium Rare">
-    <link href="assets/img/favicon.ico" rel="icon" type="image/x-icon">
 </head>
-
 <body>
-
 <div class="layout layout-nav-side">
     <div th:replace="admin/fragments ::navbar_top"></div>
-
     <div class="main-container">
         <div th:replace="admin/fragments ::navbar"></div>
         <div class="container">
@@ -28,49 +23,7 @@
 
                                 <li>
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
-                                        <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Marcus Simmons">
-                                        <img alt="Marcus Simmons" class="avatar" src="assets/img/avatar-male-1.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Peggy Brown">
-                                        <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Harry Xai">
-                                        <img alt="Harry Xai" class="avatar" src="assets/img/avatar-male-2.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Sally Harper">
-                                        <img alt="Sally Harper" class="avatar" src="assets/img/avatar-female-3.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Ravi Singh">
-                                        <img alt="Ravi Singh" class="avatar" src="assets/img/avatar-male-3.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Kristina Van Der Stroem">
-                                        <img alt="Kristina Van Der Stroem" class="avatar" src="assets/img/avatar-female-4.jpg" />
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="David Whittaker">
-                                        <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg" />
+                                        <img alt="Claire Connors" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                     </a>
                                 </li>
 
@@ -154,37 +107,19 @@
 
                                                         <li>
                                                             <a href="#" data-toggle="tooltip" title="Kenny">
-                                                                <img alt="Kenny Tran" class="avatar" src="assets/img/avatar-male-6.jpg" />
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="David">
-                                                                <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-4.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Sally">
-                                                                <img alt="Sally Harper" class="avatar" src="assets/img/avatar-female-3.jpg" />
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" title="Kristina">
-                                                                <img alt="Kristina Van Der Stroem" class="avatar" src="assets/img/avatar-female-4.jpg" />
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" title="Claire">
-                                                                <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg" />
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" title="Marcus">
-                                                                <img alt="Marcus Simmons" class="avatar" src="assets/img/avatar-male-1.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -220,14 +155,20 @@
                                                     <ul class="avatars">
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Peggy">
-                                                                <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="David">
-                                                                <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-4.jpg}" />
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -263,20 +204,20 @@
                                                     <ul class="avatars">
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Marcus">
-                                                                <img alt="Marcus Simmons" class="avatar" src="assets/img/avatar-male-1.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Claire">
-                                                                <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-4.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="David">
-                                                                <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -329,14 +270,15 @@
                                                     <ul class="avatars">
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Sally">
-                                                                <img alt="Sally Harper" class="avatar" src="assets/img/avatar-female-3.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}" />
                                                             </a>
                                                         </li>
 
+
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Claire">
-                                                                <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -372,26 +314,20 @@
                                                     <ul class="avatars">
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Peggy">
-                                                                <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="David">
-                                                                <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-4.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Ravi">
-                                                                <img alt="Ravi Singh" class="avatar" src="assets/img/avatar-male-3.jpg" />
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" title="Sally">
-                                                                <img alt="Sally Harper" class="avatar" src="assets/img/avatar-female-3.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -425,22 +361,21 @@
                                                 </div>
                                                 <div class="card-meta">
                                                     <ul class="avatars">
-
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Kristina">
-                                                                <img alt="Kristina Van Der Stroem" class="avatar" src="assets/img/avatar-female-4.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Peggy">
-                                                                <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-4.jpg}" />
                                                             </a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Ravi">
-                                                                <img alt="Ravi Singh" class="avatar" src="assets/img/avatar-male-3.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-male-5.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -493,20 +428,8 @@
                                                     <ul class="avatars">
 
                                                         <li>
-                                                            <a href="#" data-toggle="tooltip" title="Marcus">
-                                                                <img alt="Marcus Simmons" class="avatar" src="assets/img/avatar-male-1.jpg" />
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" title="Harry">
-                                                                <img alt="Harry Xai" class="avatar" src="assets/img/avatar-male-2.jpg" />
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" title="Kristina">
-                                                                <img alt="Kristina Van Der Stroem" class="avatar" src="assets/img/avatar-female-4.jpg" />
+                                                            <a href="#" data-toggle="tooltip" title="Kenny">
+                                                                <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-4.jpg}" />
                                                             </a>
                                                         </li>
 
@@ -566,7 +489,7 @@
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <img alt="David Whittaker" src="assets/img/avatar-male-4.jpg" class="avatar" data-title="David Whittaker" data-toggle="tooltip" />
+                                                            <img alt="David Whittaker"th:src="@{admin/img/avatar-female-3.jpg}" class="avatar" data-title="David Whittaker" data-toggle="tooltip" />
                                                         </li>
                                                     </ul>
                                                     <div class="media-body d-flex justify-content-between align-items-center">
@@ -680,7 +603,7 @@
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <img alt="Ravi Singh" src="assets/img/avatar-male-3.jpg" class="avatar" data-title="Ravi Singh" data-toggle="tooltip" data-filter-by="data-title" />
+                                                            <img alt="Ravi Singh" th:src="@{admin/img/avatar-male-5.jpg}" class="avatar" data-title="Ravi Singh" data-toggle="tooltip" data-filter-by="data-title" />
                                                         </li>
                                                     </ul>
                                                     <div class="media-body d-flex justify-content-between align-items-center">
@@ -1754,34 +1677,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="layout-switcher" tabindex="1">
-    <div class="layout-switcher-head d-flex justify-content-between">
-        <span>Select Layout</span>
-        <i class="material-icons">arrow_drop_up</i>
-    </div>
-    <div class="layout-switcher-body">
-
-        <div class="layout-switcher-option active">
-            <a href="nav-side-project.html">
-                <img alt="Navigation Side" src="assets/img/layouts/layout-nav-side.svg" class="layout-switcher-icon" />
-            </a>
-        </div>
-
-        <div class="layout-switcher-option">
-            <a href="nav-top-project.html">
-                <img alt="Navigation Top" src="assets/img/layouts/layout-nav-top.svg" class="layout-switcher-icon" />
-            </a>
-        </div>
-
-        <div class="layout-switcher-option">
-            <a href="nav-top-sidebar-project.html">
-                <img alt="Content Sidebar" src="assets/img/layouts/layout-nav-top-sidebar.svg" class="layout-switcher-icon" />
-            </a>
         </div>
 
     </div>

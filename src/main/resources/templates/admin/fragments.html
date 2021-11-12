@@ -1,21 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-    <script async src="https://www.googletagmanager.com/gtagadmin/js?id=UA-52115242-14"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-52115242-14');
-    </script>
     <meta charset="UTF-8">
     <title>Task Management</title>
-    <link rel="shortcut icon" type="image/svg" th:href="@{web/img/logo/logo.svg}">
+    <link rel="shortcut icon" type="image/svg" th:href="@{admin/img/logo/logo.svg}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
     <link th:href="@{admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
@@ -25,7 +13,7 @@
 <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" th:fragment="navbar_top">
 
     <a class="navbar-brand" href="index.html">
-        <img alt="Pipeline" th:src="@{/img/logo/logo.svg}"/>
+        <img alt="Pipeline" th:src="@{admin/img/logo/logo.svg}"/>
     </a>
     <div class="d-flex align-items-center">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
@@ -50,7 +38,7 @@
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/home}">Team Overview</a>
+                <a class="nav-link" th:href="@{/}">Team Overview</a>
 
             </li>
 

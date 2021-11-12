@@ -26,103 +26,103 @@
     <script th:src="@{web/js/vendor/modernizr-2.8.3.min.js}"></script>
 </head>
 <body>
-<div th:fragment="sidebar">
-    <div class="sidebar-menu">
-        <div class="sidebar-header">
-            <div class="logo">
-                <a th:href="@{/}"><img th:src="@{/images/icon/logo.png}" alt="logo"></a>
-            </div>
-        </div>
-        <div class="main-menu">
-            <div class="menu-inner">
-                <nav>
-                    <ul class="metismenu" id="menu">
-                        <li class="active">
-                            <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
-                                <span>Tables Manage Task</span></a>
-                            <ul class="collapse">
-                                <li class="active"><a th:href="@{/users}">Manage Users</a></li>
-                                <li><a th:href="@{/projects}">Manage Project</a></li>
-                                <li><a th:href="@{/tasks}">Manage Task</a></li>
-                                <li><a href="datatable.html">datatable</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i>
-                                <span>Pages</span></a>
-                            <ul class="collapse">
-                                <li><a th:href="@{/login}">Login</a></li>
-                                <li><a th:href="@{/register}">Register</a></li>
-                                <li><a th:href="@{/logout}">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div th:fragment="sidebar">-->
+<!--    <div class="sidebar-menu">-->
+<!--        <div class="sidebar-header">-->
+<!--            <div class="logo">-->
+<!--                <a th:href="@{/}"><img th:src="@{/images/icon/logo.png}" alt="logo"></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="main-menu">-->
+<!--            <div class="menu-inner">-->
+<!--                <nav>-->
+<!--                    <ul class="metismenu" id="menu">-->
+<!--                        <li class="active">-->
+<!--                            <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>-->
+<!--                                <span>Tables Manage Task</span></a>-->
+<!--                            <ul class="collapse">-->
+<!--                                <li class="active"><a th:href="@{/users}">Manage Users</a></li>-->
+<!--                                <li><a th:href="@{/projects}">Manage Project</a></li>-->
+<!--                                <li><a th:href="@{/tasks}">Manage Task</a></li>-->
+<!--                                <li><a href="datatable.html">datatable</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layers-alt"></i>-->
+<!--                                <span>Pages</span></a>-->
+<!--                            <ul class="collapse">-->
+<!--                                <li><a th:href="@{/login}">Login</a></li>-->
+<!--                                <li><a th:href="@{/register}">Register</a></li>-->
+<!--                                <li><a th:href="@{/logout}">Logout</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div th:fragment="header">
-    <div class="header-area">
-        <div class="row align-items-center">
-            <!-- nav and search button -->
-            <div class="col-md-6 col-sm-8 clearfix">
-                <div class="nav-btn pull-left">
-                    <span></span>
-                </div>
-                <div class="search-box pull-left">
-                    <form action="#">
-                        <input type="text" name="search" placeholder="Search..." required>
-                        <i class="ti-search"></i>
-                    </form>
-                </div>
-            </div>
-            <!-- profile info & task notification -->
-            <div class="col-md-6 col-sm-4 clearfix">
-                <ul class="notification-area pull-right">
-                    <li class="dropdown">
-                        <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                            <span>2</span>
-                        </i>
-                        <div class="dropdown-menu bell-notify-box notify-box">
-                            <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
-                            <div class="nofity-list">
-                                <a href="#" class="notify-item">
-                                    <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                    <div class="notify-text">
-                                        <p>You have Changed Your Password</p>
-                                        <span>Just Now</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
-                        <div class="dropdown-menu notify-box nt-enveloper-box">
-                            <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
-                            <div class="nofity-list">
-                                <a href="#" class="notify-item">
-                                    <div class="notify-thumb">
-                                        <img th:src="@{../admin/images/author/author-img3.jpg}" alt="image">
-                                    </div>
-                                    <div class="notify-text">
-                                        <p>Aglae Mayer</p>
-                                        <span class="msg">Hey I am waiting for you...</span>
-                                        <span>3:15 PM</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="settings-btn">
-                        <i class="ti-settings"></i>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<!--<div th:fragment="header">-->
+<!--    <div class="header-area">-->
+<!--        <div class="row align-items-center">-->
+<!--            &lt;!&ndash; nav and search button &ndash;&gt;-->
+<!--            <div class="col-md-6 col-sm-8 clearfix">-->
+<!--                <div class="nav-btn pull-left">-->
+<!--                    <span></span>-->
+<!--                </div>-->
+<!--                <div class="search-box pull-left">-->
+<!--                    <form action="#">-->
+<!--                        <input type="text" name="search" placeholder="Search..." required>-->
+<!--                        <i class="ti-search"></i>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; profile info & task notification &ndash;&gt;-->
+<!--            <div class="col-md-6 col-sm-4 clearfix">-->
+<!--                <ul class="notification-area pull-right">-->
+<!--                    <li class="dropdown">-->
+<!--                        <i class="ti-bell dropdown-toggle" data-toggle="dropdown">-->
+<!--                            <span>2</span>-->
+<!--                        </i>-->
+<!--                        <div class="dropdown-menu bell-notify-box notify-box">-->
+<!--                            <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>-->
+<!--                            <div class="nofity-list">-->
+<!--                                <a href="#" class="notify-item">-->
+<!--                                    <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>-->
+<!--                                    <div class="notify-text">-->
+<!--                                        <p>You have Changed Your Password</p>-->
+<!--                                        <span>Just Now</span>-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="dropdown">-->
+<!--                        <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>-->
+<!--                        <div class="dropdown-menu notify-box nt-enveloper-box">-->
+<!--                            <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>-->
+<!--                            <div class="nofity-list">-->
+<!--                                <a href="#" class="notify-item">-->
+<!--                                    <div class="notify-thumb">-->
+<!--                                        <img th:src="@{../admin/images/author/author-img3.jpg}" alt="image">-->
+<!--                                    </div>-->
+<!--                                    <div class="notify-text">-->
+<!--                                        <p>Aglae Mayer</p>-->
+<!--                                        <span class="msg">Hey I am waiting for you...</span>-->
+<!--                                        <span>3:15 PM</span>-->
+<!--                                    </div>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="settings-btn">-->
+<!--                        <i class="ti-settings"></i>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <!-- header area end -->
     <!-- page title area start -->
     <div class="page-title-area">

@@ -7,7 +7,6 @@
 <body>
 <div class="layout layout-nav-side">
     <div th:replace="admin/fragments ::navbar_top"></div>
-
     <div class="main-container">
         <div th:replace="admin/fragments ::navbar"></div>
         <div class="container">
@@ -21,51 +20,17 @@
 
                                 <li>
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
-                                        <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg"/>
+                                        <img alt="Claire Connors" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}"/>
                                     </a>
                                 </li>
-
                                 <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Marcus Simmons">
-                                        <img alt="Marcus Simmons" class="avatar" src="assets/img/avatar-male-1.jpg"/>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
+                                        <img alt="Claire Connors" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}"/>
                                     </a>
                                 </li>
-
                                 <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Peggy Brown">
-                                        <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg"/>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Harry Xai">
-                                        <img alt="Harry Xai" class="avatar" src="assets/img/avatar-male-2.jpg"/>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Sally Harper">
-                                        <img alt="Sally Harper" class="avatar" src="assets/img/avatar-female-3.jpg"/>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Ravi Singh">
-                                        <img alt="Ravi Singh" class="avatar" src="assets/img/avatar-male-3.jpg"/>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top"
-                                       title="Kristina Van Der Stroem">
-                                        <img alt="Kristina Van Der Stroem" class="avatar"
-                                             src="assets/img/avatar-female-4.jpg"/>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="David Whittaker">
-                                        <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg"/>
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
+                                        <img alt="Claire Connors" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}"/>
                                     </a>
                                 </li>
 
@@ -93,10 +58,7 @@
                             <a class="nav-link active" data-toggle="tab" href="#task" role="tab" aria-controls="task"
                                aria-selected="true">Task</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#files" role="tab" aria-controls="files"
-                               aria-selected="false">Files</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#activity" role="tab" aria-controls="activity"
                                aria-selected="false">Activity</a>
@@ -303,7 +265,7 @@
                                     <div class="card card-note">
                                         <div class="card-header">
                                             <div class="media align-items-center">
-                                                <img alt="Peggy Brown" src="assets/img/avatar-female-2.jpg"
+                                                <img alt="Peggy Brown" th:src="@{admin/img/avatar-female-3.jpg}"
                                                      class="avatar" data-toggle="tooltip" data-title="Peggy Brown"
                                                      data-filter-by="alt"/>
                                                 <div class="media-body">
@@ -339,74 +301,6 @@
                                                     softer pallette
                                                 </li>
                                             </ul>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="card card-note">
-                                        <div class="card-header">
-                                            <div class="media align-items-center">
-                                                <img alt="David Whittaker" src="assets/img/avatar-male-4.jpg"
-                                                     class="avatar" data-toggle="tooltip" data-title="David Whittaker"
-                                                     data-filter-by="alt"/>
-                                                <div class="media-body">
-                                                    <h6 class="mb-0" data-filter-by="text">Client preference</h6>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <span data-filter-by="text">Yesterday</span>
-                                                <div class="ml-1 dropdown card-options">
-                                                    <button class="btn-options" type="button"
-                                                            id="note-dropdown-button-2" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                        <i class="material-icons">more_vert</i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="#">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body" data-filter-by="text">
-                                            <p>Hi all, just wanted to add that the client has requested that we lean
-                                                toward a &#39;friendly&#39; aesthetic. I know this seems a little vague
-                                                but it does give us a starting point for the mood boards. I recommend we
-                                                use larger
-                                                corporates who target &#39;youthful&#39; audiences as initial
-                                                inspiration. <a href="#">@Peggy</a> will take the lead from here.</p>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="card card-note">
-                                        <div class="card-header">
-                                            <div class="media align-items-center">
-                                                <img alt="Ravi Singh" src="assets/img/avatar-male-3.jpg" class="avatar"
-                                                     data-toggle="tooltip" data-title="Ravi Singh"
-                                                     data-filter-by="alt"/>
-                                                <div class="media-body">
-                                                    <h6 class="mb-0" data-filter-by="text">Matboard links</h6>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <span data-filter-by="text">Just now</span>
-                                                <div class="ml-1 dropdown card-options">
-                                                    <button class="btn-options" type="button"
-                                                            id="note-dropdown-button-3" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                        <i class="material-icons">more_vert</i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item text-danger" href="#">Delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body" data-filter-by="text">
-                                            <p>Hey guys, here&#39;s the link to the Matboards: <a href="#">https://matboard.io/3928462</a>
-                                            </p>
 
                                         </div>
                                     </div>
@@ -570,7 +464,7 @@
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <img alt="Ravi Singh" src="assets/img/avatar-male-3.jpg"
+                                                        <img alt="Ravi Singh" th:src="@{admin/img/avatar-female-3.jpg}"
                                                              class="avatar" data-title="Ravi Singh"
                                                              data-toggle="tooltip" data-filter-by="data-title"/>
                                                     </li>
@@ -1096,26 +990,8 @@
 
                                                         <li>
                                                             <img alt="Claire Connors"
-                                                                 src="assets/img/avatar-female-1.jpg" class="avatar"
+                                                                 th:src="@{admin/img/avatar-female-3.jpg}"class="avatar"
                                                                  data-toggle="tooltip" data-title="Claire Connors"/>
-                                                        </li>
-
-                                                        <li>
-                                                            <img alt="Marcus Simmons" src="assets/img/avatar-male-1.jpg"
-                                                                 class="avatar" data-toggle="tooltip"
-                                                                 data-title="Marcus Simmons"/>
-                                                        </li>
-
-                                                        <li>
-                                                            <img alt="Peggy Brown" src="assets/img/avatar-female-2.jpg"
-                                                                 class="avatar" data-toggle="tooltip"
-                                                                 data-title="Peggy Brown"/>
-                                                        </li>
-
-                                                        <li>
-                                                            <img alt="Harry Xai" src="assets/img/avatar-male-2.jpg"
-                                                                 class="avatar" data-toggle="tooltip"
-                                                                 data-title="Harry Xai"/>
                                                         </li>
 
                                                     </ul>
