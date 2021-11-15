@@ -12,6 +12,8 @@ import org.springframework.test.annotation.Rollback;
 import javax.persistence.EntityManager;
 
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -33,6 +35,20 @@ public class UserRepositoryTests {
         user.addRole(roleAdmin);
         User savedUser = userRepository.save(user);
         assertThat(savedUser.getId()).isGreaterThan(0);
+    }
+
+    @Test
+    public void testCreateFourUserWithOneRole() {
+        User staff1 = new User("staff1", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff2 = new User("staff2", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff3 = new User("staff3", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff4 = new User("staff4", "staff1@gmail.com", "staff1", "staff1", "password");
+        Role roleStaff = entityManager.find(Role.class, 4);
+        staff1.addRole(roleStaff);
+        staff2.addRole(roleStaff);
+        staff3.addRole(roleStaff);
+        staff4.addRole(roleStaff);
+        userRepository.saveAll(Arrays.asList(staff1,staff2,staff3,staff4));
     }
 
     @Test
