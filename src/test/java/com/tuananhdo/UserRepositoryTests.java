@@ -39,16 +39,26 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateFourUserWithOneRole() {
-        User staff1 = new User("staff1", "staff1@gmail.com", "staff1", "staff1", "password");
-        User staff2 = new User("staff2", "staff1@gmail.com", "staff1", "staff1", "password");
-        User staff3 = new User("staff3", "staff1@gmail.com", "staff1", "staff1", "password");
-        User staff4 = new User("staff4", "staff1@gmail.com", "staff1", "staff1", "password");
-        Role roleStaff = entityManager.find(Role.class, 4);
+        User staff1 = new User("staff5", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff2 = new User("staff6", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff3 = new User("staff7", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff4 = new User("staff8", "staff1@gmail.com", "staff1", "staff1", "password");
+        Role roleStaff = entityManager.find(Role.class, 2);
         staff1.addRole(roleStaff);
         staff2.addRole(roleStaff);
         staff3.addRole(roleStaff);
         staff4.addRole(roleStaff);
         userRepository.saveAll(Arrays.asList(staff1,staff2,staff3,staff4));
+    }
+
+    @Test
+    public void testCreateTwoUserWithOneRole() {
+        User staff1 = new User("staff10", "staff1@gmail.com", "staff1", "staff1", "password");
+        User staff2 = new User("staff12", "staff1@gmail.com", "staff1", "staff1", "password");
+        Role roleStaff = entityManager.find(Role.class, 2);
+        staff1.addRole(roleStaff);
+        staff2.addRole(roleStaff);
+        userRepository.saveAll(Arrays.asList(staff1,staff2));
     }
 
     @Test
@@ -86,7 +96,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testDeleteUser() {
-        Integer id = 6;
+        Integer id = 18;
         userRepository.deleteById(id);
     }
 

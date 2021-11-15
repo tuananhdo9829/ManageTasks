@@ -1,6 +1,7 @@
 package com.tuananhdo;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.repository.RoleRepository;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -50,11 +51,12 @@ public class RolesRepositoryTests {
     @Test
     public void testUpdateRole(){
         Role role= repository.findById(1).get();
-        role.setName("Administrator");
+        role.setName("Admin");
         repository.save(role);
     }
 
     @Test
+    @Ignore
     public void testDeleteRole(){
         Integer roleId = 2;
         repository.deleteById(roleId);

@@ -18,10 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "username",nullable = false,length = 30)
+    @Column(name = "username",nullable = false,length = 30,unique = true)
     private String username;
 
-    @Column(name = "email",nullable = false,length = 30)
+    @Column(nullable = false,length = 30)
     private String email;
 
     @Column(name = "first_name",nullable = false,length = 10)
@@ -30,8 +30,12 @@ public class User {
     @Column(name = "last_name",nullable = false,length = 10)
     private String lastName;
 
-    @Column(name = "password",nullable = false,length = 64)
+    @Column(nullable = false,length = 64)
     private String password;
+
+    @Column(length = 64)
+    private String photos;
+
     private boolean enabled;
 
     public User(){
@@ -46,7 +50,7 @@ public class User {
         this.password=password;
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",joinColumns = @JoinColumn(name = "users_id")
             ,inverseJoinColumns = @JoinColumn(name = "roles_id")
@@ -55,5 +59,12 @@ public class User {
 
     public void addRole(Role role){
         this.roles.add(role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "roles=" + roles +
+                '}';
     }
 }

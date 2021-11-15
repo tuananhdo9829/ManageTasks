@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="form_user">
+    <form th:action="@{/saveUser}" th:object="${user}" method="post" class="modal fade" id="user-invite-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Invite Users</h5>
+                    <button type="button" class="close btn btn-round" data-dismiss="modal"
+                            aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <!--end of modal head-->
+                <div class="modal-body">
+                    <div>
+
+                        <div class="input-group">
+                            <input type="email" class="form-control" th:field="*{username}"
+                                   placeholder="Add Your Username "
+                                   aria-label="Recipient email address">
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" th:field="*{email}"
+                                   placeholder="Add Your Email "
+                                   aria-label="Recipient email address" >
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" th:field="*{firstName}"
+                                   placeholder="Add Your First Name "
+                                   aria-label="Recipient email address" >
+                        </div>
+                    </div>
+                    &nbsp
+                    <div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" th:field="*{lastName}"
+                                   placeholder="Add Your Last Name"
+                                   aria-label="Recipient email address">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" th:field="*{password}"
+                                   placeholder="Add Your Last Name"
+                                   aria-label="Recipient email address">
+                        </div>
+                    </div>
+                </div>
+
+                <!--end of modal body-->
+                <div class="modal-footer">
+                    <button role="button" class="btn btn-primary" type="submit">
+                        Add User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</th:block>
+</body>
+</html>
