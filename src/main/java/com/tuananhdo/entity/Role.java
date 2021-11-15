@@ -20,6 +20,10 @@ public class Role {
 
     }
 
+    public Role(Integer id){
+        this.id=id;
+    }
+
     public Role(String name){
         this.name=name;
     }

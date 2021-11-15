@@ -34,10 +34,26 @@ public class User {
     private String password;
     private boolean enabled;
 
+    public User(){
+
+    }
+
+    public User(String username,String email,String firstName,String lastName,String password){
+        this.username=username;
+        this.email=email;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.password=password;
+    }
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",joinColumns = @JoinColumn(name = "users_id")
             ,inverseJoinColumns = @JoinColumn(name = "roles_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role){
+        this.roles.add(role);
+    }
 }
