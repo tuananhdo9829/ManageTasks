@@ -1,4 +1,4 @@
-package com.tuananhdo.admin.service;
+package com.tuananhdo.service;
 
 import com.tuananhdo.entity.User;
 import com.tuananhdo.repository.UserRepository;
