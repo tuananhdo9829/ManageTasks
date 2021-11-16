@@ -3,17 +3,17 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Task Management</title>
-    <link rel="shortcut icon" type="image/svg" th:href="@{admin/img/logo/logo.svg}">
+    <link rel="shortcut icon" type="image/svg" th:href="@{/admin/img/logo/logo.svg}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
-    <link th:href="@{admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
-    <link th:href="@{admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
 <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" th:fragment="navbar_top">
 
     <a class="navbar-brand" href="index.html">
-        <img alt="Pipeline" th:src="@{admin/img/logo/logo.svg}"/>
+        <img alt="Pipeline" th:src="@{/admin/img/logo/logo.svg}"/>
     </a>
     <div class="d-flex align-items-center">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
@@ -44,13 +44,13 @@
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/projects_overview}">Project</a>
+                <a class="nav-link" th:href="@{/users/projects_overview}">Project</a>
 
             </li>
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/tasks_overview}">Single Task</a>
+                <a class="nav-link" th:href="@{/users/tasks_overview}">Single Task</a>
 
             </li>
 
@@ -131,29 +131,29 @@
 </div>
 <script th:fragment="script">
     <script></script>
-<script type="text/javascript" th:src="@{admin/js/jsQuery.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/jsQuery.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/popper.min.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/bootstrap.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/bootstrap.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/autosize.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/autosize.min.js}"></script>
 <!-- Flatpickr (calendar/date/time picker UI) -->
-<script type="text/javascript" th:src="@{admin/js/flatpickr.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/flatpickr.min.js}"></script>
 <!-- Prism - displays formatted code boxes -->
-<script type="text/javascript" th:src="@{admin/js/prism.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/prism.js}"></script>
 <!-- Shopify Draggable - drag, drop and sort items on page -->
-<script type="text/javascript" th:src="@{admin/js/draggable.bundle.legacy.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/draggable.bundle.legacy.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/swap-animation.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/swap-animation.js}"></script>
 <!-- Dropzone - drag and drop files onto the page for uploading -->
-<script type="text/javascript" th:src="@{admin/js/dropzone.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/dropzone.min.js}"></script>
 
 <!-- List.js} - filter list elements -->
-<script type="text/javascript" th:src="@{admin/js/list.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/list.min.js}"></script>
 
 <!-- Required theme scripts (Do not remove) -->
-<script type="text/javascript" th:src="@{admin/js/theme.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/theme.js}"></script>
 
 
 </body>

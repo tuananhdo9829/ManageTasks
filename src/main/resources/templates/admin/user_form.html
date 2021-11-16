@@ -1,74 +1,142 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<th:block th:fragment="form_user">
-    <form th:action="@{/saveUser}" th:object="${user}" method="post" class="modal fade" id="user-invite-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Invite Users</h5>
-                    <button type="button" class="close btn btn-round" data-dismiss="modal"
-                            aria-label="Close">
-                        <i class="material-icons">close</i>
-                    </button>
+
+<div class="layout layout-nav-side">
+    <div th:replace="/admin/fragments ::navbar_top"></div>
+
+    <div class="main-container">
+        <div th:replace="/admin/fragments ::navbar"></div>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-3 mb-3">
+                    <ul class="nav nav-tabs flex-lg-column" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">[[${pageTitle}]]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
+                        </li>
+                        </li>
+                    </ul>
                 </div>
-                <!--end of modal head-->
-                <div class="modal-body">
-                    <div>
-
-                        <div class="input-group">
-                            <input type="email" class="form-control" th:field="*{username}"
-                                   placeholder="Add Your Username "
-                                   aria-label="Recipient email address">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" role="tabpanel" id="profile">
+                                    <div class="media mb-4">
+                                        <img alt="Image" th:src="@{/admin/img/avater-male-5.jpg}" class="avatar avatar-lg" />
+                                        <div class="media-body ml-3">
+                                            <div class="custom-file custom-file-naked d-block mb-1">
+                                                <input type="file" class="custom-file-input d-none" id="avatar-file">
+                                                <label class="custom-file-label position-relative" for="avatar-file">
+                              <span class="btn btn-primary">
+                                Upload avatar
+                              </span>
+                                                </label>
+                                            </div>
+                                            <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
+                                        </div>
+                                    </div>
+                                    <!--end of avatar-->
+                                    <form th:action="@{/users/save}" th:object="${users}" method="post">
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">UserName</label>
+                                            <div class="col">
+                                                <input type="text"  placeholder="Enter your username" name="profile-last-name" class="form-control" th:field="*{username}"  required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Password</label>
+                                            <div class="col">
+                                                <input type="password" placeholder="Enter your password " name="profile-last-name" class="form-control" th:field="*{password}" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">First Name</label>
+                                            <div class="col">
+                                                <input type="text" placeholder="Enter your first name" name="profile-first-name" class="form-control" th:field="*{firstName}" required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Last Name</label>
+                                            <div class="col">
+                                                <input type="text" placeholder="Enter your last name"  name="profile-last-name" class="form-control" th:field="*{lastName}"  required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Email</label>
+                                            <div class="col">
+                                                <input type="email" placeholder="Enter your email address" name="profile-email" class="form-control" required th:field="*{email}" />
+                                            </div>
+                                        </div>
+                                        <p >Enabled</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="checkbox" th:field="*{enabled}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <p>Roles</p>
+                                        <div class="row">
+                                            <th:block th:each="roles : ${listRoles}">
+                                                <div class="col">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="checkbox" th:field="*{roles}"  th:text="${roles.name}" th:value="${roles.id}">
+                                                    </div>
+                                                </div>
+                                            </th:block>                                                             
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" role="tabpanel" id="password">
+                                    <form>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Current Password</label>
+                                            <div class="col">
+                                                <input type="password" placeholder="Enter your current password" name="password-current" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">New Password</label>
+                                            <div class="col">
+                                                <input type="password" placeholder="Enter a new password" name="password-new" class="form-control" />
+                                                <small>Password must be at least 8 characters long</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Confirm Password</label>
+                                            <div class="col">
+                                                <input type="password" placeholder="Confirm your new password" name="password-new-confirm" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary">Change Password</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" role="tabpanel" id="integrations">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    &nbsp;
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" th:field="*{email}"
-                                   placeholder="Add Your Email "
-                                   aria-label="Recipient email address" >
-                        </div>
-                    </div>
-                    &nbsp;
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" th:field="*{firstName}"
-                                   placeholder="Add Your First Name "
-                                   aria-label="Recipient email address" >
-                        </div>
-                    </div>
-                    &nbsp
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" th:field="*{lastName}"
-                                   placeholder="Add Your Last Name"
-                                   aria-label="Recipient email address">
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="input-group">
-                            <input type="text" class="form-control" th:field="*{password}"
-                                   placeholder="Add Your Last Name"
-                                   aria-label="Recipient email address">
-                        </div>
-                    </div>
-                </div>
-
-                <!--end of modal body-->
-                <div class="modal-footer">
-                    <button role="button" class="btn btn-primary" type="submit">
-                        Add User
-                    </button>
                 </div>
             </div>
         </div>
-    </form>
-</th:block>
+
+    </div>
+</div>
+<script th:replace="/admin/fragments ::script"></script>
+
 </body>
 </html>

@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="admin/fragments ::head">
+<head th:replace="/admin/fragments ::head">
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 <div class="layout layout-nav-side">
-    <div th:replace="admin/fragments ::navbar_top"></div>
+    <div th:replace="/admin/fragments ::navbar_top"></div>
 
     <div class="main-container">
-        <div th:replace="admin/fragments ::navbar"></div>
+        <div th:replace="/admin/fragments ::navbar"></div>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-11 col-xl-10">
                     <div class="page-header">
                         <h1>Manage Project &#x2615;</h1>
+
                         <p class="lead">A small web studio crafting lovely template products.</p>
                         <div class="d-flex align-items-center">
                             <ul class="avatars">
                                 <li>
                                     <a href="#" data-toggle="tooltip" title="Kenny">
-                                        <img alt="Kenny Tran" class="avatar" th:src="@{admin/img/avatar-female-3.jpg}"/>
+                                        <img alt="Kenny Tran" class="avatar" th:src="@{/admin/img/avatar-female-3.jpg}"/>
                                     </a>
                                 </li>
 
@@ -32,6 +33,9 @@
                         </div>
                     </div>
                     <hr>
+                    <div th:if="${message !=null}" class="alert alert-success text-center">
+                        [[${message}]]
+                    </div>
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#projects" role="tab"
@@ -48,10 +52,9 @@
                             <div class="content-list">
                                 <div class="row content-list-head">
                                     <div class="col-auto">
-                                        <h3>Projects</h3>
-                                        <button class="btn btn-round" data-toggle="modal"
-                                                data-target="#project-add-modal">
-                                            <i class="material-icons">add</i>
+                                        <h3>Create New Project</h3>
+                                        <button class="btn btn-round" data-toggle="modal">
+                                            <i class="material-icons"><a th:href="@{/}">add</a></i>
                                         </button>
                                     </div>
                                     <form class="col-md-auto">
@@ -98,7 +101,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Kenny">
                                                             <img alt="Kenny Tran" class="avatar"
-                                                                 th:src="@{admin/img/avatar-female-4.jpg}"/>
+                                                                 th:src="@{/admin/img/avatar-female-4.jpg}"/>
                                                         </a>
                                                     </li>
 
@@ -145,7 +148,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Harry">
                                                             <img alt="Harry Xai" class="avatar"
-                                                                 th:src="@{admin/img/avatar-male-5.jpg}"
+                                                                 th:src="@{/admin/img/avatar-male-5.jpg}"
                                                                  data-filter-by="alt"/>
                                                         </a>
                                                     </li>
@@ -191,7 +194,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Kenny">
                                                             <img alt="Kenny Tran" class="avatar"
-                                                                 th:src="@{admin/img/avatar-female-4.jpg}"/>
+                                                                 th:src="@{/admin/img/avatar-female-4.jpg}"/>
                                                         </a>
                                                     </li>
 
@@ -231,7 +234,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Kenny">
                                                             <img alt="Kenny Tran" class="avatar"
-                                                                 th:src="@{admin/img/avatar-female-3.jpg}"/>
+                                                                 th:src="@{/admin/img/avatar-female-3.jpg}"/>
                                                         </a>
                                                     </li>
 
@@ -278,7 +281,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Ravi">
                                                             <img alt="Ravi Singh" class="avatar"
-                                                                 th:src="@{admin/img/avatar-male-5.jpg}"
+                                                                 th:src="@{/admin/img/avatar-male-5.jpg}"
                                                                  data-filter-by="alt"/>
                                                         </a>
                                                     </li>
@@ -317,7 +320,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Claire">
                                                             <img alt="Claire Connors" class="avatar"
-                                                                 th:src="@{admin/img/avatar-male-5.jpg}"
+                                                                 th:src="@{/admin/img/avatar-male-5.jpg}"
                                                                  data-filter-by="alt"/>
                                                         </a>
                                                     </li>
@@ -358,7 +361,7 @@
                                                     <li>
                                                         <a href="#" data-toggle="tooltip" title="Ravi">
                                                             <img alt="Ravi Singh" class="avatar"
-                                                                 th:src="@{admin/img/avatar-male-5.jpg}"
+                                                                 th:src="@{/admin/img/avatar-male-5.jpg}"
                                                                  data-filter-by="alt"/>
                                                         </a>
                                                     </li>
@@ -390,7 +393,7 @@
                                             <h3>Members</h3>
                                             <button class="btn btn-round" data-toggle="modal"
                                                     data-target="#user-invite-modal">
-                                                <i class="material-icons">add</i>
+                                                <i class="material-icons"><a th:href="@{/users/new}">add</a></i>
                                             </button>
                                         </div>
                                         <form class="col-md-auto">
@@ -409,14 +412,14 @@
                                     <div class="content-list-body row">
                                         <th:block th:each="users :${listUsers}">
                                             <div class="col-6">
-                                                <a class="media media-member" href="">
-                                                    <img alt="Claire Connors" th:src="@{admin/img/avatar-male-5.jpg}"
+                                                <a class="media media-member" th:href="@{'/users/edit/'+${users.id}}" >
+                                                    <img alt="Claire Connors" th:src="@{/admin/img/avatar-male-5.jpg}"
                                                          class="avatar avatar-lg"/>
                                                     <div class="media-body">
                                                         <h6 class="mb-0" data-filter-by="text">[[${users.email}]]</h6>
                                                         <span data-filter-by="text"
                                                               class="text-body">[[${users.roles}]]</span>
-                                                        <p class="mb-0" data-filter-by="text">[[${users.enabled}]]</p>
+<!--                                                       <a th:href="@{'/users/delete/'+${users.id}}">Delete</a>-->
                                                     </div>
                                                 </a>
                                             </div>
@@ -426,9 +429,6 @@
                             </div>
                         </th:block>
                     </div>
-<!--                                        New User-->
-<!--                    <form th:replace="admin/user_form :: form_user"></form>-->
-
                     <form class="modal fade" id="team-manage-modal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -553,7 +553,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="project-add-members-tab" data-toggle="tab"
-                                           href="#project-add-members" role="tab" aria-controls="project-add-members"
+                                           href="#project-add-members" role="tab"
                                            aria-selected="false">Members</a>
                                     </li>
                                 </ul>
@@ -620,25 +620,7 @@
                                             <div class="users-manage" data-filter-list="form-group-users">
                                                 <div class="mb-3">
                                                     <ul class="avatars text-center">
-
-                                                        <li>
-                                                            <img alt="Claire Connors"
-                                                                 src="assets/img/avatar-female-1.jpg" class="avatar"
-                                                                 data-toggle="tooltip" data-title="Claire Connors"/>
-                                                        </li>
-
-                                                        <li>
-                                                            <img alt="Marcus Simmons" src="assets/img/avatar-male-1.jpg"
-                                                                 class="avatar" data-toggle="tooltip"
-                                                                 data-title="Marcus Simmons"/>
-                                                        </li>
-
-                                                        <li>
-                                                            <img alt="Peggy Brown" src="assets/img/avatar-female-2.jpg"
-                                                                 class="avatar" data-toggle="tooltip"
-                                                                 data-title="Peggy Brown"/>
-                                                        </li>
-
+                                                        
                                                         <li>
                                                             <img alt="Harry Xai" src="assets/img/avatar-male-2.jpg"
                                                                  class="avatar" data-toggle="tooltip"
@@ -665,129 +647,6 @@
                                   <span class="d-flex align-items-center">
                                     <img alt="Claire Connors" src="assets/img/avatar-female-1.jpg" class="avatar mr-2"/>
                                     <span class="h6 mb-0" data-filter-by="text">Claire Connors</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-2" checked>
-                                                        <label class="custom-control-label" for="project-user-2">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Marcus Simmons" src="assets/img/avatar-male-1.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Marcus Simmons</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-3" checked>
-                                                        <label class="custom-control-label" for="project-user-3">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Peggy Brown" src="assets/img/avatar-female-2.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Peggy Brown</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-4" checked>
-                                                        <label class="custom-control-label" for="project-user-4">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Harry Xai" src="assets/img/avatar-male-2.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Harry Xai</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-5">
-                                                        <label class="custom-control-label" for="project-user-5">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Sally Harper" src="assets/img/avatar-female-3.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Sally Harper</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-6">
-                                                        <label class="custom-control-label" for="project-user-6">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Ravi Singh" src="assets/img/avatar-male-3.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Ravi Singh</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-7">
-                                                        <label class="custom-control-label" for="project-user-7">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Kristina Van Der Stroem" src="assets/img/avatar-female-4.jpg"
-                                         class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Kristina Van Der Stroem</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-8">
-                                                        <label class="custom-control-label" for="project-user-8">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="David Whittaker" src="assets/img/avatar-male-4.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">David Whittaker</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-9">
-                                                        <label class="custom-control-label" for="project-user-9">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Kerri-Anne Banks" src="assets/img/avatar-female-5.jpg"
-                                         class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Kerri-Anne Banks</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-10">
-                                                        <label class="custom-control-label" for="project-user-10">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Masimba Sibanda" src="assets/img/avatar-male-5.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Masimba Sibanda</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-11">
-                                                        <label class="custom-control-label" for="project-user-11">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Krishna Bajaj" src="assets/img/avatar-female-6.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Krishna Bajaj</span>
-                                  </span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="project-user-12">
-                                                        <label class="custom-control-label" for="project-user-12">
-                                  <span class="d-flex align-items-center">
-                                    <img alt="Kenny Tran" src="assets/img/avatar-male-6.jpg" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">Kenny Tran</span>
                                   </span>
                                                         </label>
                                                     </div>
@@ -997,7 +856,7 @@
 
     </div>
 </div>
-<script th:replace="admin/fragments ::script"></script>
+<script th:replace="/admin/fragments ::script"></script>
 
 </body>
 </html>
