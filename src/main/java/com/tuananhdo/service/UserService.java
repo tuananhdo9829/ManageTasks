@@ -6,6 +6,7 @@ import com.tuananhdo.entity.User;
 import com.tuananhdo.repository.RoleRepository;
 import com.tuananhdo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +23,9 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public List<User> listAllUsers() {
         return (List<User>) userRepository.findAll();
     }
@@ -31,8 +35,14 @@ public class UserService {
 
     }
 
-    public void save(User user) throws UserNotFoudException {
-        userRepository.save(user);
+    public User save(User user) throws UserNotFoudException {
+        encodePassword(user);
+        return userRepository.save(user);
+    }
+
+    public void encodePassword(User user) {
+        String rawPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(rawPassword);
     }
 
     public User getUserById(Integer id) throws UserNotFoudException {

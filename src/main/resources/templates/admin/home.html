@@ -413,13 +413,13 @@
                                         <th:block th:each="users :${listUsers}">
                                             <div class="col-6">
                                                 <a class="media media-member" th:href="@{'/users/edit/'+${users.id}}" >
-                                                    <img alt="Claire Connors" th:src="@{/admin/img/avatar-male-5.jpg}"
+                                                    <img alt="Claire Connors" th:src="@{${users.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
                                                     <div class="media-body">
                                                         <h6 class="mb-0" data-filter-by="text">[[${users.email}]]</h6>
                                                         <span data-filter-by="text"
                                                               class="text-body">[[${users.roles}]]</span>
-<!--                                                       <a th:href="@{'/users/delete/'+${users.id}}">Delete</a>-->
+                                                       <a th:href="@{'/users/delete/'+${users.id}}">Delete</a>
                                                     </div>
                                                 </a>
                                             </div>
