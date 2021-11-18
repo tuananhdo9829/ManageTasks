@@ -58,7 +58,6 @@ public class FileUploadUltis {
             Files.delete(Paths.get(dirFile));
         } catch (Exception exception) {
             LOGGER.info("Could not delete file :" + dirFile);
-
         }
     }
 }

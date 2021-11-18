@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="/admin/fragments ::head">
     <meta charset="UTF-8">
     <title></title>
@@ -15,7 +16,7 @@
                 <div class="col-lg-11 col-xl-10">
                     <div class="page-header">
                         <h1>Manage Project &#x2615;</h1>
-
+                        <h1>Welcome : <span sec:authentication="principal.authorities"></span> </h1>
                         <p class="lead">A small web studio crafting lovely template products.</p>
                         <div class="d-flex align-items-center">
                             <ul class="avatars">
@@ -620,7 +621,7 @@
                                             <div class="users-manage" data-filter-list="form-group-users">
                                                 <div class="mb-3">
                                                     <ul class="avatars text-center">
-                                                        
+
                                                         <li>
                                                             <img alt="Harry Xai" src="assets/img/avatar-male-2.jpg"
                                                                  class="avatar" data-toggle="tooltip"

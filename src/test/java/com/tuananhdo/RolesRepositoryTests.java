@@ -1,6 +1,6 @@
 package com.tuananhdo;
 import com.tuananhdo.entity.Role;
-import com.tuananhdo.repository.RoleRepository;
+import com.tuananhdo.admin.repository.RoleRepository;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

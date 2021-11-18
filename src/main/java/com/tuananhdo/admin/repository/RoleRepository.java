@@ -1,4 +1,4 @@
-package com.tuananhdo.repository;
+package com.tuananhdo.admin.repository;
 
 import com.tuananhdo.entity.Role;
 import org.springframework.data.repository.CrudRepository;

@@ -3,7 +3,7 @@ package com.tuananhdo.admin.controller;
 import com.tuananhdo.admin.error.UserNotFoudException;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
-import com.tuananhdo.service.UserService;
+import com.tuananhdo.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping("/")
+    @GetMapping("/admin/home")
     public String listAllUsers(Model model) {
         List<User> listAllUsers = userService.listAllUsers();
         model.addAttribute("listUsers", listAllUsers);
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/users/save")
-    public String saveUser(Model model, RedirectAttributes redirectAttributes, User users, @RequestParam("image") MultipartFile multipartFile) {
+    public String saveUser(RedirectAttributes redirectAttributes, User users, @RequestParam("image") MultipartFile multipartFile) {
         try {
             if (!multipartFile.isEmpty()) {
                 String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -56,7 +56,7 @@ public class UserController {
         } catch (UserNotFoudException ex) {
             redirectAttributes.addFlashAttribute("message" + ex.getMessage());
         }
-        return "redirect:/";
+        return "redirect:/admin/home";
     }
 
     @GetMapping("/users/edit/{id}")
@@ -83,7 +83,7 @@ public class UserController {
         } catch (UserNotFoudException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
-        return "redirect:/";
+        return "redirect:/admin/home";
     }
 
     @GetMapping("/users/{id}enabled{status}")
@@ -92,6 +92,6 @@ public class UserController {
         String status = enabled ? "enabled" : "disabled";
         String message = "The User ID" + id + "has been " + status;
         redirectAttributes.addFlashAttribute("message", message);
-        return "redirect:/";
+        return "redirect:/admin/home";
     }
 }

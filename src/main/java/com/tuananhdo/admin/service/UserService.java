@@ -1,10 +1,10 @@
-package com.tuananhdo.service;
+package com.tuananhdo.admin.service;
 
 import com.tuananhdo.admin.error.UserNotFoudException;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
-import com.tuananhdo.repository.RoleRepository;
-import com.tuananhdo.repository.UserRepository;
+import com.tuananhdo.admin.repository.RoleRepository;
+import com.tuananhdo.admin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
