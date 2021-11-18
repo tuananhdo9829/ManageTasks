@@ -1,6 +1,5 @@
 package com.tuananhdo.admin.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mult;
 import com.tuananhdo.admin.error.UserNotFoudException;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,10 +50,10 @@ public class UserController {
                 User savedUser = userService.save(users);
                 String uploadDir = "user-photos/" + savedUser.getId();
                 FileUploadUltis.cleanFileDir(uploadDir);
-                FileUploadUltis.saveFileDir(uploadDir,fileName,multipartFile);
+                FileUploadUltis.saveFileDir(uploadDir, fileName, multipartFile);
                 redirectAttributes.addFlashAttribute("message", "The user has been saved successfully !");
             }
-        } catch (UserNotFoudException  ex) {
+        } catch (UserNotFoudException ex) {
             redirectAttributes.addFlashAttribute("message" + ex.getMessage());
         }
         return "redirect:/";
