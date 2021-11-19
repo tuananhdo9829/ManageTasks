@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/svg" th:href="@{/admin/img/logo/logo.svg}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link th:href="@{/admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
     <link th:href="@{/admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
 </head>
@@ -15,9 +16,9 @@
     <a class="navbar-brand" href="index.html">
         <img alt="Pipeline" th:src="@{/admin/img/logo/logo.svg}"/>
     </a>
-        <form th:action="@{/logout}" method="post" name="loggoutForm" th:hidden="true">
-            <input type="submit" value="submit"/>
-        </form>
+    <form th:action="@{/logout}" method="post" name="loggoutForm" th:hidden="true">
+        <input type="submit" value="submit"/>
+    </form>
     <div class="d-flex align-items-center">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
                 aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,10 +66,9 @@
 
             <li class="nav-item">
 
-                <a class="nav-link" href="javascript: document.loggoutForm.submit()">Logout</a>
+                <a class="nav-link" th:href="@{/demo}">Demo Admin</a>
 
             </li>
-
 
         </ul>
         <hr>
@@ -129,14 +129,14 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
 
+            <a class="dropdown-item" th:href="@{/users/account}">Account Details</a>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
             <a class="dropdown-item" href="#">Share</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" th:href="@{/logout}">Leave</a>
+            <a class="dropdown-item text-danger" href="javascript: document.loggoutForm.submit();">Leave</a>
 
         </div>
     </div>
-
 </div>
 <script th:fragment="script">
     <script></script>

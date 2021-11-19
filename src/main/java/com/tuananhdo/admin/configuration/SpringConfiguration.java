@@ -29,7 +29,7 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/web/home/**").permitAll()
-                .antMatchers("/admin/home").hasAnyAuthority("Admin", "Manage","Staff")
+                .antMatchers("/admin/home","/users/account").hasAnyAuthority("Admin", "Manage","Staff")
                 .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/login")
@@ -48,7 +48,6 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
-
     }
 
 

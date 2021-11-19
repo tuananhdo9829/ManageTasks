@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public class MyUserDetailsService implements UserDetailsService {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(MyUserDetailsService.class);
-
     @Autowired
     private UserRepository userRepository;
 

@@ -420,8 +420,9 @@
                                                         <h6 class="mb-0" data-filter-by="text">[[${users.email}]]</h6>
                                                         <span data-filter-by="text"
                                                               class="text-body">[[${users.roles}]]</span>
-                                                       <a th:href="@{'/users/delete/'+${users.id}}">Delete</a>
                                                     </div>
+                                                    <a class="" th:href="@{'/users/delete/'+${users.id}}">Delete</a>
+
                                                 </a>
                                             </div>
                                         </th:block>

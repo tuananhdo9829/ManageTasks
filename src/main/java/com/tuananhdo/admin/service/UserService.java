@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,6 +34,25 @@ public class UserService {
     public List<Role> listAllRoles() {
         return (List<Role>) roleRepository.findAll();
 
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
+    }
+
+    public User updateUserAccount(User userInForm) {
+        User userInDB = userRepository.findById(userInForm.getId()).get();
+        if (!userInForm.getPassword().isEmpty()) {
+            userInDB.setPassword(userInForm.getPassword());
+            encodePassword(userInDB);
+        }
+        if (userInForm.getPhotos() != null) {
+            userInDB.setPhotos(userInForm.getPhotos());
+        }
+        userInDB.setFirstName(userInForm.getFirstName());
+        userInDB.setLastName(userInForm.getLastName());
+        userInDB.setEmail(userInForm.getEmail());
+        return userRepository.save(userInDB);
     }
 
     public User save(User user) throws UserNotFoudException {

@@ -17,4 +17,10 @@ public class LoginController {
         }
         return "redirect:/admin/home";
     }
+
+    @GetMapping("/demo")
+    public String pageAdmin() {
+
+        return "admin/demoadmin";
+    }
 }
