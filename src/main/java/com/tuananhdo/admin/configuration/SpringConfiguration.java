@@ -29,7 +29,11 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/web/home/**").permitAll()
+
                 .antMatchers("/admin/home","/users/account").hasAnyAuthority("Admin", "Manage","Staff")
+
+                .antMatchers("/users","/users/new","/users/edit/**","/users/delete/**").hasAnyAuthority("Admin")
+
                 .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/login")

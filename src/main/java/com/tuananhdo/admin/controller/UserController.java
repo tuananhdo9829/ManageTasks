@@ -1,6 +1,6 @@
 package com.tuananhdo.admin.controller;
 
-import com.tuananhdo.admin.error.UserNotFoudException;
+import com.tuananhdo.admin.exception.UserNotFoudException;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.admin.service.UserService;

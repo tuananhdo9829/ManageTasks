@@ -1,11 +1,9 @@
 package com.tuananhdo.security;
 
-import com.tuananhdo.admin.error.UserNotFoudException;
+import com.tuananhdo.admin.exception.UserNotFoudException;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.admin.repository.UserRepository;
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

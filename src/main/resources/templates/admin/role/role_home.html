@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/admin/fragments ::head">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="layout layout-nav-side">
+    <div th:replace="/admin/fragments ::navbar_top"></div>
+    <div class="main-container">
+        <div th:replace="/admin/fragments ::navbar"></div>
+        <div class="container">
+
+            <ul class="nav nav-tabs nav-fill" role="tablist">
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tasks" role="tabpanel" data-filter-list="card-list-body">
+                    <div class="row content-list-head">
+                        <div class="col-auto">
+                            <h3>Create New Role</h3>
+                            <button class="btn btn-round" data-toggle="modal" data-target="#task-add-modal">
+                                <a th:href="@{/roles/new}" class="material-icons">add</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="content-list">
+                            <div class="row content-list-head">
+                                <div class="col-auto">
+                                </div>
+                                <form class="col-md-auto">
+                                    <div class="input-group input-group-round">
+                                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="material-icons">filter_list</i>
+                            </span>
+                                        </div>
+                                        <input type="search" class="form-control filter-list-input"
+                                               placeholder="Filter roles" aria-label="Filter activity">
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end of content list head-->
+                            <div th:if="${message != null}" class="alert alert-success text-center">
+                                [[${message}]]
+                            </div>
+                            <th:block th:each="roles :${listRoles}">
+                                <div class="content-list-body">
+                                    <ol class="list-group list-group-activity">
+
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <div>
+                                                        <span class="h6" data-filter-by="text">Role Name : [[${roles.name}]]</span>
+                                                        <span data-filter-by="text">[[${description}]]</span>
+                                                        <a th:if="${roles.}"  th:href="@{'/roles/delete/'+${roles.id}}" class="float-right"
+                                                           data-filter-by="text">Delete</a>
+                                                        <a th:href="@{'/roles/edit/'+${roles.id}}" class="float-right"
+                                                           data-filter-by="text">Edit &nbsp;</a>
+                                                    </div>
+                                                    <span class="text-small" data-filter-by="text">Just now</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ol>
+                                </div>
+                            </th:block>
+                        </div>
+
+                        <!--end of content list-->
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script th:replace="/admin/fragments ::script"></script>
+</body>
+
+</html>

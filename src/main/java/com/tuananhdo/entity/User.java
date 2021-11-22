@@ -73,4 +73,16 @@ public class User {
         if (id == null || photos == null) return "/admin/img/avatar-female-3.jpg";
         return "/user-photos/" + this.id + "/" + this.photos;
     }
+
+    @Transient
+    private boolean hasChildren;
+
+    public boolean isHasChildren(boolean b) {
+        return hasChildren;
+    }
+
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
+    }
 }
