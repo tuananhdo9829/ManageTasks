@@ -20,8 +20,6 @@ public class ProjectService {
     @Autowired
     private UserRepository userRepository;
 
-    private User user;
-
 
 
     public List<Project> listAllProjects() {
@@ -33,17 +31,22 @@ public class ProjectService {
         if (project.getId() == null) {
             project.setCreatedTime(new Date());
         }
+
         project.setUpdatedTime(new Date());
         projectRepository.save(project);
     }
 
+    public User findProjectCreateByUser(String username){
+            return userRepository.getUserByUsername(username);
+    }
+
     
-    public Project findProjectById(Long id) throws ProjectNotFoundException {
+    public Project findProjectById(Integer id) throws ProjectNotFoundException {
         return projectRepository.findById(id).orElseThrow(
                 () -> new ProjectNotFoundException("Could not find any project with id " + id));
     }
 
-    public void deleteProjectById(Long id) throws ProjectNotFoundException {
+    public void deleteProjectById(Integer id) throws ProjectNotFoundException {
         Project project = projectRepository.findById(id).orElseThrow(
                 () -> new ProjectNotFoundException("Could not find any project witd id :" + id));
         projectRepository.delete(project);

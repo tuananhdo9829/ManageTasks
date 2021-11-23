@@ -60,6 +60,7 @@ public class UserController {
         return "redirect:/admin/home";
     }
 
+
     @GetMapping("/users/edit/{id}")
     public String editUser(Model model, @PathVariable(name = "id") Integer id) throws UserNotFoudException {
         try {
