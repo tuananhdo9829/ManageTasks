@@ -1,6 +1,6 @@
 package com.tuananhdo.admin.exception;
 
-public class RoleNotFoundException extends Exception {
+public class RoleNotFoundException extends Throwable {
 
     private final String message;
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -66,11 +66,8 @@ public class UserService {
     }
 
     public User getUserById(Integer id) throws UserNotFoudException {
-        try {
-            return userRepository.findById(id).get();
-        } catch (NoSuchElementException exception) {
-            throw new UserNotFoudException("Could not find any user with ID : " + id);
-        }
+        return userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoudException("Could not find any user with ID :" + id));
     }
 
     public void deleteUser(Integer id) throws UserNotFoudException {

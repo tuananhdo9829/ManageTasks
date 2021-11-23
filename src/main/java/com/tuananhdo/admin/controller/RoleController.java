@@ -42,7 +42,7 @@ public class RoleController {
     }
 
     @GetMapping("/roles/edit/{id}")
-    public String editRole(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes, Model model) throws RoleNotFoundException {
+    public String editRole(@PathVariable(value = "id") Integer id, Model model) throws RoleNotFoundException {
         try {
             Role role = roleService.getRoleById(id);
             model.addAttribute("roles", role);

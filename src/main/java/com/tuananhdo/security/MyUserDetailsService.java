@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.Optional;
+
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -16,7 +18,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.getUserByUsername(username);
+       User user = userRepository.getUserByUsername(username);
         if (user != null) {
             return new MyUserDetails(user);
         }

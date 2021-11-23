@@ -18,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "username", nullable = false, length = 30, unique = true)
+    @Column(nullable = false, length = 30, unique = true)
     private String username;
 
     @Column(nullable = false, length = 30)
@@ -52,10 +52,11 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "users_roles", joinColumns = @JoinColumn(name = "users_id")
-            , inverseJoinColumns = @JoinColumn(name = "roles_id")
+            name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
+    
 
     public void addRole(Role role) {
         this.roles.add(role);

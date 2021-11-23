@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/admin/fragments ::head">
     <meta charset="UTF-8">
     <title></title>
@@ -16,7 +15,6 @@
                 <div class="col-lg-11 col-xl-10">
                     <div class="page-header">
                         <h1>Manage Project &#x2615;</h1>
-                        <h1>Welcome : <span sec:authentication="principal.authorities"></span> </h1>
                         <p class="lead">A small web studio crafting lovely template products.</p>
                         <div class="d-flex align-items-center">
                             <ul class="avatars">
@@ -34,56 +32,93 @@
                         </div>
                     </div>
                     <hr>
-                    <div th:if="${message !=null}" class="alert alert-success text-center">
-                        [[${message}]]
-                    </div>
-                        <!--end of tab-->
-                        <th:block>
-                            <div
-                                 data-filter-list="content-list-body">
-                                <div class="content-list">
-                                    <div class="row content-list-head">
-                                        <div class="col-auto">
-                                            <h3>Members</h3>
-                                            <button class="btn btn-round" data-toggle="modal"
-                                                    data-target="#user-invite-modal">
-                                                <i class="material-icons"><a th:href="@{/users/new}">add</a></i>
-                                            </button>
-                                        </div>
-                                        <form class="col-md-auto">
-                                            <div class="input-group input-group-round">
-                                                <div class="input-group-prepend">
+                  
+                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#projects" role="tab"
+                               aria-controls="projects" aria-selected="true">Projects</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="projects" role="tabpanel"
+                             data-filter-list="content-list-body">
+                            <div class="content-list">
+                                <div class="row content-list-head">
+                                    <div class="col-auto">
+                                        <h3>Create New Project</h3>
+                                        <button class="btn btn-round" data-toggle="modal">
+                                            <i class="material-icons"><a th:href="@{/projects/new}">add</a></i>
+                                        </button>
+                                    </div>
+                                    <form class="col-md-auto">                              
+                                        <div class="input-group input-group-round">
+                                            <div class="input-group-prepend">
                             <span class="input-group-text">
                               <i class="material-icons">filter_list</i>
                             </span>
-                                                </div>
-                                                <input type="search" class="form-control filter-list-input"
-                                                       placeholder="Filter members" aria-label="Filter Members">
                                             </div>
-                                        </form>
-                                    </div>
-                                    <!--end of content list head-->
-                                    <div class="content-list-body row">
-                                        <th:block th:each="users :${listUsers}">
-                                            <div class="col-6">
-                                                <a class="media media-member" th:href="@{'/users/edit/'+${users.id}}" >
-                                                    <img alt="Claire Connors" th:src="@{${users.photosImagePath}}"
-                                                         class="avatar avatar-lg"/>
-                                                    <div class="media-body">
-                                                        <h6 class="mb-0" data-filter-by="text">[[${users.email}]]</h6>
-                                                        <span data-filter-by="text"
-                                                              class="text-body">[[${users.roles}]]</span>
-                                                    </div>
-<!--                                                    <a  th:href="@{'/users/delete/'+${users.id}}">Delete</a>-->
-
-                                                </a>
-                                            </div>
-                                        </th:block>
-                                    </div>
+                                            <input type="search" class="form-control filter-list-input"
+                                                   placeholder="Filter projects" aria-label="Filter Projects">
+                                        </div>
+                                    </form>
                                 </div>
+                                <!--end of content list head-->
+                                <div class="content-list-body row">
+                                    <th:block th:each="projects : ${listProjects}">
+                                    <div class="col-lg-6">
+                                        <div class="card card-project">
+
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 80%" aria-valuenow="40" aria-valuemin="0"
+                                                     aria-valuemax="100"></div>
+                                            </div>
+
+                                            <div class="card-body">
+                                                <div class="dropdown card-options">
+                                                    <button class="btn-options" type="button"
+                                                            id="project-dropdown-button-1" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                        <i class="material-icons">more_vert</i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" th:href="@{'/projects/edit/'+${projects.id}}">Edit</a>
+                                                        <a class="dropdown-item" th:href="@{'/projects/delete/'+${projects.id}}">Delete</a>
+                                                    </div>
+                                                </div>
+                                                <div class="card-title">
+                                                    <a href="#"><h5 data-filter-by="text">[[${projects.name}]]</h5></a>
+                                                </div>
+                                                <ul class="avatars">
+
+                                                    <li>
+                                                        <a href="#" data-toggle="tooltip" title="Kenny">
+                                                            <img alt="Kenny Tran" class="avatar"
+                                                                 th:src="@{${projects.name}}"/>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="card-title">
+                                                    <h6 data-filter-by="text">[[${projects.description}]]</h6>
+                                                </div>
+                                                <div class="card-meta d-flex justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="material-icons mr-1">playlist_add_check</i>
+                                                        <span class="text-small">6/10</span>
+                                                    </div>
+                                                    <span class="text-small" data-filter-by="text">Due 4 days</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </th:block>
+                                </div>
+                                <!--end of content list body-->
                             </div>
-                        </th:block>
+                            <!--end of content list-->
+                        </div>
                     </div>
+
                     <form class="modal fade" id="team-manage-modal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">

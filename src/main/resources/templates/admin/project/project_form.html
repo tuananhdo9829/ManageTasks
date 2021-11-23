@@ -11,9 +11,6 @@
 
     <div class="main-container">
         <div th:replace="/admin/fragments ::navbar"></div>
-        <div th:if="${message !=null}">
-            <span class="alert alert-success text-center"></span>
-        </div>
         <div class="container">
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-3 mb-3">
@@ -28,15 +25,24 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="tab-content">
-                                <form th:action="@{/roles/save}" th:object="${roles}" method="post">
+                                <form th:action="@{/projects/save}" th:object="${projects}" method="post">
                                     <input type="hidden" id="id" th:field="*{id}">
                                     <div class="tab-pane fade show active" role="tabpanel" id="profile">
                                         <div class="media mb-4">
+                                            <div class="media-body ml-3">
+<!--                                                <div class="custom-file custom-file-naked d-block mb-1">-->
+<!--                                                    <input type="file" name="image" accept="image/png, image/jpg" id="fileImage">-->
+
+<!--                                                    <img alt="Photo Preview" id="thumbnail"-->
+<!--                                                         th:src="@{${users.photosImagePath}}"-->
+<!--                                                         class="avatar avatar-lg"/>-->
+<!--                                                </div>-->
+                                            </div>
                                         </div>
                                         <div class="form-group row align-items-center">
-                                            <label class="col-3">Role</label>
+                                            <label class="col-3">Name Project :</label>
                                             <div class="col">
-                                                <input type="text" placeholder="Enter a new role"
+                                                <input type="text" placeholder="Enter your username"
                                                        name="profile-last-name" class="form-control"
                                                        th:field="*{name}" required/>
                                             </div>
@@ -44,7 +50,7 @@
                                         <div class="form-group row align-items-center">
                                             <label class="col-3">Description</label>
                                             <div class="col">
-                                                <input type="text" placeholder="Enter a description "
+                                                <input type="text" placeholder="Enter your password "
                                                        name="profile-last-name" class="form-control"
                                                        th:field="*{description}" required/>
                                             </div>
@@ -52,6 +58,7 @@
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -65,6 +72,7 @@
         </div>
     </div>
 </div>
+
 <script th:replace="/admin/fragments ::script"></script>
 </body>
 </html>

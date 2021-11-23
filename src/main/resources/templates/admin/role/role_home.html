@@ -56,7 +56,7 @@
                                                     <div>
                                                         <span class="h6" data-filter-by="text">Role Name : [[${roles.name}]]</span>
                                                         <span data-filter-by="text">[[${description}]]</span>
-                                                        <a th:if="${roles.}"  th:href="@{'/roles/delete/'+${roles.id}}" class="float-right"
+                                                        <a th:href="@{'/roles/delete/'+${roles.id}}" class="float-right"
                                                            data-filter-by="text">Delete</a>
                                                         <a th:href="@{'/roles/edit/'+${roles.id}}" class="float-right"
                                                            data-filter-by="text">Edit &nbsp;</a>
