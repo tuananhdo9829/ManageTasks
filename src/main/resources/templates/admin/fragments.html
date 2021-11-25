@@ -3,18 +3,22 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Task Management</title>
-    <link rel="shortcut icon" type="image/svg" th:href="@{admin/img/logo/logo.svg}">
+    <link rel="shortcut icon" type="image/svg" th:href="@{/admin/img/logo/logo.svg}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
-    <link th:href="@{admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
-    <link th:href="@{admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link th:href="@{/admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
 <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" th:fragment="navbar_top">
 
     <a class="navbar-brand" href="index.html">
-        <img alt="Pipeline" th:src="@{admin/img/logo/logo.svg}"/>
+        <img alt="Pipeline" th:src="@{/admin/img/logo/logo.svg}"/>
     </a>
+    <form th:action="@{/logout}" method="post" name="loggoutForm" th:hidden="true">
+        <input type="submit" value="submit"/>
+    </form>
     <div class="d-flex align-items-center">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
                 aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +32,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="nav-side-user.html" class="dropdown-item">Profile</a>
                     <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-                    <a href="#" class="dropdown-item">Log Out</a>
+                    <a href="javascript: document.loggoutForm.submit()" class="dropdown-item">Log Out</a>
                 </div>
             </div>
         </div>
@@ -38,28 +42,45 @@
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/}">Team Overview</a>
+                <a class="nav-link" th:href="@{/admin/home}">Users</a>
 
             </li>
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/projects_overview}">Project</a>
+                <a class="nav-link" th:href="@{/projects/home}">Projects</a>
 
             </li>
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/tasks_overview}">Single Task</a>
+                <a class="nav-link" th:href="@{/users/projects_overview}">Task</a>
 
             </li>
 
             <li class="nav-item">
 
-                <a class="nav-link" th:href="@{/home}">Kanban Board</a>
+                <a class="nav-link" th:href="@{/roles/home}">Manage Roles</a>
 
             </li>
 
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/users/tasks_overview}">Single Task</a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/web/home}">Home Page</a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link" th:href="@{/demo}">Demo Admin</a>
+
+            </li>
 
         </ul>
         <hr>
@@ -120,39 +141,37 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
 
+            <a class="dropdown-item" th:href="@{/users/account}">Account Details</a>
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
             <a class="dropdown-item" href="#">Share</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" href="#">Leave</a>
+            <a class="dropdown-item text-danger" href="javascript: document.loggoutForm.submit();">Leave</a>
 
         </div>
     </div>
-
 </div>
 <script th:fragment="script">
-    <script type="text/javascript" th:src="@{admin/js/jquery.min.js}"></script>
+    <script></script>
+<script type="text/javascript" th:src="@{/admin/js/jsQuery.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/popper.min.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/bootstrap.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/bootstrap.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/autosize.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/autosize.min.js}"></script>
 <!-- Flatpickr (calendar/date/time picker UI) -->
-<script type="text/javascript" th:src="@{admin/js/flatpickr.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/flatpickr.min.js}"></script>
 <!-- Prism - displays formatted code boxes -->
-<script type="text/javascript" th:src="@{admin/js/prism.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/prism.js}"></script>
 <!-- Shopify Draggable - drag, drop and sort items on page -->
-<script type="text/javascript" th:src="@{admin/js/draggable.bundle.legacy.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/draggable.bundle.legacy.js}"></script>
 
-<script type="text/javascript" th:src="@{admin/js/swap-animation.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/swap-animation.js}"></script>
 <!-- Dropzone - drag and drop files onto the page for uploading -->
-<script type="text/javascript" th:src="@{admin/js/dropzone.min.js}"></script>
+<script type="text/javascript" th:src="@{/admin/js/dropzone.min.js}"></script>
 <!-- List.js} - filter list elements -->
-<script type="text/javascript" th:src="@{admin/js/list.min.js}"></script>
-
+<script type="text/javascript" th:src="@{/admin/js/list.min.js}"></script>
 <!-- Required theme scripts (Do not remove) -->
-<script type="text/javascript" th:src="@{admin/js/theme.js}"></script>
-
-
+<script type="text/javascript" th:src="@{/admin/js/theme.js}"></script>
 </body>
 </html>

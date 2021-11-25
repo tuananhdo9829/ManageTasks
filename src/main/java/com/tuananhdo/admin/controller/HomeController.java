@@ -7,21 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
 
-
-    @GetMapping("/home")
-    public String webHome() {
-
-        return "web/home";
-    }
-
-    @GetMapping("/projects_overview")
+    @GetMapping("/users/projects_overview")
     public String projectOverview() {
 
         return "admin/project_overview";
     }
 
 
-    @GetMapping("/tasks_overview")
+    @GetMapping("/users/tasks_overview")
     public String taskOverview() {
 
         return "admin/task_overview";

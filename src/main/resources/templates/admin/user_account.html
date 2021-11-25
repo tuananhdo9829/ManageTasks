@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/fragments ::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="layout layout-nav-side">
+    <div th:replace="/admin/fragments ::navbar_top"></div>
+
+    <div class="main-container">
+        <div th:replace="/admin/fragments ::navbar"></div>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+
+                <div class="col-lg-3 mb-3">
+                    <ul class="nav nav-tabs flex-lg-column" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/users/new}">Account User</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-8 col-lg-9">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <form th:action="@{/users/update/account}" th:object="${users}" method="post"
+                                      enctype="multipart/form-data">
+                                    <input type="hidden" id="id" th:field="*{id}">
+                                    <div class="tab-pane fade show active" role="tabpanel" id="profile">
+                                        <div class="media mb-4">
+                                            <div class="media-body ml-3">
+                                                <div class="custom-file custom-file-naked d-block mb-1">
+                                                    <input type="hidden" th:field="*{photos}">
+                                                    <input type="file" name="image" accept="image/png, image/jpg"
+                                                           id="fileImage">
+                                                    <img alt="Photo Preview" id="thumbnail"
+                                                         th:src="@{${users.photosImagePath}}"
+                                                         class="avatar avatar-lg"/>
+                                                </div>
+                                                <small>For best results, use an image at least 256px by 256px in either
+                                                    .jpg
+                                                    or .png format</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">UserName</label>
+                                            <div class="col">
+                                                <input type="text" placeholder="Enter your username"
+                                                       name="profile-last-name" class="form-control"
+                                                       th:field="*{username}" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Password</label>
+                                            <div class="col">
+                                                <input type="password" placeholder="Enter your password "
+                                                       name="profile-last-name" class="form-control"
+                                                       th:field="*{password}" id="password" minlength="3" max="25"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Confirm Password</label>
+                                            <div class="col">
+                                                <input type="password" placeholder="Enter your password "
+                                                       name="profile-last-name" class="form-control"
+                                                       id="confirmPassword" oninput="checkPasswordMatch(this)"
+                                                       minlength="3" max="25"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">First Name</label>
+                                            <div class="col">
+                                                <input type="text" placeholder="Enter your first name"
+                                                       name="profile-first-name" class="form-control"
+                                                       th:field="*{firstName}" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Last Name</label>
+                                            <div class="col">
+                                                <input type="text" placeholder="Enter your last name"
+                                                       name="profile-last-name" class="form-control"
+                                                       th:field="*{lastName}" required/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="col-3">Email</label>
+                                            <div class="col">
+                                                <input type="email" placeholder="Enter your email address"
+                                                       name="profile-email" class="form-control" required
+                                                       th:field="*{email}"/>
+                                            </div>
+                                        </div>
+                                        <p>Enabled</p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="checkbox" th:field="*{enabled}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <p>Assigned Roles: </p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="custom-control custom-radio">
+                                                    <span>[[${users.roles}]]</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="/admin/fragments ::script"></script>
+<script>
+    function checkPasswordMatch(confirmPassword) {
+        if (confirmPassword.value !== $("#password").val()) {
+            confirmPassword.setCustomValidity("Password dont match !");
+        } else {
+            confirmPassword.setCustomValidity("");
+        }
+    }
+</script>
+</body>
+</html>
