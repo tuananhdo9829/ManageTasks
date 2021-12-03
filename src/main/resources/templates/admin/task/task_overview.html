@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/admin/fragments ::head">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="layout layout-nav-side">
+    <div th:replace="/admin/fragments ::navbar_top"></div>
+    <div class="main-container">
+        <div th:replace="/admin/fragments ::navbar"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 col-xl-10">
+                    <div class="page-header">
+                        <h1>Brand Concept and Design</h1>
+                        <p class="lead">Research, ideate and present brand concepts for client consideration</p>
+                    </div>
+                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" role="tabpanel"
+                             data-filter-list="card-list-body">
+                            <div class="row content-list-head">
+                                <div class="col-auto">
+                                    <h3>Tasks</h3>
+                                    <button class="btn btn-round" data-toggle="modal">
+                                        <i class="material-icons"><a th:href="@{/task/new}">add</a></i>
+                                    </button>
+                                </div>
+                                <form class="col-md-auto">
+                                    <div class="input-group input-group-round">
+                                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">filter_list</i>
+                          </span>
+                                        </div>
+                                        <input type="search" class="form-control filter-list-input"
+                                               placeholder="Filter tasks" aria-label="Filter Tasks">
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end of content list head-->
+                            <div class="content-list-body">
+                                <th:block th:each="task : ${listAllTasks}">
+                                    <div class="card-list">
+                                        <div class="card-list-head">
+                                            <h6>[[${task.project.name}]]</h6>
+                                            <div class="dropdown">
+                                                <button class="btn-options" type="button"
+                                                        id="cardlist-dropdown-button-1"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Rename</a>
+                                                    <a class="dropdown-item text-danger" href="#">Archive</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-list-body">
+                                            <div class="card card-task">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-success" role="progressbar"
+                                                         style="width: 75%" aria-valuenow="25" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-title">
+                                                        <a href="#"><h6 data-filter-by="text">[[${task.name}]]</h6>
+                                                        </a>
+                                                        <span class="text-small">[[${task.description}]]</span>
+                                                    </div>
+                                                    <div class="card-meta">
+                                                        <ul class="avatars">
+
+                                                            <li>
+                                                                <a href="#" data-toggle="tooltip" th:title="${task.user.fullName}">
+                                                                    <img alt="Kenny Tran" class="avatar"
+                                                                         th:src="@{${task.user.photosImagePath}}"/>
+                                                                </a>
+                                                            </li>
+
+                                                        </ul>
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="material-icons">playlist_add_check</i>
+                                                            <span th:text="${#lists.size(task.user.id)} + '/1'"></span>
+                                                        </div>
+                                                        <div class="dropdown card-options">
+                                                            <button class="btn-options" type="button"
+                                                                    id="task-dropdown-button-1" data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false">
+                                                                <i class="material-icons">more_vert</i>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item"
+                                                                   th:href="@{'/task/edit/'+${task.id}}">Edit</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <a class="dropdown-item text-danger"
+                                                                   th:href="@{'/task/delete/'+${task.id}}">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                            <!--end of content list-->
+                        </div>
+                    </div>
+                    <form class="modal fade" id="project-edit-modal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Project</h5>
+                                    <button type="button" class="close btn btn-round" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                                <!--end of modal head-->
+                                <ul class="nav nav-tabs nav-fill" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="project-edit-details-tab" data-toggle="tab"
+                                           href="#project-edit-details" role="tab" aria-controls="project-edit-details"
+                                           aria-selected="true">Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="project-edit-members-tab" data-toggle="tab"
+                                           href="#project-edit-members" role="tab" aria-controls="project-edit-members"
+                                           aria-selected="false">Members</a>
+                                    </li>
+                                </ul>
+                                <div class="modal-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="project-edit-details"
+                                             role="tabpanel">
+                                            <h6>General Details</h6>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-3">Name</label>
+                                                <input class="form-control col" type="text"
+                                                       value="Brand Concept and Design" name="project-name"/>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-3">Description</label>
+                                                <textarea class="form-control col" rows="3"
+                                                          placeholder="Project description" name="project-description">Research, ideate and present brand concepts for client consideration</textarea>
+                                            </div>
+                                            <hr>
+                                            <h6>Timeline</h6>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-3">Start Date</label>
+                                                <input class="form-control col" type="text" name="project-start"
+                                                       placeholder="Select a date" data-flatpickr
+                                                       data-default-date="2021-04-21" data-alt-input="true"/>
+                                            </div>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-3">Due Date</label>
+                                                <input class="form-control col" type="text" name="project-due"
+                                                       placeholder="Select a date" data-flatpickr
+                                                       data-default-date="2021-09-15" data-alt-input="true"/>
+                                            </div>
+                                            <div class="alert alert-warning text-small" role="alert">
+                                                <span>You can change due dates at any time.</span>
+                                            </div>
+                                            <hr>
+                                            <h6>Visibility</h6>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="visibility-everyone" name="visibility"
+                                                               class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="visibility-everyone">Everyone</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="visibility-members" name="visibility"
+                                                               class="custom-control-input">
+                                                        <label class="custom-control-label" for="visibility-members">Members</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="visibility-me" name="visibility"
+                                                               class="custom-control-input">
+                                                        <label class="custom-control-label" for="visibility-me">Just
+                                                            me</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="project-edit-members" role="tabpanel">
+                                            <div class="users-manage" data-filter-list="form-group-users">
+                                                <div class="mb-3">
+                                                    <ul class="avatars text-center">
+
+                                                        <li>
+                                                            <img alt="Claire Connors"
+                                                                 src="assets/img/avatar-female-1.jpg" class="avatar"
+                                                                 data-toggle="tooltip" data-title="Claire Connors"/>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </div>
+                                                <div class="input-group input-group-round">
+                                                    <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">filter_list</i>
+                                </span>
+                                                    </div>
+                                                    <input type="search" class="form-control filter-list-input"
+                                                           placeholder="Filter members" aria-label="Filter Members">
+                                                </div>
+                                                <div class="form-group-users">
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="project-user-1" checked>
+                                                        <label class="custom-control-label" for="project-user-1">
+                                  <span class="d-flex align-items-center">
+                                    <img alt="Claire Connors" src="assets/img/avatar-female-1.jpg" class="avatar mr-2"/>
+                                    <span class="h6 mb-0" data-filter-by="text">Claire Connors</span>
+                                  </span>
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end of modal body-->
+                                <div class="modal-footer">
+                                    <button role="button" class="btn btn-primary" type="submit">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="modal fade" id="task-add-modal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">New Task</h5>
+                                    <button type="button" class="close btn btn-round" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                                <!--end of modal head-->
+                                <ul class="nav nav-tabs nav-fill" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="task-add-details-tab" data-toggle="tab"
+                                           href="#task-add-details" role="tab" aria-controls="task-add-details"
+                                           aria-selected="true">Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="task-add-members-tab" data-toggle="tab"
+                                           href="#task-add-members" role="tab" aria-controls="task-add-members"
+                                           aria-selected="false">Members</a>
+                                    </li>
+                                </ul>
+                                <div class="modal-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="task-add-details" role="tabpanel">
+                                            <h6>General Details</h6>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-3">Name</label>
+                                                <input class="form-control col" type="text" placeholder="Task name"
+                                                       name="task-name"/>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-3">Description</label>
+                                                <textarea class="form-control col" rows="3"
+                                                          placeholder="Task description"
+                                                          name="task-description"></textarea>
+                                            </div>
+                                            <hr>
+                                            <h6>Timeline</h6>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-3">Start Date</label>
+                                                <input class="form-control col" type="text" name="task-start"
+                                                       placeholder="Select a date" data-flatpickr
+                                                       data-default-date="2021-04-21" data-alt-input="true"/>
+                                            </div>
+                                            <div class="form-group row align-items-center">
+                                                <label class="col-3">Due Date</label>
+                                                <input class="form-control col" type="text" name="task-due"
+                                                       placeholder="Select a date" data-flatpickr
+                                                       data-default-date="2021-09-15" data-alt-input="true"/>
+
+                                            </div>
+                                            <div class="alert alert-warning text-small" role="alert">
+                                                <span>You can change due dates at any time.</span>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="task-add-members" role="tabpanel">
+                                            <div class="users-manage" data-filter-list="form-group-users">
+                                                <div class="mb-3">
+                                                    <ul class="avatars text-center">
+
+                                                        <li>
+                                                            <img alt="Claire Connors"
+                                                                 src="assets/img/avatar-female-1.jpg" class="avatar"
+                                                                 data-toggle="tooltip" data-title="Claire Connors"/>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </div>
+                                                <div class="input-group input-group-round">
+                                                    <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">filter_list</i>
+                                </span>
+                                                    </div>
+                                                    <input type="search" class="form-control filter-list-input"
+                                                           placeholder="Filter members" aria-label="Filter Members">
+                                                </div>
+                                                <div class="form-group-users">
+
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="task-user-1" checked>
+                                                        <label class="custom-control-label" for="task-user-1">
+                                  <span class="d-flex align-items-center">
+                                    <img alt="Claire Connors" src="assets/img/avatar-female-1.jpg" class="avatar mr-2"/>
+                                    <span class="h6 mb-0" data-filter-by="text">Claire Connors</span>
+                                  </span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end of modal body-->
+                                <div class="modal-footer">
+                                    <button role="button" class="btn btn-primary" type="submit">
+                                        Create Task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="/admin/fragments ::script"></script>
+</body>
+
+</html>
