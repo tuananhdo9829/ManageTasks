@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/fragments ::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="layout layout-nav-side">
+    <div th:replace="/admin/fragments ::navbar_top"></div>
+
+    <div class="main-container">
+        <div th:replace="/admin/fragments ::navbar"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 col-xl-10">
+                    <div class="page-header">
+                        <h1>Medium Rare &#x2615;</h1>
+                        <p class="lead">A small web studio crafting lovely template products.</p>
+                    </div>
+                    <hr>
+                    <!--end of modal head-->
+
+                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="project-add-details-tab" data-toggle="tab"
+                               href="#project-add-details" role="tab" aria-controls="project-add-details"
+                               aria-selected="true">Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="project-add-members-tab" data-toggle="tab"
+                               href="#project-add-members" role="tab" aria-controls="project-add-members"
+                               aria-selected="false">Members</a>
+                        </li>
+                    </ul>
+
+                    <form th:action="@{/task/save}" th:object="${task}" method="post">
+                        <input th:field="*{id}" type="hidden">
+                        <div class="modal-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="project-add-details" role="tabpanel">
+                                    <h6>General Details</h6>
+
+                                    <div class="form-group row">
+                                        <label class="col-3">Choose Project :</label>
+                                        <select class="form-control col" th:field="*{project}">
+                                            <th:block th:each="project : ${listProject}">
+                                                <option th:value="${project.id}">[[${project.name}]]</option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-3">Name</label>
+                                        <input class="form-control col" type="text" th:field="*{name}"
+                                               placeholder="Task name"
+                                               name="project-name"/>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-3">Description</label>
+                                        <textarea class="form-control col" rows="3" th:field="*{description}"
+                                                  placeholder="Task description"
+                                                  name="project-description" required></textarea>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-3">Status:</label>
+                                        <select class="form-control col" th:field="*{status}">
+                                                <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os}"></option>
+                                        </select>
+                                    </div>
+
+                                    <hr>
+                                    <h6>Timeline</h6>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-3">Start Date</label>
+                                        <input class="form-control col" type="date" th:field="*{dateTimeStart}"
+                                               name="task-start"
+                                               placeholder="Select a date" data-flatpickr
+                                               th:data-default-date="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
+                                               data-alt-input="true" required/>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <label class="col-3">Due Date</label>
+                                        <input class="form-control col" type="date" th:field="*{dateTimeEnd}"
+                                               name="task-due"
+                                               placeholder="Select a date" data-flatpickr
+                                               data-alt-input="true" required/>
+
+                                    </div>
+                                    <div class="alert alert-warning text-small" role="alert">
+                                        <span>You can change due dates at any time.</span>
+                                    </div>
+                                    <hr>
+                                </div>
+
+                                <div class="tab-pane fade" id="project-add-members" role="tabpanel">
+                                    <div class="users-manage" data-filter-list="form-group-users">
+                                        <div class="mb-3">
+                                            <ul class="avatars text-center">
+                                                <th:block th:each="users : ${listAllUsers}">
+                                                    <li>
+                                                        <img alt="Claire Connors" th:src="@{${users.photosImagePath}}"
+                                                             class="avatar" data-toggle="tooltip"
+                                                             th:data-title="${users.username}"/>
+                                                    </li>
+
+                                                </th:block>
+
+
+                                            </ul>
+
+                                        </div>
+
+                                        <div class="input-group input-group-round">
+                                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="material-icons">filter_list 2</i>
+                                </span>
+                                            </div>
+                                            <input type="search" class="form-control filter-list-input"
+                                                   placeholder="Filter members" aria-label="Filter Members">
+                                        </div>
+
+                                        <div class="form-group-users">
+                                            <th:block th:each="userCurrentOfProject : ${listProject}">
+                                                <th:block th:each="user : ${userCurrentOfProject.users}">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               th:field="*{user.id}" th:value="${user.id}"
+                                                               th:id="${user.id}">
+                                                        <label class="custom-control-label" th:for="${user.id}">
+                                  <span class="d-flex align-items-center">
+                                    <img alt="Claire Connors" th:src="@{${user.photosImagePath}}" class="avatar mr-2"/>
+                                    <span class="h6 mb-0" data-filter-by="text">[[${user.username}]]</span>
+                                  </span>
+                                                        </label>
+                                                    </div>
+                                                </th:block>
+                                            </th:block>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end of modal body-->
+                        <div class="modal-footer">
+                            <button role="button" class="btn btn-primary" type="submit">
+                                Create Task
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="/admin/fragments ::script"></script>
+</body>
+</html>

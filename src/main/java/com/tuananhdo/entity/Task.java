@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Setter
@@ -26,6 +29,12 @@ public class Task {
 
     @Column(name = "created_time")
     private Date createdTime;
+
+    @Column(name = "time_start")
+    private Date timeStart;
+
+    @Column(name = "time_end")
+    private Date timeEnd;
 
     @Column(name = "updated_time")
     private Date updatedTime;
@@ -76,28 +85,72 @@ public class Task {
         this.description = description;
     }
 
-    public Task(Integer id,String description) {
+    public Task(Integer id, String description) {
         this.id = id;
         this.description = description;
     }
 
 
+    @Transient
+    public String getDateTimeStart() {
+        DateFormat dateFormat = getDateFormat();
+        return dateFormat.format(this.timeStart);
+    }
 
+
+    public void setDateTimeStart(String dateString) throws ParseException {
+        DateFormat dateFormat = getDateFormat();
+
+        this.timeStart = dateFormat.parse(dateString);
+    }
+
+
+    @Transient
+    public String getDateTimeEnd() {
+        DateFormat dateFormat = getDateFormat();
+        return dateFormat.format(this.timeEnd);
+    }
+
+    public void setDateTimeEnd(String dateString) throws ParseException {
+        DateFormat dateFormat = getDateFormat();
+        this.timeEnd = dateFormat.parse(dateString);
+    }
+
+    @Transient
+    public boolean isTodo() {
+        return status.equals(TaskStatus.TODO);
+    }
+
+    @Transient
+    public boolean isInProgress() {
+        return hasStatus(TaskStatus.IN_PROGRESS);
+    }
+
+    @Transient
+    public boolean isDone() {
+        return hasStatus(TaskStatus.DONE);
+    }
+
+
+    public boolean hasStatus(TaskStatus status) {
+        return getStatus().equals(status);
+    }
+
+    private DateFormat getDateFormat() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
+
+    public Date getTimeStart() {
+        return timeStart;
+    }
+
+    public void setTimeStart(Date timeStart) {
+        this.timeStart = timeStart;
+    }
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", createdTime=" + createdTime +
-                ", updatedTime=" + updatedTime +
-                ", createdBy='" + createdBy + '\'' +
-                ", updateBy='" + updateBy + '\'' +
-                ", assignTo='" + assignTo + '\'' +
-                ", project=" + project.getName() +
-                ", user=" + user.getUsername() +
-                '}';
+        return this.user.getEmail();
     }
+
 }
