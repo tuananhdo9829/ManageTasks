@@ -1,11 +1,11 @@
 package com.tuananhdo;
 
-import com.tuananhdo.admin.exception.TaskNotFoundException;
-import com.tuananhdo.admin.repository.TaskRepository;
 import com.tuananhdo.entity.Project;
 import com.tuananhdo.entity.Task;
 import com.tuananhdo.entity.TaskStatus;
 import com.tuananhdo.entity.User;
+import com.tuananhdo.exception.TaskNotFoundException;
+import com.tuananhdo.repository.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -40,7 +40,7 @@ public class TaskRepositoryTest {
         task.setName("Create New Project 2");
         task.setDescription("Create Full User and Header 2");
         task.setCreatedTime(new Date());
-        task.setStatus(TaskStatus.NEW);
+        task.setStatus(TaskStatus.TODO);
 
         Task savedTask = taskRepository.save(task);
 

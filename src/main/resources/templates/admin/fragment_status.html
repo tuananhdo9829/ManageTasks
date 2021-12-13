@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="progress_task(status)" th:remove="tag">
+        <div class="progress">
+            <div th:if="${status == status.TODO}" class="progress-bar bg-info" role="progressbar"
+                 style="width: 20%" aria-valuenow="25" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+        <div th:if="${status == status.IN_PROGRESS}" class="progress" >
+            <div class="progress-bar bg-warning" role="progressbar"
+                 style="width: 50%" aria-valuenow="25" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+        <div th:if="${status == status.DONE}" class="progress">
+            <div class="progress-bar bg-success" role="progressbar"
+                 style="width: 100%" aria-valuenow="25" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <div th:fragment="progress_project(status)" th:remove="tag">
+        <div th:if="${status == status.NEW}" class="progress">
+            <div class="progress-bar bg-primary" role="progressbar"
+                 style="width: 20%" aria-valuenow="60" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+
+        <div th:if="${status == status.REVIEW}" class="progress">
+            <div class="progress-bar bg-warning" role="progressbar"
+                 style="width: 60%" aria-valuenow="60" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+
+        <div th:if="${status == status.COMPLETED}" class="progress">
+            <div class="progress-bar bg-success" role="progressbar"
+                 style="width: 100%" aria-valuenow="60" aria-valuemin="0"
+                 aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <div th:fragment="status_small(status)">
+        <span th:fragment="status_small" class="text-small " th:if="${status == status.TODO}" style="color: #17a2b8"><b>Status: [[${task.status.TODO}]]</b></span>
+        <span th:fragment="status_small" class="text-small" th:if="${status == status.IN_PROGRESS}" style="color: #ffc107"><b>Status: [[${task.status.IN_PROGRESS}]]</b></span>
+        <span th:fragment="status_small" class="text-small" th:if="${status == status.DONE}" style="color: #28a745"><b>Status: [[${task.status.DONE}]]</b></span>
+    </div>
+
+</body>
+</html>

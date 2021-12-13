@@ -36,6 +36,9 @@ public class Project {
     @Column(name = "updated_time")
     private Date updatedTime;
 
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus projectStatus;
+
     @Column(name = "time_start")
     private Date timeStart;
 
@@ -84,16 +87,16 @@ public class Project {
         return new SimpleDateFormat("yyyy-MM-dd");
     }
 
-    public boolean isHasChildren() {
-        return this.hasChildren;
-    }
-
-    public void setHasChildren(boolean hasChildren) {
-        this.hasChildren = hasChildren;
-    }
-
-    @Transient
-    private boolean hasChildren;
+//    public boolean isHasChildren() {
+//        return this.hasChildren;
+//    }
+//
+//    public void setHasChildren(boolean hasChildren) {
+//        this.hasChildren = hasChildren;
+//    }
+//
+//    @Transient
+//    private boolean hasChildren;
 
 
     public Project(Integer id) {

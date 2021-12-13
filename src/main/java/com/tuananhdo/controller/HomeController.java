@@ -5,11 +5,13 @@ import com.tuananhdo.entity.Task;
 import com.tuananhdo.entity.Team;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.TeamNotFoundException;
+import com.tuananhdo.security.MyUserDetails;
 import com.tuananhdo.service.ProjectService;
 import com.tuananhdo.service.TaskService;
 import com.tuananhdo.service.TeamService;
 import com.tuananhdo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,14 +34,21 @@ public class HomeController {
     private UserService userService;
 
     @GetMapping("/admin/home")
-    public String homePage(Model model) {
+    public String homePage(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         List<Team> listAllTeams = teamService.listAllTeams();
         List<Project> listAllProjects = projectService.listAllProjects();
         List<Task> listAllTasks = taskService.listAllTasks();
+        User users = getAuthenticationUser(myUserDetails);
+        model.addAttribute("users",users);
         model.addAttribute("listAllTeams", listAllTeams);
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllTasks", listAllTasks);
         return "admin/home";
+    }
+
+    private User getAuthenticationUser(MyUserDetails myUserDetails) {
+        String username = myUserDetails.getUsername();
+        return userService.getUserByUsername(username);
     }
 
     @GetMapping("/teams/new")

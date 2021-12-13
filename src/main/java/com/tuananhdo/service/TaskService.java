@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,10 @@ public class TaskService {
         task.setCreatedTime(new Date());
         task.setDateTimeStart(task.getDateTimeStart());
         return taskRepository.save(task);
+    }
+
+    public List<Task> getTaskByName(String name){
+       return taskRepository.getTaskByName(name);
     }
 
 

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="/admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -41,7 +43,7 @@
                                     <h6>General Details</h6>
 
                                     <div class="form-group row">
-                                        <label class="col-3">Choose Project :</label>
+                                        <label class="col-3">Choose Project :      </label>
                                         <select class="form-control col" th:field="*{project}">
                                             <th:block th:each="project : ${listAllProjects}">
                                                 <option th:value="${project.id}">[[${project.name}]]</option>
