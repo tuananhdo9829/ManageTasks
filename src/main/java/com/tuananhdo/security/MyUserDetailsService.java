@@ -1,14 +1,12 @@
 package com.tuananhdo.security;
 
-import com.tuananhdo.admin.exception.UserNotFoudException;
+import com.tuananhdo.exception.UserNotFoundException;
 import com.tuananhdo.entity.User;
-import com.tuananhdo.admin.repository.UserRepository;
+import com.tuananhdo.repository.UserRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import java.util.Optional;
 
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -22,6 +20,6 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user != null) {
             return new MyUserDetails(user);
         }
-        throw new UserNotFoudException("Could not find any user with username : " + username);
+        throw new UserNotFoundException("Could not find any user with username : " + username);
     }
 }

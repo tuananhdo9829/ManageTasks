@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sex="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Task Management</title>
     <link rel="shortcut icon" type="image/svg" th:href="@{/admin/img/logo/logo.svg}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Gothic+A1" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link th:href="@{/admin/css/theme.css}" rel="stylesheet" type="text/css" media="all"/>
     <link th:href="@{/admin/css/bottom.css}" rel="stylesheet" type="text/css" media="all"/>
 </head>
@@ -26,9 +26,6 @@
         </button>
         <div class="d-block d-lg-none ml-2">
             <div class="dropdown">
-                <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar"/>
-                </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="nav-side-user.html" class="dropdown-item">Profile</a>
                     <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
@@ -41,46 +38,27 @@
         <ul class="navbar-nav d-lg-block">
 
             <li class="nav-item">
-
-                <a class="nav-link" th:href="@{/admin/home}">Users</a>
-
+                <a class="nav-link" th:href="@{/admin/home}">Home</a>
             </li>
 
-            <li class="nav-item">
+            <th:block sec:authorize="hasAuthority('Admin')">
+                <li class="nav-item" sex:authorize="hasAuthority('Admin')">
+                    <a class="nav-link" th:href="@{/projects/home}">Team Overview</a>
+                </li>
+            </th:block>
 
-                <a class="nav-link" th:href="@{/projects/home}">Projects</a>
+            <th:block sec:authozire="hasAuthority('Admin')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/task_overview}">Single Task</a>
+                </li>
+            </th:block>
 
-            </li>
 
-            <li class="nav-item">
-
-                <a class="nav-link" th:href="@{/users/projects_overview}">Task</a>
-
-            </li>
-
-            <li class="nav-item">
-
-                <a class="nav-link" th:href="@{/roles/home}">Manage Roles</a>
-
-            </li>
-
-            <li class="nav-item">
-
-                <a class="nav-link" th:href="@{/users/tasks_overview}">Single Task</a>
-
-            </li>
-
-            <li class="nav-item">
-
-                <a class="nav-link" th:href="@{/web/home}">Home Page</a>
-
-            </li>
-
-            <li class="nav-item">
-
-                <a class="nav-link" th:href="@{/demo}">Demo Admin</a>
-
-            </li>
+            <th:block sex:authozire="hasAuthority('Admin')">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/roles/home}">Role</a>
+                </li>
+            </th:block>
 
         </ul>
         <hr>
@@ -97,23 +75,16 @@
                 </div>
             </form>
             <div class="dropdown mt-2">
-                <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="newContentButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-primary btn-block" type="button" id="newContentButton"
+                        aria-haspopup="true" aria-expanded="false">
                     Add New
                 </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Team</a>
-                    <a class="dropdown-item" href="#">Project</a>
-                    <a class="dropdown-item" href="#">Task</a>
-                </div>
             </div>
         </div>
     </div>
     <div class="d-none d-lg-block">
         <div class="dropup">
-            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar"/>
-            </a>
+
             <div class="dropdown-menu">
                 <a href="nav-side-user.html" class="dropdown-item">Profile</a>
                 <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
@@ -127,9 +98,9 @@
 <div class="navbar bg-white breadcrumb-bar" th:fragment="navbar">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Overview</a>
+            <li class="breadcrumb-item"><a th:href="@{/admin/home}">Overview</a>
             </li>
-            <li class="breadcrumb-item"><a href="pages-app.html#">App Pages</a>
+            <li class="breadcrumb-item"><a th:href="@{/admin/home}">App Pages</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Team</li>
         </ol>

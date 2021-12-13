@@ -18,16 +18,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false, length = 30, unique = true)
+    @Column(length = 30, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 30)
+    @Column(length = 30,nullable = false)
     private String email;
 
-    @Column(name = "first_name", nullable = false, length = 10)
+    @Column(name = "first_name", length = 10)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 10)
+    @Column(name = "last_name", length = 10)
     private String lastName;
 
     @Column(nullable = false, length = 64)
@@ -37,6 +37,10 @@ public class User {
     private String photos;
 
     private boolean enabled;
+
+    @Column(name = "verification_code",length = 64,updatable = false)
+    private String verificationCode;
+
 
     public User() {
 
@@ -58,14 +62,30 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Team team;
+
+
+    public User(Integer id) {
+        this.id = id;
+    }
+
+
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
+
     @Override
     public String toString() {
-        return this.username;
+
+        return this.getFullName();
     }
+
+    public String getFullName() {
+        return this.firstName + this.lastName;
+    }
+
 
     @Transient
     public String getPhotosImagePath() {

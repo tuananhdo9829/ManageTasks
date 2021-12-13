@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments ::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div class="main-container fullscreen">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-7">
+                <div class="text-center">
+                    <h1 class="display-1 text-primary">403</h1>
+                    <p>
+                        The page you were looking for was not found. <a href="index.html">Click here to go home</a> or <a href="#">Contact Us</a> if you think this might be an error.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layout-switcher" tabindex="1">
+    <div class="layout-switcher-head d-flex justify-content-between">
+        <span>Select Layout</span>
+        <i class="material-icons">arrow_drop_up</i>
+    </div>
+    <div class="layout-switcher-body">
+
+    </div>
+</div>
+<script th:replace="admin/fragments ::script"></script>
+
+</body>
+</html>

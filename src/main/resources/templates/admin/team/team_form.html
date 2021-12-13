@@ -33,82 +33,29 @@
                         </li>
                     </ul>
 
-                    <form th:action="@{/task/save}" th:object="${task}" method="post">
+                    <form th:action="@{/teams/save}" th:object="${team}" method="post">
                         <input th:field="*{id}" type="hidden">
                         <div class="modal-body">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="project-add-details" role="tabpanel">
                                     <h6>General Details</h6>
-
-                                    <div class="form-group row">
-                                        <label class="col-3">Choose Project :</label>
-                                        <select class="form-control col" th:field="*{project}">
-                                            <th:block th:each="project : ${listAllProjects}">
-                                                <option th:value="${project.id}">[[${project.name}]]</option>
-                                            </th:block>
-                                        </select>
-                                    </div>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Name</label>
                                         <input class="form-control col" type="text" th:field="*{name}"
-                                               placeholder="Task name"
+                                               placeholder="Team name"
                                                name="project-name"/>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-3">Description</label>
-                                        <textarea class="form-control col" rows="3" th:field="*{description}"
-                                                  placeholder="Task description"
+                                        <label class="col-3">Slogan</label>
+                                        <textarea class="form-control col" rows="3" th:field="*{slogan}"
+                                                  placeholder="Slogan Team"
                                                   name="project-description" required></textarea>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label class="col-3">Status:</label>
-                                        <select class="form-control col" th:field="*{status}">
-                                                <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os}"></option>
-                                        </select>
-                                    </div>
-
-                                    <hr>
-                                    <h6>Timeline</h6>
-                                    <div class="form-group row align-items-center">
-                                        <label class="col-3">Start Date</label>
-                                        <input class="form-control col" type="date" th:field="*{dateTimeStart}"
-                                               name="task-start"
-                                               placeholder="Select a date" data-flatpickr
-                                               th:data-default-date="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
-                                               data-alt-input="true" required/>
-                                    </div>
-                                    <div class="form-group row align-items-center">
-                                        <label class="col-3">Due Date</label>
-                                        <input class="form-control col" type="date" th:field="*{dateTimeEnd}"
-                                               name="task-due"
-                                               placeholder="Select a date" data-flatpickr
-                                               data-alt-input="true" required/>
-
-                                    </div>
-                                    <div class="alert alert-warning text-small" role="alert">
-                                        <span>You can change due dates at any time.</span>
-                                    </div>
-                                    <hr>
                                 </div>
 
                                 <div class="tab-pane fade" id="project-add-members" role="tabpanel">
                                     <div class="users-manage" data-filter-list="form-group-users">
-                                        <div class="mb-3">
-                                            <ul class="avatars text-center">
-                                                <th:block th:each="users : ${listAllUsers}">
-                                                    <li>
-                                                        <img alt="Claire Connors" th:src="@{${users.photosImagePath}}"
-                                                             class="avatar" data-toggle="tooltip"
-                                                             th:data-title="${users.username}"/>
-                                                    </li>
-
-                                                </th:block>
-
-
-                                            </ul>
-
-                                        </div>
 
                                         <div class="input-group input-group-round">
                                             <div class="input-group-prepend">
@@ -121,19 +68,20 @@
                                         </div>
 
                                         <div class="form-group-users">
-                                                <th:block th:each="user : ${listAllUsers}">
+                                                <th:block  th:each="users : ${listAllUsers}">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input"
-                                                               th:field="*{user.id}" th:value="${user.id}"
-                                                               th:id="${user.id}">
-                                                        <label class="custom-control-label" th:for="${user.id}">
+                                                               th:field="*{users}" th:value="${users.id}"
+                                                               th:id="${users.id}">
+                                                        <label class="custom-control-label" th:for="${users.id}">
                                   <span class="d-flex align-items-center">
-                                    <img alt="Claire Connors" th:src="@{${user.photosImagePath}}" class="avatar mr-2"/>
-                                    <span class="h6 mb-0" data-filter-by="text">[[${user.username}]]</span>
+                                    <img alt="Claire Connors" th:src="@{${users.photosImagePath}}" class="avatar mr-2"/>
+                                    <span class="h6 mb-0" data-filter-by="text">[[${users.username}]]</span>
                                   </span>
                                                         </label>
                                                     </div>
                                                 </th:block>
+                                            </th:block>
                                         </div>
                                     </div>
 
@@ -143,7 +91,7 @@
                         <!--end of modal body-->
                         <div class="modal-footer">
                             <button role="button" class="btn btn-primary" type="submit">
-                                Create Task
+                                Create Team
                             </button>
                         </div>
                     </form>

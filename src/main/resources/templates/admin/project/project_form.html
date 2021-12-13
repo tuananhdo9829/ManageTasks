@@ -21,7 +21,7 @@
 
                                 <li>
                                     <a href="#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
-                                        <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg"/>
+                                        <img alt="Claire Connors" class="avatar" th:src="@{/admin/img/avatar-female-3.jpg}"/>
                                     </a>
                                 </li>
 
@@ -68,14 +68,14 @@
                                     <h6>Timeline</h6>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Start Date</label>
-                                        <input class="form-control col" type="text" name="project-start"
-                                               placeholder="Select a date" data-flatpickr data-default-date="2021-04-21"
+                                        <input class="form-control col" type="date" th:field="*{timeStartOfProject}" name="project-start"
+                                               placeholder="Select a date" data-flatpickr th:data-default-date="${#dates.format(#dates.createNow(),'YYYY-MM-dd')}"
                                                data-alt-input="true"/>
                                     </div>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Due Date</label>
-                                        <input class="form-control col" type="text" name="project-due"
-                                               placeholder="Select a date" data-flatpickr data-default-date="2021-09-15"
+                                        <input class="form-control col" type="date" th:field="*{timeEndOfProject}" name="project-due"
+                                               placeholder="Select a date" data-flatpickr th:data-default-date="${#dates.format(#dates.createNow(),'YYYY-MM-dd')}"
                                                data-alt-input="true"/>
                                     </div>
                                     <div class="alert alert-warning text-small" role="alert">
@@ -112,8 +112,7 @@
 
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input"
-                                                           th:field="*{users}" th:id="${users.id}"
-                                                           th:value="${users.id}">
+                                                        th:field="*{users}"  th:id="${users.id}" th:value="${users.id}">
                                                     <label class="custom-control-label" th:for="${users.id}">
                                   <span class="d-flex align-items-center">
                                     <img alt="Claire Connors" th:src="@{${users.photosImagePath}}" class="avatar mr-2"/>
@@ -127,6 +126,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <!--end of modal body-->
                         <div class="modal-footer">
                             <button role="button" class="btn btn-primary" type="submit">

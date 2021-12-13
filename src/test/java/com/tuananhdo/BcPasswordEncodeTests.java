@@ -10,9 +10,9 @@ public class BcPasswordEncodeTests {
     public void testPasswordEncode() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String newPassword = "password";
-        String ecodePassword = bCryptPasswordEncoder.encode(newPassword);
-        System.out.println(ecodePassword);
-        boolean matches = bCryptPasswordEncoder.matches(newPassword,ecodePassword);
+        String encodePassword = bCryptPasswordEncoder.encode(newPassword);
+        System.out.println(encodePassword);
+        boolean matches = bCryptPasswordEncoder.matches(newPassword,encodePassword);
         assertThat(matches).isTrue();
     }
 
