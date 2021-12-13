@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head th:replace="/admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -41,30 +43,24 @@
                 </li>
 
                 <th:block sec:authorize="hasAuthority('Admin')">
-                    <li class="nav-item" sex:authorize="hasAuthority('Admin')">
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/projects/home}">Team Overview</a>
                     </li>
                 </th:block>
 
-                <th:block sec:authozire="hasAuthority('Admin')">
+                <th:block sec:authorize="hasAnyAuthority('Admin','Manage','Staff')">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/task_overview}">Single Task</a>
                     </li>
                 </th:block>
 
 
-                <th:block sex:authozire="hasAuthority('Admin')">
-                    <li class="nav-item">
+                <th:block sec:authorize="hasAnyAuthority('Admin','Manage')">
+                    <li class="nav-item" >
                         <a class="nav-link" th:href="@{/roles/home}">Role</a>
                     </li>
                 </th:block>
-
-
-                <li class="nav-item">
-
-                    <a class="nav-link" th:href="@{/single_task}">Single Task</a>
-
-                </li>
+                
 
             </ul>
             <hr>

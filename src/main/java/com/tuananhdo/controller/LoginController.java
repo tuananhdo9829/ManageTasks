@@ -42,11 +42,11 @@ public class LoginController {
     }
 
     @PostMapping("/sign_up")
-    public String signUp(User user, HttpServletRequest request, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException, MessagingException, UserNotFoundException {
+    public String signUp(User user, HttpServletRequest request, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException, MessagingException {
         String siteURL = Utility.getSiteURL(request);
         userService.registerUser(user);
         userService.sendVerificationEmail(user, siteURL);
-        redirectAttributes.addFlashAttribute("message","Registration Succeeded ! Please check your email");
+        redirectAttributes.addFlashAttribute("message", "Registration Succeeded ! Please check your email");
         return "admin/sign_up/sign_up_success";
     }
 
@@ -55,12 +55,7 @@ public class LoginController {
         boolean verify = userService.verify(code);
         String pageTitle = verify ? "Verification Succeeded" : "Verification Failed !";
         model.addAttribute("pageTitle", pageTitle);
-        return "admin/sign_up/" + (verify ? "verify_success" :"verify_fail");
+        return "admin/sign_up/" + (verify ? "verify_success" : "verify_fail");
     }
 
-    @GetMapping("/demo")
-    public String pageAdmin() {
-
-        return "admin/sign_up/demoadmin";
-    }
 }

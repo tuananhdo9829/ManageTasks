@@ -16,11 +16,10 @@
                 <div class="col-lg-11 col-xl-10">
                     <div class="page-header mb-4">
                         <div class="media">
-                            <img alt="Image" th:src="@{/admin/img/avatar-female-3.jpg}" class="avatar avatar-lg mt-1" />
+                            <img alt="Image" th:src="@{${users.photosImagePath}}" class="avatar avatar-lg mt-1" />
                             <div class="media-body ml-3">
-                                <h1 class="mb-0">David Whittaker</h1>
-<!--                                <h1>Welcome : <span sec:authentication="principal.authorities"></span></h1>-->
-                                <p class="lead">Interface designer and front-end developer</p>
+                                &nbsp;
+                                <h2>Welcome : <span class="mb-0" style="color: purple" sec:authentication="principal.authorities"></span></h2>
                             </div>
                         </div>
                     </div>
@@ -38,11 +37,14 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="teams" role="tabpanel" data-filter-list="content-list-body">
                             <div class="row content-list-head">
-                                <div class="col-auto">
+                                <div class="col-auto" sec:authorize="hasAnyAuthority('Admin,Manage')">
                                     <h3>Teams</h3>
-                                    <button class="btn btn-round" data-toggle="modal" >
+                                    <button class="btn btn-round" data-toggle="modal">
                                         <i class="material-icons"><a th:href="@{/teams/new}">add</a></i>
                                     </button>
+                                </div>
+                                <div class="col-auto" sec:authorize="hasAnyAuthority('Staff')">
+                                    <h3>Teams</h3>
                                 </div>
                                 <form class="col-md-auto">
                                     <div class="input-group input-group-round">
@@ -61,12 +63,12 @@
                                 <th:block th:each="team : ${listAllTeams}">
                                 <div class="col-md-6">
                                     <div class="card card-team">
-                                        <div class="card-body">
-                                            <div class="dropdown card-options">
+                                        <div class="card-body" >
+                                            <div class="dropdown card-options" sec:authorize="hasAnyAuthority('Admin,Manage')">
                                                 <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="material-icons">more_vert</i>
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
+                                                <div class="dropdown-menu dropdown-menu-right" >
                                                     <a class="dropdown-item" th:href="@{'/teams/edit/'+${team.id}}">Manage</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item text-danger" th:href="@{'/teams/delete/'+${team.id}}">Delete</a>
@@ -112,24 +114,31 @@
                                 </div>
                                 <!--end of content list head-->
                                 <div class="content-list-body row">
-                                    <th:block th:each="projects : ${listAllProjects}">
+                                    <th:block th:each="project : ${listAllProjects}">
                                         <div class="col-lg-6">
                                             <div class="card card-project">
 
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-success" role="progressbar"
-                                                         style="width: 80%" aria-valuenow="40" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
+                                                <div th:replace="admin/fragment_status :: progress_project(${project.projectStatus})"></div>
 
                                                 <div class="card-body">
+                                                    <div class="dropdown card-options" sec:authorize="hasAuthority('Admin')">
+                                                        <button class="btn-options" type="button"
+                                                                id="project-dropdown-button-1" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                            <i class="material-icons">more_vert</i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
+                                                            <a class="dropdown-item" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
+                                                        </div>
+                                                    </div>
                                                     <div class="card-title">
-                                                        <a href="#"><h5 data-filter-by="text">[[${projects.name}]]</h5>
+                                                        <a href="#"><h5 data-filter-by="text">[[${project.name}]]</h5>
                                                         </a>
                                                     </div>
 
                                                     <ul class="avatars">
-                                                        <li th:each="avatar : ${projects.users}">
+                                                        <li th:each="avatar : ${project.users}">
                                                             <a href="#" data-toggle="tooltip" th:title="${avatar.username}">
                                                                 <img alt="Kenny Tran" class="avatar" th:src="@{${avatar.photosImagePath}}" />
                                                             </a>
@@ -138,16 +147,16 @@
 
 
                                                     <div class="card-title">
-                                                        <h6 data-filter-by="text">[[${projects.description}]]</h6>
+                                                        <h6 data-filter-by="text">[[${project.description}]]</h6>
                                                     </div>
                                                     <div class="card-meta d-flex justify-content-between">
                                                         <div class="d-flex align-items-center">
                                                             <i class="material-icons mr-1">playlist_add_check</i>
                                                             <span class="text-small"
-                                                                  th:text="${#lists.size(projects.users)} + ' Members'"></span>
+                                                                  th:text="${#lists.size(project.users)} + ' Members'"></span>
 
                                                         </div>
-                                                        <span class="text-small" th:text="${projects.timeEnd.getDate() - projects.timeStart.getDate() + ' Days'}">Due 4 days</span>
+                                                        <span class="text-small" th:text="${project.timeEnd.getDate() - project.timeStart.getDate() + ' Days'}">Due 4 days</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,22 +188,17 @@
                                 <th:block th:each="task : ${listAllTasks}">
                                     <div class="card-list">
                                         <div class="card-list-head">
-                                            <h6>[[${task.project.name}]]</h6>
+                                            <h6></h6>
                                         </div>
                                         <div class="card-list-body">
                                             <div class="card card-task">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-success" role="progressbar"
-                                                         style="width: 75%" aria-valuenow="25" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
+                                                <div th:replace="admin/fragment_status :: progress_task(${task.status})"></div>
                                                 <div class="card-body">
                                                     <div class="card-title">
                                                         <a href="#"><h6 data-filter-by="text">[[${task.name}]]</h6>
                                                         </a>
-                                                        <span class="text-small">[[${task.description}]]</span></br>
-                                                        <span class="text-small" style="color: purple">Status: [[${task.status.name}]]</span>
-                                                        </br>
+                                                        <span class="text-small">[[${task.description}]]</span><br>
+                                                        <div th:replace="admin/fragment_status :: status_small(${task.status})"></div>
                                                         <span class="text-small" style="color: lightseagreen">Duo Date:
                                                             [[${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}]]</span>
 

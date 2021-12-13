@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="/admin/fragments ::head">
     <meta charset="utf-8">
@@ -20,7 +21,7 @@
                         <div class="d-flex align-items-center">
                             <ul class="avatars">
                                 <li th:each="user : ${listAllUsers}">
-                                    <a href="#" data-toggle="tooltip" title="Kenny">
+                                    <a href="#" data-toggle="tooltip" th:title="${user.username}">
                                         <img alt="Kenny Tran" class="avatar"
                                              th:src="@{${user.photosImagePath}}"/>
                                     </a>
@@ -39,11 +40,14 @@
                         <div class="tab-pane fade show active" role="tabpanel"
                              data-filter-list="card-list-body">
                             <div class="row content-list-head">
-                                <div class="col-auto">
-                                    <h3>Tasks</h3>
+                                <div class="col-auto" sec:authorize="hasAnyAuthority('Admin,Manage')">
+                                    <h3>Add Task</h3>
                                     <button class="btn btn-round" data-toggle="modal">
                                         <i class="material-icons"><a th:href="@{/task/new}">add</a></i>
                                     </button>
+                                </div>
+                                <div class="col-auto" sec:authorize="hasAnyAuthority('Staff')">
+                                    <h3>Tasks</h3>
                                 </div>
                                 <form class="col-md-auto">
                                     <div class="input-group input-group-round">
@@ -61,22 +65,23 @@
                             <div th:if="${message != null}" class="alert alert-success text-center">
                                 [[${message}]]
                             </div>
-                            <div class="content-list-body">
+                            <div class="content-list-body" >
+                                <th:block th:each="authority : ${#authentication.authorities}">
                                 <th:block th:each="task : ${listAllTasks}">
                                     <div class="card-list">
                                         <div class="card-list-head">
-                                            <h6>[[${task.project.name}]]</h6>
-                                            <div class="dropdown">
+                                            <h6 ></h6>
+                                            <div class="dropdown" >
                                                 <button class="btn-options" type="button"
                                                         id="cardlist-dropdown-button-1"
                                                         data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
                                                     <i class="material-icons">more_vert</i>
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
+                                                <div class="dropdown-menu dropdown-menu-right" >
                                                     <a class="dropdown-item" th:href="@{'/task/edit/' + ${task.id}}">Rename
                                                         Task</a>
-                                                    <a class="dropdown-item text-danger"
+                                                    <a class="dropdown-item text-danger" sec:authorize="hasAnyAuthority('Admin,Manage')"
                                                        th:href="@{'/task/delete/' + ${task.id}}">Remove Task</a>
                                                 </div>
 
@@ -84,19 +89,14 @@
                                         </div>
                                         <div class="card-list-body">
                                             <div class="card card-task">
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-success" role="progressbar"
-                                                         style="width: 75%" aria-valuenow="25" aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
+                                             <div th:replace="admin/fragment_status :: progress_task(${task.status})"></div>
                                                 <div class="card-body">
                                                     <div class="card-title">
                                                         <a href="#"><h6 data-filter-by="text">[[${task.name}]]</h6>
                                                         </a>
-                                                        <span class="text-small">[[${task.description}]]</span></br>
-                                                        <span class="text-small" style="color: purple">Status: [[${task.status.name}]]</span>
-                                                        </br>
-                                                        <span class="text-small" style="color: lightseagreen">Duo Date:
+                                                        <span class="text-small">[[${task.description}]]</span><br>
+                                                        <div th:replace="admin/fragment_status :: status_small(${task.status})"></div>
+                                                        <span class="text-small" style="color: lightseagreen ;">Duo Date:
                                                             [[${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}]]</span>
 
                                                     </div>
@@ -121,6 +121,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                </th:block>
                                 </th:block>
                             </div>
                             <!--end of content list-->

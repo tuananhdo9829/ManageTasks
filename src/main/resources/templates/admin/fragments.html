@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sex="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Task Management</title>
@@ -42,7 +42,7 @@
             </li>
 
             <th:block sec:authorize="hasAuthority('Admin')">
-                <li class="nav-item" sex:authorize="hasAuthority('Admin')">
+                <li class="nav-item">
                     <a class="nav-link" th:href="@{/projects/home}">Team Overview</a>
                 </li>
             </th:block>
@@ -54,7 +54,7 @@
             </th:block>
 
 
-            <th:block sex:authozire="hasAuthority('Admin')">
+            <th:block sec:authozire="hasAuthority('Admin')">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/roles/home}">Role</a>
                 </li>

@@ -3,6 +3,7 @@ package com.tuananhdo.controller;
 
 import com.tuananhdo.entity.Project;
 import com.tuananhdo.entity.Task;
+import com.tuananhdo.entity.TaskStatus;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.TaskNotFoundException;
 import com.tuananhdo.service.ProjectService;
@@ -62,6 +63,7 @@ public class TaskController {
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllUsers", listAllUsers);
         model.addAttribute("pageTitle", "Create New Task");
+        model.addAttribute("titleButton", "Add Task");
         return "admin/task/task_form";
     }
 
@@ -93,12 +95,14 @@ public class TaskController {
     @GetMapping("/task/edit/{id}")
     public String editTask(@PathVariable("id") Integer id, Model model) throws TaskNotFoundException {
         Task task = taskService.getTaskById(id);
-        List<Project> listProjects = projectService.listAllProjects();
+        List<Project> listAllProjects = projectService.listAllProjects();
         List<User> listAllUsers = userService.listAllUsers();
         model.addAttribute("task", task);
-        model.addAttribute("listProject", listProjects);
+        model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllUsers", listAllUsers);
         model.addAttribute("pageTitle", "Edit Task ID " + id);
+        model.addAttribute("titleButton", "Edit Task");
+
         return "admin/task/task_form";
     }
 

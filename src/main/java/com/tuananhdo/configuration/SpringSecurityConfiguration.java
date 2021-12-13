@@ -30,15 +30,16 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 
-                .antMatchers("/users/home","/admin/home","/users/account").hasAnyAuthority("Admin", "Manage","Staff")
+                .antMatchers("/admin/home", "/users/account").hasAnyAuthority("Admin", "Manage", "Staff")
 
-                .antMatchers("/users","/users/new","/users/edit/**","/users/delete/**").hasAnyAuthority("Admin")
+                .antMatchers("/users/home", "/users/new", "/users/edit/**", "/users/delete/**").hasAnyAuthority("Admin", "Manage")
 
-                .antMatchers("/roles/home","/roles/new","/roles/edit/**","/roles/delete/**").hasAnyAuthority("Admin")
+                .antMatchers("/roles/home", "/roles/new", "/roles/edit/**", "/roles/delete/**").hasAnyAuthority("Admin", "Manage")
 
-                .antMatchers("/projects/home","/projects/new","/projects/edit/**","/projects/delete/**").hasAnyAuthority("Admin","Manage")
+                .antMatchers("/projects/home", "/projects/new", "/projects/edit/**", "/projects/delete/**").hasAnyAuthority("Admin", "Manage")
 
-                .antMatchers("/task/overview","/task/new","/task/edit/**","/task/delete/**").hasAnyAuthority("Admin","Manage")
+                .antMatchers("/task/overview", "/task/new", "/task/delete/**").hasAnyAuthority("Admin", "Manage")
+                .antMatchers("/task/edit/**").hasAuthority("Staff")
 
                 .anyRequest().permitAll()
                 .and().formLogin()
@@ -48,6 +49,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll()
                 .and().exceptionHandling().accessDeniedPage("/403");
     }
+
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
