@@ -1,17 +1,16 @@
 package com.tuananhdo;
 
+import com.tuananhdo.repository.UserRepository;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
-import com.tuananhdo.admin.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.Rollback;
 
 import javax.persistence.EntityManager;
-
-
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,7 +47,7 @@ public class UserRepositoryTests {
         staff2.addRole(roleStaff);
         staff3.addRole(roleStaff);
         staff4.addRole(roleStaff);
-        userRepository.saveAll(Arrays.asList(staff1,staff2,staff3,staff4));
+        userRepository.saveAll(Arrays.asList(staff1, staff2, staff3, staff4));
     }
 
     @Test
@@ -58,7 +57,7 @@ public class UserRepositoryTests {
         Role roleStaff = entityManager.find(Role.class, 2);
         staff1.addRole(roleStaff);
         staff2.addRole(roleStaff);
-        userRepository.saveAll(Arrays.asList(staff1,staff2));
+        userRepository.saveAll(Arrays.asList(staff1, staff2));
     }
 
     @Test
@@ -97,32 +96,41 @@ public class UserRepositoryTests {
     @Test
     public void testDeleteUser() {
         Integer id = 18;
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("Could not find any user id " + id));
+        userRepository.delete(user);
+        assertThat(user.getId()).isNotNull().isGreaterThan(0);
     }
 
     @Test
-    public void testGetUserByEmail(){
+    public void testGetUserByEmail() {
         String email = "tuananhdoPro@gmail.com";
         User user = userRepository.getUserByEmail(email);
         assertThat(user).isNotNull();
     }
 
     @Test
-    public void testCountById(){
+    public void testCountById() {
         Integer id = 6;
         Long countById = userRepository.countById(id);
         assertThat(countById).isNotNull().isGreaterThan(0);
     }
 
     @Test
-    public void testEnabledStatus(){
-        Integer id = 6;
-        userRepository.updateEnableStatus(id,true);
+    public void testEnabledStatus() {
+        Integer id = 18;
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("Could not find any user id " + id));
+        userRepository.updateEnableStatus(18, true);
+        assertThat(user.isEnabled()).isTrue();
     }
 
     @Test
-    public void testDisableStatus(){
-        Integer id = 6;
-        userRepository.updateEnableStatus(id,true);
+    public void testDisableStatus() {
+        Integer id = 18;
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("Could not find any user id " + id));
+        userRepository.updateEnableStatus(18, false);
+        assertThat(user.isEnabled()).isFalse();
     }
 }

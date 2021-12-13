@@ -52,7 +52,7 @@ public class Task {
     @JoinColumn(name = "projects_id")
     private Project project;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "users_id")
     private User user;
 
