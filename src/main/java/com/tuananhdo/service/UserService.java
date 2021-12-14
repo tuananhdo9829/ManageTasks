@@ -9,6 +9,7 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private  JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
     public List<User> listAllUsers() {
 
@@ -45,7 +46,7 @@ public class UserService {
 
     }
 
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
 
@@ -53,8 +54,10 @@ public class UserService {
         return userRepository.getUserByUsername(username);
     }
 
+
     public User updateUserAccount(User userInForm) {
         User userInDB = userRepository.findById(userInForm.getId()).get();
+
         if (!userInForm.getPassword().isEmpty()) {
             userInDB.setPassword(userInForm.getPassword());
             encodePassword(userInDB);
@@ -69,7 +72,17 @@ public class UserService {
     }
 
     public User save(User user) throws UserNotFoundException {
-        encodePassword(user);
+        boolean isUpdatingUser = (user.getId() != null);
+        if (isUpdatingUser) {
+            User isExisUser = userRepository.findById(user.getId()).get();
+            if (user.getPassword().isEmpty()) {
+                user.setPassword(isExisUser.getPassword());
+            } else {
+                encodePassword(user);
+            }
+        } else {
+            encodePassword(user);
+        }
         return userRepository.save(user);
     }
 
@@ -81,18 +94,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean verify(String verificationCode){
+    public boolean verify(String verificationCode) {
         User user = userRepository.findByVerificationCode(verificationCode);
 
-        if (user == null || user.isEnabled()){
+        if (user == null || user.isEnabled()) {
             return false;
-        }else {
+        } else {
             userRepository.activeUser(user.getId());
             return true;
         }
     }
-
-
 
 
     public void sendVerificationEmail(User user, String siteURL) throws MessagingException, UnsupportedEncodingException {

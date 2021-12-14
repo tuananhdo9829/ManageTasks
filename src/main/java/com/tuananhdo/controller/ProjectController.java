@@ -1,19 +1,22 @@
 package com.tuananhdo.controller;
 
-import com.tuananhdo.exception.ProjectNotFoundException;
-import com.tuananhdo.service.ProjectService;
 import com.tuananhdo.entity.Project;
 import com.tuananhdo.entity.User;
+import com.tuananhdo.exception.ProjectNotFoundException;
 import com.tuananhdo.security.MyUserDetails;
+import com.tuananhdo.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -52,8 +55,11 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/save")
-    public String save(Project project, RedirectAttributes redirectAttributes, @AuthenticationPrincipal MyUserDetails myUserDetails) throws ProjectNotFoundException {
+    public String save(@AuthenticationPrincipal MyUserDetails myUserDetails, @Valid @ModelAttribute("projects") Project project, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ProjectNotFoundException {
         try {
+            if (bindingResult.hasErrors()){
+                return "/admin/project/project_form";
+            }
             User userCreatedProject = getUserCreatedProject(project, myUserDetails);
             project.setUpdatedBy(userCreatedProject.getUsername());
             projectService.save(project);
