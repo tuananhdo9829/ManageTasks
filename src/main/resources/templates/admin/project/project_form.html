@@ -48,21 +48,26 @@
                     </ul>
                     <form th:action="@{/projects/save}" th:object="${projects}" method="post">
                         <input th:field="*{id}" type="hidden">
+                        <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="valid-feedback"></div>
                         <div class="modal-body">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="project-add-details" role="tabpanel">
                                     <h6>General Details</h6>
-                                    <div class="form-group row align-items-center">
+                                    <div class="form-group row align-items-center" id="mySelect">
                                         <label class="col-3">Name</label>
-                                        <input class="form-control col" type="text" th:field="*{name}"
+                                        <input class="form-control col" type="text" th:field="*{name}" 
                                                placeholder="Project name"
-                                               name="project-name"/>
+                                               name="project-name" />
+                                        <div th:if="${#fields.hasErrors('name')}" id="error" th:errors="*{name}" class="invalid-feedback"></div>
+
                                     </div>
+
                                     <div class="form-group row">
-                                        <label class="col-3">Description</label>
+                                        <label class="col-3 ">Description</label>
                                         <textarea class="form-control col" rows="3" th:field="*{description}"
                                                   placeholder="Project description"
-                                                  name="project-description"></textarea>
+                                                  name="project-description"  ></textarea>
+                                        <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="valid-tooltip"></div>
                                     </div>
 
                                     <div class="form-group row">
@@ -70,6 +75,8 @@
                                         <select class="form-control col"  th:field="*{projectStatus}">
                                                  <option th:each="status : ${T(com.tuananhdo.entity.ProjectStatus).values()}" th:value="${status}">[[${status}]]</option>
                                         </select>
+                                        <div th:if="${#fields.hasErrors('projectStatus')}" th:errors="*{projectStatus}" class="invalid-feedback "></div>
+
                                     </div>
                                     <hr>
                                     <h6>Timeline</h6>
@@ -78,12 +85,16 @@
                                         <input class="form-control col" type="date" th:field="*{timeStartOfProject}" name="project-start"
                                                placeholder="Select a date" data-flatpickr th:data-default-date="${#dates.format(#dates.createNow(),'YYYY-MM-dd')}"
                                                data-alt-input="true"/>
+                                        <div th:if="${#fields.hasErrors('timeStartOfProject')}" th:errors="*{timeStartOfProject}" class="invalid-feedback"></div>
+
                                     </div>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Due Date</label>
                                         <input class="form-control col" type="date" th:field="*{timeEndOfProject}" name="project-due"
                                                placeholder="Select a date" data-flatpickr
                                                data-alt-input="true"/>
+                                        <div th:if="${#fields.hasErrors('timeEndOfProject')}" th:errors="*{timeEndOfProject}" class="invalid-feedback "></div>
+
                                     </div>
                                     <div class="alert alert-warning text-small" role="alert">
                                         <span>You can change due dates at any time.</span>
@@ -102,7 +113,6 @@
                                                     </li>
 
                                                 </th:block>
-
                                             </ul>
                                         </div>
                                         <div class="input-group input-group-round">
@@ -115,6 +125,8 @@
                                                    placeholder="Filter members" aria-label="Filter Members">
                                         </div>
                                         <div class="form-group-users">
+<<<<<<< HEAD
+=======
                                             <th:block th:each="users : ${listAllUsers}">
 
                                                 <div class="custom-control custom-checkbox">  
@@ -128,13 +140,12 @@
                                                     </label>
                                                 </div>
                                             </th:block>
+>>>>>>> master
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                         <!--end of modal body-->
                         <div class="modal-footer">
                             <button role="button" class="btn btn-primary" type="submit">

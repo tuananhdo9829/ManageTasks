@@ -11,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,15 +43,20 @@ public class UserController {
     @GetMapping("/users/new")
     public String createNewUsers(Model model) {
         List<Role> listAllRoles = userService.listAllRoles();
-        model.addAttribute("users", new User());
+        User user = new User();
+        user.setEnabled(true);
+        model.addAttribute("users", user);
         model.addAttribute("listRoles", listAllRoles);
         model.addAttribute("pageTitle", "Create New User");
         return "admin/user/user_form";
     }
 
     @PostMapping("/users/save")
-    public String saveUser(RedirectAttributes redirectAttributes, User users, @RequestParam("image") MultipartFile multipartFile) {
+    public String saveUser(@Valid @ModelAttribute("users") User users, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
         try {
+            if (bindingResult.hasErrors()) {
+                return "admin/user/user_form";
+            }
             if (!multipartFile.isEmpty()) {
                 String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
                 users.setPhotos(fileName);
@@ -65,6 +69,7 @@ public class UserController {
         } catch (UserNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message" + ex.getMessage());
         }
+
         return "redirect:/users/home";
     }
 

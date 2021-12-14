@@ -5,6 +5,7 @@ import com.tuananhdo.entity.Task;
 import com.tuananhdo.entity.Team;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.TeamNotFoundException;
+import com.tuananhdo.exception.UserNotFoundException;
 import com.tuananhdo.security.MyUserDetails;
 import com.tuananhdo.service.ProjectService;
 import com.tuananhdo.service.TaskService;
@@ -39,7 +40,7 @@ public class HomeController {
         List<Project> listAllProjects = projectService.listAllProjects();
         List<Task> listAllTasks = taskService.listAllTasks();
         User users = getAuthenticationUser(myUserDetails);
-        model.addAttribute("users",users);
+        model.addAttribute("users", users);
         model.addAttribute("listAllTeams", listAllTeams);
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllTasks", listAllTasks);
@@ -71,9 +72,12 @@ public class HomeController {
     }
 
     @GetMapping("/teams/edit/{id}")
-    public String editTeams(@PathVariable("id") Integer id, Model model) {
+    public String editTeams(@PathVariable("id") Integer id, Model model) throws TeamNotFoundException, UserNotFoundException {
         Team team = teamService.getTeamById(id);
+        List<User> listAllUsers = userService.listAllUsers();
         model.addAttribute("team", team);
+        model.addAttribute("listAllUsers", listAllUsers);
+
         return "admin/team/team_form";
     }
 

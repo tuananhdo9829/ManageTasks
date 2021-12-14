@@ -32,7 +32,7 @@
                                             <div class="media-body ml-3">
                                                 <div class="custom-file custom-file-naked d-block mb-1">
                                                     <input type="hidden" th:field="*{photos}">
-                                                    <input type="file" name="image" accept="image/png, image/jpg" id="fileImage">
+                                                    <input type="file" name="image" accept="image/png, image/jpg" id="fileImage" required>
                                                     <img alt="Photo Preview" id="thumbnail"
                                                          th:src="@{${users.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
@@ -96,8 +96,7 @@
                                             <th:block th:each="roles : ${listRoles}">
                                                 <div class="col">
                                                     <div class="custom-control custom-radio">
-                                                        <input type="hidden" th:field="*{id}">
-                                                        <input type="checkbox" th:field="*{roles}" th:text="${roles.name}" th:value="${roles.id}">
+                                                        <input type="checkbox" th:field="*{roles}" th:id="${roles.id}" th:value="${roles.id} " th:text="${roles.name}" >
                                                     </div>
                                                 </div>
                                             </th:block>

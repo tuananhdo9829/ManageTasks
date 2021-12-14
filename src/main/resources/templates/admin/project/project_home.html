@@ -153,6 +153,8 @@
                                             <div class="media-body">
                                                 <h6 class="mb-0" data-filter-by="text">[[${user.username}]]</h6>
                                                 <span data-filter-by="text" class="text-body">[[${user.roles}]]</span>
+                                                <span data-filter-by="text" class="text-body"><a th:href="@{'/users/delete/'+${user.id}}">De</a></span>
+
                                             </div>
                                         </a>
                                     </div>

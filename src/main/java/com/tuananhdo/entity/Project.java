@@ -1,13 +1,21 @@
 package com.tuananhdo.entity;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -25,24 +33,32 @@ public class Project {
     private Integer id;
 
     @Column(nullable = false, length = 35, unique = true)
+    @NotBlank(message = "Enter your project name")
+    @Size(min = 2,message = "project name should have at least 2 characters")
     private String name;
 
     @Column(nullable = false, length = 200)
+    @NotBlank(message = "Enter your project description")
+    @Size(min = 2,message = "project name should have at least 2 characters")
     private String description;
 
     @Column(name = "created_time")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createdTime;
 
     @Column(name = "updated_time")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date updatedTime;
 
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
 
     @Column(name = "time_start")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date timeStart;
 
     @Column(name = "time_end")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date timeEnd;
 
     @Column(name = "created_by", length = 35)

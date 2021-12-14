@@ -2,8 +2,11 @@ package com.tuananhdo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,24 +22,32 @@ public class Task {
     private Integer id;
 
     @Column(nullable = false, length = 35, unique = true)
+    @NotBlank(message = "Enter your task name")
+    @Size(min = 6,message = "The task name should have at least 6 characters")
     private String name;
 
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 150)
+    @NotBlank(message = "Enter your task description")
+    @Size(min = 6,message = "The task description should have at least 6 characters")
     private String description;
 
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
     @Column(name = "created_time")
+    @DateTimeFormat(pattern = "yyyy-dd-mm")
     private Date createdTime;
 
     @Column(name = "time_start")
+    @DateTimeFormat(pattern = "yyyy-dd-mm")
     private Date timeStart;
 
     @Column(name = "time_end")
+    @DateTimeFormat(pattern = "yyyy-dd-mm")
     private Date timeEnd;
 
     @Column(name = "updated_time")
+    @DateTimeFormat(pattern = "yyyy-dd-mm")
     private Date updatedTime;
 
     @Column(name = "created_by", length = 35)
@@ -116,31 +127,13 @@ public class Task {
         this.timeEnd = dateFormat.parse(dateString);
     }
 
-    @Transient
-    public boolean isTodo() {
-        return status.equals(TaskStatus.TODO);
-    }
-
-    @Transient
-    public boolean isInProgress() {
-        return hasStatus(TaskStatus.IN_PROGRESS);
-    }
-
-    @Transient
-    public boolean isDone() {
-        return hasStatus(TaskStatus.DONE);
-    }
-
-
-    public boolean hasStatus(TaskStatus status) {
-        return getStatus().equals(status);
-    }
 
     private DateFormat getDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public Date getTimeStart() {
+
         return timeStart;
     }
 
