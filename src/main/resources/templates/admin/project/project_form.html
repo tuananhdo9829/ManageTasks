@@ -118,9 +118,8 @@
                                             <th:block th:each="users : ${listAllUsers}">
 
                                                 <div class="custom-control custom-checkbox">  
-                                                    <input type="hidden" th:field="*{users}">
                                                     <input type="checkbox" class="custom-control-input"
-                                                        th:field="*{users}" th:value="${users.id}">
+                                                        th:field="*{users}" th:id="${users.id}" th:value="${users.id}">
                                                     <label class="custom-control-label" th:for="${users.id}">
                                   <span class="d-flex align-items-center">
                                     <img alt="Claire Connors" th:src="@{${users.photosImagePath}}" class="avatar mr-2"/>
