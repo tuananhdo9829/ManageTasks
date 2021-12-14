@@ -71,7 +71,7 @@ public class HomeController {
     }
 
     @GetMapping("/teams/edit/{id}")
-    public String editTeams(@PathVariable("id") Integer id, Model model) throws TeamNotFoundException {
+    public String editTeams(@PathVariable("id") Integer id, Model model) {
         Team team = teamService.getTeamById(id);
         model.addAttribute("team", team);
         return "admin/team/team_form";

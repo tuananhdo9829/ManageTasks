@@ -189,6 +189,21 @@
                                     <div class="card-list">
                                         <div class="card-list-head">
                                             <h6></h6>
+                                            <div class="dropdown" sec:authorize="hasAnyAuthority('Admin','Manage')" >
+                                                <button class="btn-options" type="button"
+                                                        id="cardlist-dropdown-button-1"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" >
+                                                    <a class="dropdown-item" th:href="@{'/task/edit/' + ${task.id}}">Rename
+                                                        Task</a>
+                                                    <a class="dropdown-item text-danger" sec:authorize="hasAnyAuthority('Admin,Manage')"
+                                                       th:href="@{'/task/delete/' + ${task.id}}">Remove Task</a>
+                                                </div>
+
+                                            </div>
                                         </div>
                                         <div class="card-list-body">
                                             <div class="card card-task">
@@ -201,7 +216,6 @@
                                                         <div th:replace="admin/fragment_status :: status_small(${task.status})"></div>
                                                         <span class="text-small" style="color: lightseagreen">Duo Date:
                                                             [[${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}]]</span>
-
                                                     </div>
                                                     <div class="card-meta">
                                                         <ul class="avatars">
