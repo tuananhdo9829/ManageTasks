@@ -125,6 +125,22 @@
                                                    placeholder="Filter members" aria-label="Filter Members">
                                         </div>
                                         <div class="form-group-users">
+<<<<<<< HEAD
+=======
+                                            <th:block th:each="users : ${listAllUsers}">
+
+                                                <div class="custom-control custom-checkbox">  
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        th:field="*{users}" th:id="${users.id}" th:value="${users.id}">
+                                                    <label class="custom-control-label" th:for="${users.id}">
+                                  <span class="d-flex align-items-center">
+                                    <img alt="Claire Connors" th:src="@{${users.photosImagePath}}" class="avatar mr-2"/>
+                                    <span class="h6 mb-0" data-filter-by="text">[[${users.username}]]</span>
+                                  </span>
+                                                    </label>
+                                                </div>
+                                            </th:block>
+>>>>>>> master
                                         </div>
                                     </div>
                                 </div>

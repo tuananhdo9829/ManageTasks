@@ -20,9 +20,9 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 25, name = "name")
     @NotBlank(message = "Enter your team name")
     @Size(min = 3 , message = "The team name should have at least 3 characters")
+    @Column(nullable = false, length = 25)
     private String name;
 
     @Column(length = 150)
