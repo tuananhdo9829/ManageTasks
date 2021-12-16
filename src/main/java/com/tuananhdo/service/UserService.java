@@ -1,20 +1,17 @@
 package com.tuananhdo.service;
 
+import com.tuananhdo.entity.Role;
+import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.UserNotFoundException;
 import com.tuananhdo.repository.RoleRepository;
 import com.tuananhdo.repository.UserRepository;
-import com.tuananhdo.entity.Role;
-import com.tuananhdo.entity.User;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -39,6 +36,7 @@ public class UserService {
 
         return userRepository.findAll();
     }
+    
 
     public List<Role> listAllRoles() {
 
@@ -116,14 +114,7 @@ public class UserService {
 
         mailContent += "<h3><a href =\"" + verifyURL + "\">VERIFY</a></h3>";
 
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-
-        mimeMessageHelper.setFrom("slodierqwe@gmail.com", senderName);
-        mimeMessageHelper.setTo(user.getEmail());
-        mimeMessageHelper.setSubject(subject);
-        mimeMessageHelper.setText(mailContent, true);
-        javaMailSender.send(mimeMessage);
+        TaskService.sendMail(user, subject, senderName, mailContent, javaMailSender);
     }
 
     public void encodePassword(User user) {

@@ -63,7 +63,7 @@ public class Task {
     @JoinColumn(name = "projects_id")
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "users_id")
     private User user;
 

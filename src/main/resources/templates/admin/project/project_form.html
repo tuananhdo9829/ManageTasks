@@ -53,12 +53,12 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="project-add-details" role="tabpanel">
                                     <h6>General Details</h6>
-                                    <div class="form-group row align-items-center" id="mySelect">
+                                    <div class="form-group row align-items-center" >
                                         <label class="col-3">Name</label>
                                         <input class="form-control col" type="text" th:field="*{name}" 
                                                placeholder="Project name"
                                                name="project-name" />
-                                        <div th:if="${#fields.hasErrors('name')}" id="error" th:errors="*{name}" class="invalid-feedback"></div>
+                                        <div th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" class="invalid-feedback"></div>
 
                                     </div>
 
@@ -67,7 +67,7 @@
                                         <textarea class="form-control col" rows="3" th:field="*{description}"
                                                   placeholder="Project description"
                                                   name="project-description"  ></textarea>
-                                        <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="valid-tooltip"></div>
+                                        <div th:if="${#fields.hasErrors('description')}"  th:errors="*{description}" class="valid-tooltip"></div>
                                     </div>
 
                                     <div class="form-group row">
@@ -125,8 +125,6 @@
                                                    placeholder="Filter members" aria-label="Filter Members">
                                         </div>
                                         <div class="form-group-users">
-<<<<<<< HEAD
-=======
                                             <th:block th:each="users : ${listAllUsers}">
 
                                                 <div class="custom-control custom-checkbox">  
@@ -140,7 +138,6 @@
                                                     </label>
                                                 </div>
                                             </th:block>
->>>>>>> master
                                         </div>
                                     </div>
                                 </div>

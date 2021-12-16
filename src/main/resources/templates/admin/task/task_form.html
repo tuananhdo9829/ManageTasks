@@ -50,18 +50,24 @@
                                             </th:block>
                                         </select>
                                     </div>
+                                    <div th:if="${#fields.hasErrors('project')}" th:errors="*{project}" class="invalid-feedback"></div>
+
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Name</label>
                                         <input class="form-control col" type="text" th:field="*{name}"
                                                placeholder="Task name"
                                                name="project-name"/>
                                     </div>
+                                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback"></div>
+
+
                                     <div class="form-group row">
                                         <label class="col-3">Description</label>
                                         <textarea class="form-control col" rows="3" th:field="*{description}"
                                                   placeholder="Task description"
                                                   name="project-description" required></textarea>
                                     </div>
+                                    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
 
                                     <div class="form-group row">
                                         <label class="col-3">Status:</label>
@@ -69,6 +75,8 @@
                                                 <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os.name}"></option>
                                         </select>
                                     </div>
+                                    <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}" ></div>
+
 
                                     <hr>
                                     <h6>Timeline</h6>
@@ -80,6 +88,8 @@
                                                th:data-default-date="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
                                                data-alt-input="true" required/>
                                     </div>
+                                    <div th:if="${#fields.hasErrors('dateTimeStart')}" th:errors="*{dateTimeStart}" class="valid-tooltip"></div>
+
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Due Date</label>
                                         <input class="form-control col" type="date" th:field="*{dateTimeEnd}"
@@ -88,6 +98,8 @@
                                                data-alt-input="true" required/>
 
                                     </div>
+                                    <div th:if="${#fields.hasErrors('dateTimeEnd')}" th:errors="*{dateTimeEnd}" class="valid-tooltip"></div>
+
                                     <div class="alert alert-warning text-small" role="alert">
                                         <span>You can change due dates at any time.</span>
                                     </div>

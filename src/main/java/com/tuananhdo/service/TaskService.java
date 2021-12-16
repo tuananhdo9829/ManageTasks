@@ -38,6 +38,7 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
+
     public Task getTaskById(Integer id) throws TaskNotFoundException {
 
         return taskRepository.findById(id).orElseThrow(
@@ -60,23 +61,25 @@ public class TaskService {
         if (getEmailUser != null) {
             String subject = "CSeam Group Team";
             String senderName = "CS Dojo Kind Roy";
-            String mailContent = "<p> Dear : " + getEmailUser.getFullName() + ", </p>";
-            mailContent += "<p>Here is link task for you</p>";
-
+            String mailContent = "<p> Dear : " + getEmailUser.getFullName() + "</p>";
+            mailContent += "<p> You have an invitation to join the project</p>";
             String claimTask = siteURL + "/task_overview";
+            mailContent += "<h3><a href =\"" + claimTask + "\">Join Project</a></h3>";
 
-            mailContent += "<h3><a href =\"" + claimTask + "\">Claim Task</a></h3>";
-
-            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-            mimeMessageHelper.setFrom("slodierqwe@gmail.com", senderName);
-            mimeMessageHelper.setTo(user.getEmail());
-            mimeMessageHelper.setSubject(subject);
-            mimeMessageHelper.setText(mailContent, true);
-            javaMailSender.send(mimeMessage);
+            sendMail(user, subject, senderName, mailContent, javaMailSender);
         } else {
             throw new UserNotFoundException("Could not find any with email :" + email);
         }
+    }
+
+    static void sendMail(User user, String subject, String senderName, String mailContent, JavaMailSender javaMailSender) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+        mimeMessageHelper.setFrom("slodierqwe@gmail.com", senderName);
+        mimeMessageHelper.setTo(user.getEmail());
+        mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setText(mailContent, true);
+        javaMailSender.send(mimeMessage);
     }
 
 

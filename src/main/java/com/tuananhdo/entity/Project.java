@@ -103,16 +103,6 @@ public class Project {
         return new SimpleDateFormat("yyyy-MM-dd");
     }
 
-//    public boolean isHasChildren() {
-//        return this.hasChildren;
-//    }
-//
-//    public void setHasChildren(boolean hasChildren) {
-//        this.hasChildren = hasChildren;
-//    }
-//
-//    @Transient
-//    private boolean hasChildren;
 
 
     public Project(Integer id) {

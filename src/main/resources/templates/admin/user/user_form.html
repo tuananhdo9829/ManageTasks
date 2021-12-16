@@ -93,10 +93,10 @@
                                         <hr>
                                         <p>Roles</p>
                                         <div class="row">
-                                            <th:block th:each="roles : ${listRoles}">
+                                            <th:block th:each="roles : ${listAllRoles}">
                                                 <div class="col">
                                                     <div class="custom-control custom-radio">
-                                                        <input type="checkbox" th:field="*{roles}" th:id="${roles.id}" th:value="${roles.id} " th:text="${roles.name}" >
+                                                            <input type="checkbox" th:field="*{roles}" th:value="${roles.id}" > [[${roles.name}]]
                                                     </div>
                                                 </div>
                                             </th:block>
@@ -104,7 +104,6 @@
                                         <div class="d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
-
                                     </div>
                                 </form>
                             </div>

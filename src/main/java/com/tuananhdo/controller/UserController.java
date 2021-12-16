@@ -76,7 +76,7 @@ public class UserController {
             User users = userService.getUserById(id);
             List<Role> listAllRoles = userService.listAllRoles();
             model.addAttribute("users", users);
-            model.addAttribute("listRoles", listAllRoles);
+            model.addAttribute("listAllRoles", listAllRoles);
             model.addAttribute("pageTitle", "Edit User ID : (" + id + ") ");
             return "admin/user/user_form";
         } catch (UserNotFoundException ex) {
