@@ -83,7 +83,7 @@ public class HomeController {
     }
 
     @GetMapping("/teams/edit/{id}")
-    public String editTeams(@PathVariable("id") Integer id, Model model) throws TeamNotFoundException, UserNotFoundException {
+    public String editTeams(@PathVariable("id") Integer id, Model model) throws TeamNotFoundException {
         Team team = teamService.getTeamById(id);
         List<User> listAllUsers = userService.listAllUsers();
         model.addAttribute("team", team);

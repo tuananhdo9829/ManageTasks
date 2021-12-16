@@ -1542,11 +1542,11 @@ textarea.form-control {
     margin-left: 0; }
 
 .valid-feedback {
-    display: none;
+    display: block;
     width: 100%;
     margin-top: 0.25rem;
     font-size: 80%;
-    color: #28a745; }
+    color: red; }
 
 .valid-tooltip {
     position: absolute;
@@ -1624,9 +1624,8 @@ textarea.form-control {
 
 .invalid-feedback {
     display: block;
-    width: 100%;
-    margin-top: 0.25rem;
-    font-size: 80%;
+    margin-top: .25rem;
+    font-size: .875rem;
     color: #dc3545;
 }
 
@@ -1643,7 +1642,8 @@ textarea.form-control {
     line-height: 1.5;
     color: #fff;
     background-color: #dc3545;
-    border-radius: 10rem; }
+    border-radius: 10rem;
+}
 
 .was-validated :invalid ~ .invalid-feedback,
 .was-validated :invalid ~ .invalid-tooltip,

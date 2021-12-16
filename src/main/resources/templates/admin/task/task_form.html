@@ -44,38 +44,37 @@
 
                                     <div class="form-group row">
                                         <label class="col-3">Choose Project :      </label>
-                                        <select class="form-control col" th:field="*{project}">
+                                        <select class="form-control col " th:field="*{project}" >
+                                            <option value="0">Choose Project </option>
                                             <th:block th:each="project : ${listAllProjects}">
                                                 <option th:value="${project.id}">[[${project.name}]]</option>
                                             </th:block>
                                         </select>
+                                        <small th:if="${#fields.hasErrors('project')}"  th:errors="*{project}" class="invalid"></small>
                                     </div>
-                                    <div th:if="${#fields.hasErrors('project')}" th:errors="*{project}" class="invalid-feedback"></div>
-
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Name</label>
-                                        <input class="form-control col" type="text" th:field="*{name}"
+                                        <input class="form-control col  "  type="text" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
                                                placeholder="Task name"
                                                name="project-name"/>
                                     </div>
-                                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="invalid-feedback"></div>
-
+                                    <small th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" class="invalid "></small>
 
                                     <div class="form-group row">
                                         <label class="col-3">Description</label>
-                                        <textarea class="form-control col" rows="3" th:field="*{description}"
-                                                  placeholder="Task description"
-                                                  name="project-description" required></textarea>
+                                        <textarea class="form-control col"  rows="3" th:field="*{description} " th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+                                               placeholder="Task description"
+                                                  name="project-description" ></textarea>
                                     </div>
-                                    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="invalid-feedback"></div>
+                                    <small th:if="${#fields.hasErrors('description')}"  th:errors="*{description}" class="invalid "></small>
+
 
                                     <div class="form-group row">
                                         <label class="col-3">Status:</label>
-                                        <select class="form-control col" th:field="*{status}">
+                                        <select class="form-control col " th:field="*{status}">
                                                 <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os.name}"></option>
                                         </select>
                                     </div>
-                                    <div th:if="${#fields.hasErrors('status')}" th:errors="*{status}" ></div>
 
 
                                     <hr>
@@ -86,20 +85,16 @@
                                                name="task-start"
                                                placeholder="Select a date" data-flatpickr
                                                th:data-default-date="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
-                                               data-alt-input="true" required/>
+                                               data-alt-input="true" />
                                     </div>
-                                    <div th:if="${#fields.hasErrors('dateTimeStart')}" th:errors="*{dateTimeStart}" class="valid-tooltip"></div>
-
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Due Date</label>
                                         <input class="form-control col" type="date" th:field="*{dateTimeEnd}"
                                                name="task-due"
                                                placeholder="Select a date" data-flatpickr
-                                               data-alt-input="true" required/>
+                                               data-alt-input="true" />
 
                                     </div>
-                                    <div th:if="${#fields.hasErrors('dateTimeEnd')}" th:errors="*{dateTimeEnd}" class="valid-tooltip"></div>
-
                                     <div class="alert alert-warning text-small" role="alert">
                                         <span>You can change due dates at any time.</span>
                                     </div>
@@ -137,9 +132,9 @@
                                         <div class="form-group-users">
                                                 <th:block th:each="user : ${listAllUsers}">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
+                                                        <input type="checkbox" class="custom-control-input "
                                                                th:field="*{user.id}" th:value="${user.id}"
-                                                               th:id="${user.id}">
+                                                               th:id="${user.id}" th:classappend="${#fields.hasErrors('user.id')} ? 'is-invalid' : '' ">
                                                         <label class="custom-control-label" th:for="${user.id}">
                                   <span class="d-flex align-items-center">
                                     <img alt="Claire Connors" th:src="@{${user.photosImagePath}}" class="avatar mr-2"/>
@@ -166,6 +161,11 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("[rel='tooltip']").tooltip();
+    });
+</script>
 <script th:replace="/admin/fragments ::script"></script>
 </body>
 </html>

@@ -5,10 +5,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,32 +20,32 @@ public class User {
     private Integer id;
 
     @Column(length = 30, unique = true)
-    @NotBlank(message = "Enter your username")
+    @NotEmpty(message = "Enter your username")
     @Size(min = 6 , message = "The username should have at least 6 characters")
     private String username;
 
     @Column(length = 30,nullable = false)
-    @NotBlank(message = "Enter your email")
+    @NotEmpty(message = "Enter your email")
     @Email(message = "Enter a valid email address")
     private String email;
 
     @Column(name = "first_name", length = 10)
-    @NotBlank(message = "Enter your first name")
+    @NotEmpty(message = "Enter your first name")
     @Size(min = 2 , message = "The first name should have at least 2 characters")
     private String firstName;
 
     @Column(name = "last_name", length = 10)
-    @NotBlank(message = "Enter your last name")
+    @NotEmpty(message = "Enter your last name")
     @Size(min = 2 , message = "The last name should have at least 2 characters")
     private String lastName;
 
     @Column(nullable = false, length = 64)
-    @NotBlank(message = "Enter your password")
+    @NotEmpty(message = "Enter your password")
     @Length(min = 8,message = "Password must be at least 8 characters")
     private String password;
 
     @Column(length = 64)
-    @NotBlank
+    @NotEmpty
     private String photos;
 
     @AssertTrue
@@ -70,7 +67,7 @@ public class User {
         this.password = password;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinTable(
             name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id")
             , inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id")

@@ -5,7 +5,9 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,13 +24,13 @@ public class Task {
     private Integer id;
 
     @Column(nullable = false, length = 35, unique = true)
-    @NotBlank(message = "Enter your task name")
-    @Size(min = 6,message = "The task name should have at least 6 characters")
+    @NotEmpty(message = "")
+    @Size(min = 6,message = "Should have at least 6 characters")
     private String name;
 
     @Column(nullable = false, length = 150)
-    @NotBlank(message = "Enter your task description")
-    @Size(min = 6,message = "The task description should have at least 6 characters")
+    @NotEmpty(message = "")
+    @Size(min = 6,message = "Should have at least 6 characters")
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -59,11 +61,14 @@ public class Task {
     @Column(name = "assign_to", length = 35)
     private String assignTo;
 
+    @NotNull(message = "")
+    @Valid
     @ManyToOne
     @JoinColumn(name = "projects_id")
     private Project project;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @NotNull(message = "")
+    @ManyToOne
     @JoinColumn(name = "users_id")
     private User user;
 

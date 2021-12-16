@@ -46,7 +46,7 @@ public class UserController {
         User user = new User();
         user.setEnabled(true);
         model.addAttribute("users", user);
-        model.addAttribute("listRoles", listAllRoles);
+        model.addAttribute("listAllRoles", listAllRoles);
         model.addAttribute("pageTitle", "Create New User");
         return "admin/user/user_form";
     }

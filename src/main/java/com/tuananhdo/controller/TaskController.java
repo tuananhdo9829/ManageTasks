@@ -12,6 +12,7 @@ import com.tuananhdo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +30,12 @@ import java.util.List;
 public class TaskController {
 
 
-    @Autowired private TaskService taskService;
-    @Autowired private ProjectService projectService;
-    @Autowired private UserService userService;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/task_overview")
     public String listAllTask(Model model) {
@@ -64,9 +68,17 @@ public class TaskController {
 
 
     @PostMapping("/task/save")
-    public String saveTask(@Valid @ModelAttribute("task") Task task,@ModelAttribute("user") User user , RedirectAttributes redirectAttributes) throws TaskNotFoundException, UnsupportedEncodingException, MessagingException, ParseException, UserNotFoundException {
-        taskService.save(task);
-        redirectAttributes.addFlashAttribute("message", "The task has been saved successfully !");
+    public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws TaskNotFoundException, UnsupportedEncodingException, MessagingException, ParseException, UserNotFoundException {
+        if (bindingResult.hasErrors()) {
+            List<Project> listAllProjects = projectService.listAllProjects();
+            List<User> listAllUsers = userService.listAllUsers();
+            model.addAttribute("listAllProjects", listAllProjects);
+            model.addAttribute("listAllUsers", listAllUsers);
+            return "admin/task/task_form";
+        } else {
+            taskService.save(task);
+            redirectAttributes.addFlashAttribute("message", "The task has been saved successfully !");
+        }
         return "redirect:/task_overview";
     }
 
