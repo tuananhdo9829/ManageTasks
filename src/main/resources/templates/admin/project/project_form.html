@@ -73,7 +73,7 @@
                                     <div class="form-group row">
                                         <label class="col-3">Status</label>
                                         <select class="form-control col"  th:field="*{projectStatus}">
-                                                 <option th:each="status : ${T(com.tuananhdo.entity.ProjectStatus).values()}" th:value="${status}">[[${status}]]</option>
+                                                 <option th:each="status : ${T(com.tuananhdo.entity.ProjectStatus).values()}" th:value="${status}">[[${status.name}]]</option>
                                         </select>
                                         <div th:if="${#fields.hasErrors('projectStatus')}" th:errors="*{projectStatus}" class="invalid-feedback "></div>
 

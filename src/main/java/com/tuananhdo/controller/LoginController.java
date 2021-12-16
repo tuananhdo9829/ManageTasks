@@ -1,8 +1,7 @@
 package com.tuananhdo.controller;
 
-import com.tuananhdo.exception.UserNotFoundException;
-import com.tuananhdo.service.UserService;
 import com.tuananhdo.entity.User;
+import com.tuananhdo.service.UserService;
 import com.tuananhdo.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -36,8 +35,8 @@ public class LoginController {
 
     @GetMapping("/sign_up")
     public String signUp(Model model) {
-        model.addAttribute("pageTitle", "Create Account");
         model.addAttribute("user", new User());
+        model.addAttribute("pageTitle", "Create Account");
         return "admin/sign_up/sign_up";
     }
 

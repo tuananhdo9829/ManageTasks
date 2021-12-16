@@ -22,6 +22,57 @@
                                 <h2>Welcome : <span class="mb-0" style="color: purple" sec:authentication="principal.authorities"></span></h2>
                             </div>
                         </div>
+                        <p class="lead">A small web studio crafting lovely template products.</p>
+                        <div class="d-flex align-items-center">
+                            <ul class="avatars">
+                                <li th:each="users : ${listAllUsers}">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" th:title="${users.username}">
+                                        <img alt="Claire Connors" class="avatar" th:src="@{${users.photosImagePath}}"/>
+                                    </a>
+                                </li>
+                            </ul>
+                            <button class="btn btn-round flex-shrink-0" data-toggle="modal" data-target="#user-invite-modal">
+                                <i class="material-icons">add</i>
+                            </button>
+                        </div>
+                    </div>
+                    <form class="modal fade" th:action="@{/team/send/mail}" th:object="${user}" method="post" id="user-invite-modal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Invite Users</h5>
+                                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                                <!--end of modal head-->
+                                <div class="modal-body">
+                                    <p>Send an invite link via email to add members to this task</p>
+                                    <div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend" >
+                            <span class="input-group-text">
+                              <i class="material-icons">email</i>
+                            </span>
+                                            </div>
+                                            <input type="email" class="form-control" th:field="*{email}" placeholder="Recipient email address" aria-label="Recipient email address" required>
+                                        </div>
+                                        <div class="text-right text-small mt-2">
+                                            <a href="#" role="button">Add another recipient</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end of modal body-->
+                                <div class="modal-footer">
+                                    <button role="button" class="btn btn-primary" type="submit">
+                                        Invite users
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div th:if="${message != null}" class="alert alert-success text-center">
+                        [[${message}]]
                     </div>
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">

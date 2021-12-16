@@ -44,9 +44,9 @@
     </div>
 
     <div th:fragment="status_small(status)">
-        <span th:fragment="status_small" class="text-small " th:if="${status == status.TODO}" style="color: #17a2b8"><b>Status: [[${task.status.TODO}]]</b></span>
-        <span th:fragment="status_small" class="text-small" th:if="${status == status.IN_PROGRESS}" style="color: #ffc107"><b>Status: [[${task.status.IN_PROGRESS}]]</b></span>
-        <span th:fragment="status_small" class="text-small" th:if="${status == status.DONE}" style="color: #28a745"><b>Status: [[${task.status.DONE}]]</b></span>
+        <span th:fragment="status_small" class="text-small " th:if="${status == status.TODO}" style="color: #17a2b8"><b>Status: [[${task.status.name}]]</b></span>
+        <span th:fragment="status_small" class="text-small" th:if="${status == status.IN_PROGRESS}" style="color: #ffc107"><b>Status: [[${task.status.name}]]</b></span>
+        <span th:fragment="status_small" class="text-small" th:if="${status == status.DONE}" style="color: #28a745"><b>Status: [[${task.status.name}]]</b></span>
     </div>
 
 </body>

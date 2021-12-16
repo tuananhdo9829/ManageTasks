@@ -30,14 +30,6 @@ public class AccountController {
         return "admin/user/user_account";
     }
 
-    @GetMapping("/users/image")
-    public String getImageUser(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-        User users = getAuthenticationUser(myUserDetails);
-        model.addAttribute("users", users);
-        return "admin/home";
-    }
-
-
     private  User getAuthenticationUser(MyUserDetails myUserDetails) {
         String username = myUserDetails.getUsername();
         return userService.getUserByUsername(username);

@@ -66,7 +66,7 @@
                                     <div class="form-group row">
                                         <label class="col-3">Status:</label>
                                         <select class="form-control col" th:field="*{status}">
-                                                <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os}"></option>
+                                                <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os.name}"></option>
                                         </select>
                                     </div>
 

@@ -20,7 +20,7 @@
                     </button>
 
                     <hr>
-                    <form th:action="@{/templates/admin/sign_up}" method="post" th:object="${user}">
+                    <form th:action="@{/sign_up}" method="post" th:object="${user}">
                         <div class="form-group">
                             <input class="form-control" type="text" placeholder="Username" th:field="*{username}" name="create-account-email" />
                         </div>

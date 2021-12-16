@@ -4,7 +4,9 @@ package com.tuananhdo.service;
 import com.tuananhdo.entity.Task;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.TaskNotFoundException;
+import com.tuananhdo.exception.UserNotFoundException;
 import com.tuananhdo.repository.TaskRepository;
+import com.tuananhdo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,7 +17,6 @@ import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +30,12 @@ public class TaskService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private UserRepository userRepository;
+
 
     public List<Task> listAllTasks() {
-       return taskRepository.findAll();
+        return taskRepository.findAll();
     }
 
     public Task getTaskById(Integer id) throws TaskNotFoundException {
@@ -46,28 +50,33 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public List<Task> getTaskByName(String name){
-       return taskRepository.getTaskByName(name);
+    public List<Task> getTaskByName(String name) {
+        return taskRepository.getTaskByName(name);
     }
 
 
-    public void sendMailForUsers(User user, String siteURL) throws MessagingException, UnsupportedEncodingException {
-        String subject = "CSeam Group Team";
-        String senderName = "CS Dojo Kind Roy";
-        String mailContent = "<p> Dear" + user.getUsername() + ", </p>";
-        mailContent += "<p>Here is link task for you</p>";
+    public void sendMailForUsers(User user, String siteURL, String email) throws MessagingException, UnsupportedEncodingException, UserNotFoundException {
+        User getEmailUser = userRepository.getUserByEmail(email);
+        if (getEmailUser != null) {
+            String subject = "CSeam Group Team";
+            String senderName = "CS Dojo Kind Roy";
+            String mailContent = "<p> Dear : " + getEmailUser.getFullName() + ", </p>";
+            mailContent += "<p>Here is link task for you</p>";
 
-        String claimTask = siteURL + "/task/overview";
+            String claimTask = siteURL + "/task_overview";
 
-        mailContent += "<h3><a href =\"" + claimTask + "\">Claim Task</a></h3>";
+            mailContent += "<h3><a href =\"" + claimTask + "\">Claim Task</a></h3>";
 
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-        mimeMessageHelper.setFrom("slodierqwe@gmail.com", senderName);
-        mimeMessageHelper.setTo(user.getEmail());
-        mimeMessageHelper.setSubject(subject);
-        mimeMessageHelper.setText(mailContent, true);
-        javaMailSender.send(mimeMessage);
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+            mimeMessageHelper.setFrom("slodierqwe@gmail.com", senderName);
+            mimeMessageHelper.setTo(user.getEmail());
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setText(mailContent, true);
+            javaMailSender.send(mimeMessage);
+        } else {
+            throw new UserNotFoundException("Could not find any with email :" + email);
+        }
     }
 
 

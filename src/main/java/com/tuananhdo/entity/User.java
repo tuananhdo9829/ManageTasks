@@ -20,7 +20,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Size(min = 1,message = "At least one checkbox must be checked")
     private Integer id;
 
     @Column(length = 30, unique = true)

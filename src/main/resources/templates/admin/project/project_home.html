@@ -29,8 +29,7 @@
                                 </li>
 
                             </ul>
-                            <button class="btn btn-round flex-shrink-0" data-toggle="modal"
-                                    data-target="#user-invite-modal">
+                            <button class="btn btn-round flex-shrink-0" >
                                 <i class="material-icons">add</i>
                             </button>
                         </div>
@@ -73,6 +72,9 @@
                                     </form>
                                 </div>
                                 <!--end of content list head-->
+                                <div th:if="${message != null}" class="alert alert-success text-center">
+                                    [[${message}]]
+                                </div>
                                 <div class="content-list-body row">
                                     <th:block th:each="project : ${listAllProjects}">
                                     <div class="col-lg-6">
@@ -126,8 +128,7 @@
                                 <div class="row content-list-head">
                                     <div class="col-auto">
                                         <h3>Members</h3>
-                                        <button class="btn btn-round" data-toggle="modal"
-                                                data-target="#user-invite-modal">
+                                        <button class="btn btn-round" data-toggle="modal">
                                             <i class="material-icons"><a th:href="@{/users/new}">add</a></i>
                                         </button>
                                     </div>
@@ -153,11 +154,36 @@
                                             <div class="media-body">
                                                 <h6 class="mb-0" data-filter-by="text">[[${user.username}]]</h6>
                                                 <span data-filter-by="text" class="text-body">[[${user.roles}]]</span>
-                                                <span data-filter-by="text" class="text-body"><a th:href="@{'/users/delete/'+${user.id}}">De</a></span>
+<!--                                                <span data-filter-by="text" class="text-body "> <a class="link-delete" th:userId="${user.id}" th:href="@{'/users/delete/'+${user.id}}">Delete</a></span>-->
 
                                             </div>
                                         </a>
                                     </div>
+
+                                        <form class="modal fade" id="user-invite-modal" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Delete Confirmation</h5>
+                                                        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </div>
+                                                    <!--end of modal head-->
+                                                    <div class="modal-body" id="confirmText">
+                                                    </div>
+                                                    <!--end of modal body-->
+                                                    <div class="modal-footer">
+                                                        <button role="button" class="btn btn-primary" type="submit">
+                                                            Cancel
+                                                        </button>
+                                                        <a class="btn btn-primary" href="" type="submit" id="deleteButton">
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
 
                                     </th:block>
                                 </div>
@@ -171,13 +197,13 @@
         </div>
     </div>
 </div>
-<script th:replace="/admin/fragments ::script"></script>
 <script th:src="@{/admin/js/delete-function.js}"></script>
+<script th:replace="/admin/fragments ::script"></script>
 <script>
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {
             event.preventDefault();
-            showDeleteConfirmModal($(this), 'user');
+            showDeleteConfirmModal($(this))
         });
     });
 </script>

@@ -11,6 +11,7 @@ import com.tuananhdo.service.ProjectService;
 import com.tuananhdo.service.TaskService;
 import com.tuananhdo.service.TeamService;
 import com.tuananhdo.service.UserService;
+import com.tuananhdo.util.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,31 +21,41 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
 public class HomeController {
 
-    @Autowired
-    private ProjectService projectService;
-    @Autowired
-    private TaskService taskService;
-    @Autowired
-    private TeamService teamService;
-    @Autowired
-    private UserService userService;
+    @Autowired private ProjectService projectService;
+    @Autowired private TaskService taskService;
+    @Autowired private TeamService teamService;
+    @Autowired private UserService userService;
 
     @GetMapping("/admin/home")
     public String homePage(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         List<Team> listAllTeams = teamService.listAllTeams();
         List<Project> listAllProjects = projectService.listAllProjects();
         List<Task> listAllTasks = taskService.listAllTasks();
+        List<User> listAllUsers = userService.listAllUsers();
         User users = getAuthenticationUser(myUserDetails);
         model.addAttribute("users", users);
+        model.addAttribute("user", new User());
         model.addAttribute("listAllTeams", listAllTeams);
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllTasks", listAllTasks);
+        model.addAttribute("listAllUsers", listAllUsers);
         return "admin/home";
+    }
+
+    @PostMapping("/team/send/mail")
+    public String sendMail(User user,String email,HttpServletRequest request, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException, MessagingException, UserNotFoundException {
+        String siteURL = Utility.getSiteURL(request);
+        taskService.sendMailForUsers(user, siteURL,email);
+        redirectAttributes.addFlashAttribute("message", "Send e-mail successfully !");
+        return "redirect:/admin/home";
     }
 
     private User getAuthenticationUser(MyUserDetails myUserDetails) {

@@ -55,9 +55,11 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/save")
-    public String save(@AuthenticationPrincipal MyUserDetails myUserDetails, @Valid @ModelAttribute("projects") Project project, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws ProjectNotFoundException {
+    public String save(@AuthenticationPrincipal MyUserDetails myUserDetails, @Valid @ModelAttribute("projects") Project project, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws ProjectNotFoundException {
         try {
-            if (bindingResult.hasErrors()){
+            if (bindingResult.hasErrors()) {
+                List<User> listAllUsers = projectService.listAllUsers();
+                model.addAttribute("listAllUsers", listAllUsers);
                 return "/admin/project/project_form";
             }
             User userCreatedProject = getUserCreatedProject(project, myUserDetails);
