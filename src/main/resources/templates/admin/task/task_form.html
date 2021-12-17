@@ -44,7 +44,7 @@
 
                                     <div class="form-group row">
                                         <label class="col-3">Choose Project :      </label>
-                                        <select class="form-control col " th:field="*{project}" >
+                                        <select class="form-control col " th:field="*{project}" th:classappend="${#fields.hasErrors('project')} ? 'is-invalid' : '' " >
                                             <option value="0">Choose Project </option>
                                             <th:block th:each="project : ${listAllProjects}">
                                                 <option th:value="${project.id}">[[${project.name}]]</option>
@@ -62,7 +62,7 @@
 
                                     <div class="form-group row">
                                         <label class="col-3">Description</label>
-                                        <textarea class="form-control col"  rows="3" th:field="*{description} " th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+                                        <textarea class="form-control col is-invalid"  rows="3" th:field="*{description} " th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
                                                placeholder="Task description"
                                                   name="project-description" ></textarea>
                                     </div>
