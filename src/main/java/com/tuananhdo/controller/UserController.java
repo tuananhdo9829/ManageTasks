@@ -36,7 +36,6 @@ public class UserController {
         List<User> listAllUsers = userService.listAllUsers();
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllUsers", listAllUsers);
-
         return "admin/project/project_home";
     }
 
@@ -52,23 +51,30 @@ public class UserController {
     }
 
     @PostMapping("/users/save")
-    public String saveUser(@Valid @ModelAttribute("users") User users, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
-            try {
-                if (!multipartFile.isEmpty()) {
-                    String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-                    users.setPhotos(fileName);
-                    User savedUser = userService.save(users);
-                    String uploadDir = "user-photos/" + savedUser.getId();
-                    FileUploadUlti.cleanFileDir(uploadDir);
-                    FileUploadUlti.saveFileDir(uploadDir, fileName, multipartFile);
-                    redirectAttributes.addFlashAttribute("message", "The user has been saved successfully !");
-                }
-            } catch (UserNotFoundException ex) {
-                redirectAttributes.addFlashAttribute("message" + ex.getMessage());
-            }
+    public String saveUser(@Valid @ModelAttribute("users") User users, BindingResult bindingResult, Model model, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
 
-            return "redirect:/users/home";
+//        if (bindingResult.hasErrors()) {
+//            List<Role> listAllRoles = userService.listAllRoles();
+//            model.addAttribute("listAllRoles", listAllRoles);
+//            model.addAttribute("pageTitle", "Create New User");
+//            return "admin/user/user_form";
+//        }
+        try {
+            if (!multipartFile.isEmpty()) {
+                String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+                users.setPhotos(fileName);
+                User savedUser = userService.save(users);
+                String uploadDir = "user-photos/" + savedUser.getId();
+                FileUploadUlti.cleanFileDir(uploadDir);
+                FileUploadUlti.saveFileDir(uploadDir, fileName, multipartFile);
+                redirectAttributes.addFlashAttribute("message", "The user has been saved successfully !");
+            }
+        } catch (UserNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message" + ex.getMessage());
         }
+
+        return "redirect:/users/home";
+    }
 
     @GetMapping("/users/edit/{id}")
     public String editUser(Model model, @PathVariable(name = "id") Integer id) throws UserNotFoundException {

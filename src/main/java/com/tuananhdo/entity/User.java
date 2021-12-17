@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,35 +21,34 @@ public class User {
     private Integer id;
 
     @Column(length = 30, unique = true)
-    @NotEmpty(message = "Enter your username")
+    @NotEmpty(message = "")
     @Size(min = 6 , message = "The username should have at least 6 characters")
     private String username;
 
     @Column(length = 30,nullable = false)
-    @NotEmpty(message = "Enter your email")
+    @NotEmpty(message = "")
     @Email(message = "Enter a valid email address")
     private String email;
 
     @Column(name = "first_name", length = 10)
-    @NotEmpty(message = "Enter your first name")
+    @NotEmpty(message = "")
     @Size(min = 2 , message = "The first name should have at least 2 characters")
     private String firstName;
 
     @Column(name = "last_name", length = 10)
-    @NotEmpty(message = "Enter your last name")
+    @NotEmpty(message = "")
     @Size(min = 2 , message = "The last name should have at least 2 characters")
     private String lastName;
 
     @Column(nullable = false, length = 64)
-    @NotEmpty(message = "Enter your password")
+    @NotEmpty(message = "")
     @Length(min = 8,message = "Password must be at least 8 characters")
     private String password;
 
     @Column(length = 64)
-    @NotEmpty
     private String photos;
 
-    @AssertTrue
+    @AssertTrue(message = "Please checkbox")
     private boolean enabled;
 
     @Column(name = "verification_code",length = 64,updatable = false)
@@ -67,11 +67,14 @@ public class User {
         this.password = password;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id")
             , inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id")
     )
+    @NotNull
+    @Valid
     private Set<Role> roles = new HashSet<>();
 
 

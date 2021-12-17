@@ -29,9 +29,10 @@ public class ProjectController {
 
 
     @GetMapping("/projects/home")
-    public String getAllProjects(Model model) {
+    public String getAllProjects(Model model,User user) {
         List<Project> listAllProjects = projectService.listAllProjects();
         List<User> listAllUsers = projectService.listAllUsers();
+        model.addAttribute("user", user);
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllUsers", listAllUsers);
         return "/admin/project/project_home";

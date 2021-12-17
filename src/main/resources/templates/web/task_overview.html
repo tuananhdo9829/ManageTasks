@@ -18,24 +18,12 @@
                     <div class="page-header">
                         <h1>Brand Concept and Design</h1>
                         <p class="lead">Research, ideate and present brand concepts for client consideration</p>
-                        <div class="d-flex align-items-center">
-                            <ul class="avatars">
-                                <li th:each="user : ${listAllUsers}">
-                                    <a href="#" data-toggle="tooltip" th:title="${user.username}">
-                                        <img alt="Kenny Tran" class="avatar"
-                                             th:src="@{${user.photosImagePath}}"/>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <button class="btn btn-round flex-shrink-0" data-toggle="modal"
-                                    data-target="#user-invite-modal">
-                                <i class="material-icons">add</i>
-                            </button>
-                        </div>
+                        <div th:replace="admin/fragments :: list_users"></div>
                     </div>
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                     </ul>
+                    <div th:replace="admin/fragments :: form_send_mail"></div>
+
                     <div class="tab-content">
                         <div class="tab-pane fade show active" role="tabpanel"
                              data-filter-list="card-list-body">
@@ -80,7 +68,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right" >
                                                     <a class="dropdown-item" th:href="@{'/task/edit/' + ${task.id}}">Rename
                                                         Task</a>
-                                                    <a class="dropdown-item text-danger" sec:authorize="hasAnyAuthority('Admin,Manage')"
+                                                    <a class="dropdown-item text-danger link-delete" th:entityId="${task.id}" sec:authorize="hasAnyAuthority('Admin,Manage')"
                                                        th:href="@{'/task/delete/' + ${task.id}}">Remove Task</a>
                                                 </div>
 
@@ -95,8 +83,7 @@
                                                         </a>
                                                         <span class="text-small">[[${task.description}]]</span><br>
                                                         <div th:replace="admin/fragment_status :: status_small(${task.status})"></div>
-                                                        <span class="text-small" style="color: lightseagreen ;">Duo Date:
-                                                            [[${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}]]</span>
+                                                        <span class="text-small" style="color: lightseagreen ;" th:text="${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}">Duo Date:</span>
 
                                                     </div>
                                                     <div class="card-meta">
@@ -125,16 +112,22 @@
                             <!--end of content list-->
                         </div>
                     </div>
-
-
-                                <!--end of modal head-->
-
+                    <div th:replace="admin/fragments :: user-modal-dialog"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script th:src="@{/admin/js/delete-function.js}"></script>
 <script th:replace="/admin/fragments ::script"></script>
+<script>
+    $(document).ready(function () {
+        $(".link-delete").on("click", function (event) {
+            event.preventDefault();
+            showDeleteConfirmModal($(this),'Task')
+        });
+    });
+</script>
 </body>
 
 </html>

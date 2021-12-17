@@ -19,22 +19,10 @@
                     <div class="page-header">
                         <h1>Medium Rare &#x2615;</h1>
                         <p class="lead">A small web studio crafting lovely template products.</p>
-                        <div class="d-flex align-items-center">
-                            <ul class="avatars">
-
-                                <li th:each="users : ${listAllUsers}">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" th:title="${users.username}">
-                                        <img alt="Claire Connors" class="avatar" th:src="@{${users.photosImagePath}}"/>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <button class="btn btn-round flex-shrink-0" >
-                                <i class="material-icons">add</i>
-                            </button>
-                        </div>
+                        <div th:replace="admin/fragments :: list_users"></div>
                     </div>
                     <hr>
+                    <div th:replace="admin/fragments :: form_send_mail"></div>
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#projects" role="tab"
@@ -88,8 +76,8 @@
                                                         <i class="material-icons">more_vert</i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
-                                                        <a class="dropdown-item" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
+                                                        <a class="dropdown-item " th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
+                                                        <a class="dropdown-item link-delete" th:entityId="${project.id}" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
                                                     </div>
                                                 </div>
                                                 <div class="card-title">
@@ -154,36 +142,10 @@
                                             <div class="media-body">
                                                 <h6 class="mb-0" data-filter-by="text">[[${user.username}]]</h6>
                                                 <span data-filter-by="text" class="text-body">[[${user.roles}]]</span>
-<!--                                                <span data-filter-by="text" class="text-body "> <a class="link-delete" th:userId="${user.id}" th:href="@{'/users/delete/'+${user.id}}">Delete</a></span>-->
-
+                                                <span data-filter-by="text" class="text-body "><a class="link-delete" th:entityId="${user.id}" th:href="@{'/users/delete/'+${user.id}}">Delete</a></span>
                                             </div>
                                         </a>
                                     </div>
-
-                                        <form class="modal fade" id="user-invite-modal" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Delete Confirmation</h5>
-                                                        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                                                            <i class="material-icons">close</i>
-                                                        </button>
-                                                    </div>
-                                                    <!--end of modal head-->
-                                                    <div class="modal-body" id="confirmText">
-                                                    </div>
-                                                    <!--end of modal body-->
-                                                    <div class="modal-footer">
-                                                        <button role="button" class="btn btn-primary" type="submit">
-                                                            Cancel
-                                                        </button>
-                                                        <a class="btn btn-primary" href="" type="submit" id="deleteButton">
-                                                            Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
 
                                     </th:block>
                                 </div>
@@ -191,7 +153,7 @@
                             <!--end of content list-->
                         </div>
                     </div>
-
+                <div th:replace="admin/fragments :: user-modal-dialog"></div>
                 </div>
             </div>
         </div>
@@ -203,7 +165,7 @@
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {
             event.preventDefault();
-            showDeleteConfirmModal($(this))
+            showDeleteConfirmModal($(this),'Product')
         });
     });
 </script>

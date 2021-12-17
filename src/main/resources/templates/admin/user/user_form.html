@@ -19,23 +19,39 @@
                             <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                aria-controls="profile" aria-selected="true">[[${pageTitle}]]</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">Email Notifications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="billing-tab" data-toggle="tab" href="#billing" role="tab" aria-controls="billing" aria-selected="false">Billing Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="integrations-tab" data-toggle="tab" href="#integrations" role="tab" aria-controls="integrations" aria-selected="false">Integrations</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-xl-8 col-lg-9">
                     <div class="card">
                         <div class="card-body">
                             <div class="tab-content">
-                                <form th:action="@{/users/save}" th:object="${users}" method="post" enctype="multipart/form-data">
+                                <form th:action="@{/users/save}" th:object="${users}" method="post"
+                                      enctype="multipart/form-data">
                                     <input type="hidden" id="id" th:field="*{id}">
                                     <div class="tab-pane fade show active" role="tabpanel" id="profile">
                                         <div class="media mb-4">
                                             <div class="media-body ml-3">
                                                 <div class="custom-file custom-file-naked d-block mb-1">
                                                     <input type="hidden" th:field="*{photos}">
-                                                    <input type="file" name="image" accept="image/png, image/jpg" id="fileImage" required>
+                                                    <input type="file" class="custom-file-input d-none" name="image" accept="image/png, image/jpg" id="avatar-file" th:id="${users.id}" required>
                                                     <img alt="Photo Preview" id="thumbnail"
                                                          th:src="@{${users.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
+                                                    <label class="custom-file-label position-relative" th:for="${users.id}" >
+                                                        <span class="btn btn-primary">Upload avatar</span>
+                                                    </label>
                                                 </div>
                                                 <small>For best results, use an image at least 256px by 256px in either
                                                     .jpg
@@ -47,7 +63,8 @@
                                             <div class="col">
                                                 <input type="text" placeholder="Enter your username"
                                                        name="profile-last-name" class="form-control"
-                                                       th:field="*{username}" required/>
+                                                       th:field="*{username}"
+                                                       th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : '' "/>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -55,7 +72,8 @@
                                             <div class="col">
                                                 <input type="password" placeholder="Enter your password "
                                                        name="profile-last-name" class="form-control"
-                                                       th:field="*{password}" required/>
+                                                       th:field="*{password}"
+                                                       th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : '' "/>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -63,7 +81,8 @@
                                             <div class="col">
                                                 <input type="text" placeholder="Enter your first name"
                                                        name="profile-first-name" class="form-control"
-                                                       th:field="*{firstName}" required/>
+                                                       th:field="*{firstName}"
+                                                       th:classappend="${#fields.hasErrors('firstName')} ? 'is-invalid' : '' "/>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -71,22 +90,27 @@
                                             <div class="col">
                                                 <input type="text" placeholder="Enter your last name"
                                                        name="profile-last-name" class="form-control"
-                                                       th:field="*{lastName}" required/>
+                                                       th:field="*{lastName}"
+                                                       th:classappend="${#fields.hasErrors('lastName')} ? 'is-invalid' : '' "/>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <label class="col-3">Email</label>
                                             <div class="col">
                                                 <input type="email" placeholder="Enter your email address"
-                                                       name="profile-email" class="form-control" required
-                                                       th:field="*{email}"/>
+                                                       name="profile-email" class="form-control"
+                                                       th:field="*{email}"
+                                                       th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : '' "/>
                                             </div>
                                         </div>
                                         <p>Enabled</p>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="checkbox" th:field="*{enabled}">
+                                                    <input type="checkbox" class="is-valid" th:field="*{enabled}"
+                                                           th:classappend="${#fields.hasErrors('enabled')} ? 'is-invalid' : '' ">
+                                                    <small th:if="${#fields.hasErrors('enabled')}"
+                                                           th:errors="*{enabled}" class="text-danger"></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,8 +119,9 @@
                                         <div class="row">
                                             <th:block th:each="roles : ${listAllRoles}">
                                                 <div class="col">
-                                                    <div class="custom-control custom-radio">
-                                                            <input type="checkbox" th:field="*{roles}" th:value="${roles.id}" > [[${roles.name}]]
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" th:field="*{roles}"
+                                                               th:value="${roles.id}"> [[${roles.name}]]
                                                     </div>
                                                 </div>
                                             </th:block>
@@ -123,14 +148,14 @@
         $("#fileImage").change(function () {
 
             fileSize = this.files[0].size;
-            if (fileSize >1048576){
+            if (fileSize > 1048576) {
                 this.setCustomValidity("You must choose an image less than 1MB !")
                 this.reportValidity();
             } else {
                 this.setCustomValidity("");
                 showImageThumbnail(this);
             }
-        })   ;
+        });
     });
 
     function showImageThumbnail(fileInput) {

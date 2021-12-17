@@ -14,7 +14,7 @@
 <body>
 <div class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top" th:fragment="navbar_top">
 
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" th:href="@{/admin/home}">
         <img alt="Pipeline" th:src="@{/admin/img/logo/logo.svg}"/>
     </a>
     <form th:action="@{/logout}" method="post" name="loggoutForm" th:hidden="true">
@@ -42,20 +42,20 @@
                 <a class="nav-link" th:href="@{/admin/home}">Home</a>
             </li>
 
-            <th:block sec:authorize="hasAuthority('Admin')">
+            <th:block sec:authorize="hasAnyAuthority('Admin','Manage')">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/projects/home}">Team Overview</a>
                 </li>
             </th:block>
 
-            <th:block sec:authozire="hasAuthority('Admin')">
+            <th:block sec:authorize="hasAnyAuthority('Admin','Manage','Staff')">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/task_overview}">Single Task</a>
                 </li>
             </th:block>
 
 
-            <th:block sec:authozire="hasAuthority('Admin')">
+            <th:block sec:authorize="hasAnyAuthority('Admin','Manage')">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/roles/home}">Role</a>
                 </li>
@@ -75,11 +75,11 @@
                            aria-label="Search app">
                 </div>
             </form>
-            <div class="dropdown mt-2">
-                <button class="btn btn-primary btn-block" type="button" id="newContentButton"
+            <div class="dropdown mt-2" sec:authorize="hasAnyAuthority('Admin','Manage')">
+                <a class="btn btn-primary btn-block" th:href="@{/projects/new}" type="button" id="newContentButton"
                         aria-haspopup="true" aria-expanded="false">
                     Add New
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -114,12 +114,110 @@
         <div class="dropdown-menu dropdown-menu-right">
 
             <a class="dropdown-item" th:href="@{/users/account}">Account Details</a>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+                <a class="dropdown-item"  data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
             <a class="dropdown-item" href="#">Share</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-danger" href="javascript: document.loggoutForm.submit();">Leave</a>
 
         </div>
+    </div>
+</div>
+<div th:fragment="form_send_mail" th:remove="tag">
+    <form class="modal fade" th:action="@{/team/send/mail}" th:object="${user}" method="post" id="user-invite-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Invite Users</h5>
+                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <!--end of modal head-->
+                <div class="modal-body">
+                    <p>Send an invite link via email to add members to this task</p>
+                    <div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" >
+                            <span class="input-group-text">
+                              <i class="material-icons">email</i>
+                            </span>
+                            </div>
+                            <input type="email" class="form-control" th:field="*{email}" required placeholder="Recipient email address" aria-label="Recipient email address">
+                        </div>
+                        <div class="text-right text-small mt-2">
+                            <a href="#" role="button">Add another recipient</a>
+                        </div>
+                    </div>
+                </div>
+                <!--end of modal body-->
+                <div class="modal-footer">
+                    <button role="button" class="btn btn-primary" type="submit">
+                        Invite users
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:fragment="photo" th:remove="tag">
+    <div class="media mb-4">
+        <div class="media-body ml-3">
+            <div class="custom-file custom-file-naked d-block mb-1">
+                <input type="hidden" th:field="*{photos}">
+                <input type="file" class="custom-file-input d-none" name="image" accept="image/png, image/jpg" th:id="${users.id}" id="fileImage" required>
+                <img alt="Photo Preview" id="thumbnail"
+                     th:src="@{${users.photosImagePath}}"
+                     class="avatar avatar-lg"/>
+                <label class="custom-file-label position-relative" th:for="${users.id}">
+                    <span class="btn btn-primary">Upload avatar</span>
+                </label>
+            </div>
+            <small>For best results, use an image at least 256px by 256px in either
+                .jpg
+                or .png format</small>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="user-modal-dialog" th:remove="tag">
+    <form class="modal fade" id="user-modal-dialog" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Confirmation</h5>
+                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <!--end of modal head-->
+                <div class="modal-body" id="confirmText">
+                </div>
+                <!--end of modal body-->
+                <div class="modal-footer">
+                    <a role="button" class="btn btn-primary" th:href="@{/admin/home}" type="submit">
+                        Cancel
+                    </a>
+                    <a class="btn btn-primary" href="" type="submit" id="deleteButton">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:fragment="list_users" th:remove="tag" sec:authorize="hasAnyAuthority('Admin','Manage')">
+    <div class="d-flex align-items-center">
+        <ul class="avatars">
+            <li th:each="users : ${listAllUsers}">
+                <a th:href="@{'/users/edit/'+${users.id}}" data-toggle="tooltip" data-placement="top" th:title="${users.username}">
+                    <img alt="Claire Connors" class="avatar" th:src="@{${users.photosImagePath}}"/>
+                </a>
+            </li>
+        </ul>
+        <button class="btn btn-round flex-shrink-0" data-toggle="modal" data-target="#user-invite-modal">
+            <i class="material-icons">add</i>
+        </button>
     </div>
 </div>
 <script th:fragment="script">

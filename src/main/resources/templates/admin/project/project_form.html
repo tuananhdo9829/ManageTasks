@@ -13,25 +13,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-11 col-xl-10">
-                    <div class="page-header">
-                        <h1>Medium Rare &#x2615;</h1>
-                        <p class="lead">A small web studio crafting lovely template products.</p>
-                        <div class="d-flex align-items-center">
-                            <ul class="avatars">
-
-                                <li>
-                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
-                                        <img alt="Claire Connors" class="avatar" th:src="@{/admin/img/avatar-female-3.jpg}"/>
-                                    </a>
-                                </li>
-
-                            </ul>
-                            <button class="btn btn-round flex-shrink-0" data-toggle="modal"
-                                    data-target="#user-invite-modal">
-                                <i class="material-icons">add</i>
-                            </button>
-                        </div>
-                    </div>
                     <hr>
                     <!--end of modal head-->
                     <ul class="nav nav-tabs nav-fill" role="tablist">
@@ -55,19 +36,16 @@
                                     <h6>General Details</h6>
                                     <div class="form-group row align-items-center" >
                                         <label class="col-3">Name</label>
-                                        <input class="form-control col" type="text" th:field="*{name}" 
-                                               placeholder="Project name"
+                                        <input class="form-control col" type="text" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+                                               placeholder="Enter Your Project"
                                                name="project-name" />
-                                        <div th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" class="invalid-feedback"></div>
-
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-3 ">Description</label>
-                                        <textarea class="form-control col" rows="3" th:field="*{description}"
-                                                  placeholder="Project description"
+                                        <label class="col-3 col">Description</label>
+                                        <textarea class="form-control col" rows="3" th:field="*{description}" th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : '' "
+                                                  placeholder="Enter Your Description"
                                                   name="project-description"  ></textarea>
-                                        <div th:if="${#fields.hasErrors('description')}"  th:errors="*{description}" class="valid-tooltip"></div>
                                     </div>
 
                                     <div class="form-group row">

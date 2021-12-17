@@ -34,13 +34,11 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/users/home", "/users/new", "/users/edit/**", "/users/delete/**").hasAnyAuthority("Admin", "Manage")
 
-                .antMatchers("/roles/home", "/roles/new", "/roles/edit/**", "/roles/delete/**").hasAnyAuthority("Admin", "Manage")
+                .antMatchers("/roles/home", "/roles/new", "/roles/edit/**", "/roles/delete/**","/task/new", "/task/delete/**").hasAnyAuthority("Admin", "Manage")
 
                 .antMatchers("/projects/home", "/projects/new", "/projects/edit/**", "/projects/delete/**").hasAnyAuthority("Admin", "Manage")
 
-                .antMatchers("/task_overview", "/task/new", "/task/delete/**").hasAnyAuthority("Admin", "Manage")
-
-                .antMatchers("/task/edit/**").hasAnyAuthority("Admin", "Manage","Staff")
+                .antMatchers("/task/edit/**","/task_overview").hasAnyAuthority("Admin", "Manage","Staff")
 
                 .anyRequest().permitAll()
                 .and().formLogin()

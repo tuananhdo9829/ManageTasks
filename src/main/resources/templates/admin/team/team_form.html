@@ -41,15 +41,15 @@
                                     <h6>General Details</h6>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Name</label>
-                                        <input class="form-control col" type="text" th:field="*{name}"
-                                               placeholder="Team name"
+                                        <input class="form-control col" type="text" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+                                               placeholder="Enter Your Team "
                                                name="project-name"/>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3">Slogan</label>
-                                        <textarea class="form-control col" rows="3" th:field="*{slogan}"
-                                                  placeholder="Slogan Team"
-                                                  name="project-description" required></textarea>
+                                        <textarea class="form-control col" rows="3" th:field="*{slogan}" th:classappend="${#fields.hasErrors('slogan')} ? 'is-invalid' : '' "
+                                                  placeholder="Enter Your Slogan"
+                                                  name="project-description" ></textarea>
                                     </div>
 
                                 </div>

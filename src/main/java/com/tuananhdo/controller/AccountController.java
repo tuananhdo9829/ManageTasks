@@ -20,17 +20,18 @@ import java.util.Objects;
 @Controller
 public class AccountController {
 
-    @Autowired
-    private  UserService userService;
+    private static final String URL_ACCOUNT = "/admin/user/user_account";
+
+    @Autowired private UserService userService;
 
     @GetMapping("/users/account")
     public String accountDetails(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         User users = getAuthenticationUser(myUserDetails);
         model.addAttribute("users", users);
-        return "admin/user/user_account";
+        return URL_ACCOUNT;
     }
 
-    private  User getAuthenticationUser(MyUserDetails myUserDetails) {
+    private User getAuthenticationUser(MyUserDetails myUserDetails) {
         String username = myUserDetails.getUsername();
         return userService.getUserByUsername(username);
     }
@@ -48,9 +49,9 @@ public class AccountController {
             if (user.getPhotos().isEmpty()) user.setPhotos(null);
             userService.updateUserAccount(user);
         }
-        redirectAttributes.addFlashAttribute("message","The user has been saved successfully !");
+        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully !");
         myUserDetails.setFirstName(user.getFirstName());
         myUserDetails.setLastName(user.getLastName());
-        return "redirect:/users/account";
+        return "redirect:" + URL_ACCOUNT;
     }
 }

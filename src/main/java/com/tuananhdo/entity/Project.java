@@ -21,7 +21,6 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(
         name = "projects"
@@ -33,13 +32,13 @@ public class Project {
     private Integer id;
 
     @Column(nullable = false, length = 35, unique = true)
-    @NotBlank(message = "Enter your project name")
-    @Size(min = 2,message = "project name should have at least 2 characters")
+    @NotBlank(message = "")
+    @Size(min = 2,message = "Should have at least 2 characters")
     private String name;
 
     @Column(nullable = false, length = 200)
-    @NotBlank(message = "Enter your project description")
-    @Size(min = 2,message = "project name should have at least 2 characters")
+    @NotBlank(message = "")
+    @Size(min = 2,message = "Should have at least 2 characters")
     private String description;
 
     @Column(name = "created_time")

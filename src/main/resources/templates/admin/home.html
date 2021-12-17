@@ -8,7 +8,6 @@
 <body>
 <div class="layout layout-nav-side">
     <div th:replace="/admin/fragments ::navbar_top"></div>
-
     <div class="main-container">
         <div th:replace="/admin/fragments ::navbar"></div>
         <div class="container">
@@ -23,57 +22,14 @@
                             </div>
                         </div>
                         <p class="lead">A small web studio crafting lovely template products.</p>
-                        <div class="d-flex align-items-center">
-                            <ul class="avatars">
-                                <li th:each="users : ${listAllUsers}">
-                                    <a href="#" data-toggle="tooltip" data-placement="top" th:title="${users.username}">
-                                        <img alt="Claire Connors" class="avatar" th:src="@{${users.photosImagePath}}"/>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="btn btn-round flex-shrink-0" data-toggle="modal" data-target="#user-invite-modal">
-                                <i class="material-icons">add</i>
-                            </button>
-                        </div>
+                        <div th:replace="admin/fragments :: list_users"></div>
                     </div>
-                    <form class="modal fade" th:action="@{/team/send/mail}" th:object="${user}" method="post" id="user-invite-modal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Invite Users</h5>
-                                    <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                </div>
-                                <!--end of modal head-->
-                                <div class="modal-body">
-                                    <p>Send an invite link via email to add members to this task</p>
-                                    <div>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend" >
-                            <span class="input-group-text">
-                              <i class="material-icons">email</i>
-                            </span>
-                                            </div>
-                                            <input type="email" class="form-control" th:field="*{email}" placeholder="Recipient email address" aria-label="Recipient email address" required>
-                                        </div>
-                                        <div class="text-right text-small mt-2">
-                                            <a href="#" role="button">Add another recipient</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end of modal body-->
-                                <div class="modal-footer">
-                                    <button role="button" class="btn btn-primary" type="submit">
-                                        Invite users
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <div th:replace="admin/fragments :: form_send_mail"></div>
+
                     <div th:if="${message != null}" class="alert alert-success text-center">
                         [[${message}]]
                     </div>
+
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Teams</a>
@@ -122,7 +78,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right" >
                                                     <a class="dropdown-item" th:href="@{'/teams/edit/'+${team.id}}">Manage</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" th:href="@{'/teams/delete/'+${team.id}}">Delete</a>
+                                                    <a class="dropdown-item text-danger link-delete" th:entityId="${team.id}" th:href="@{'/teams/delete/'+${team.id}}">Delete</a>
                                                 </div>
                                             </div>
                                             <div class="card-title">
@@ -180,7 +136,7 @@
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <a class="dropdown-item" th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
-                                                            <a class="dropdown-item" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
+                                                            <a class="dropdown-item link-delete" th:entityId="${project.id}" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
                                                         </div>
                                                     </div>
                                                     <div class="card-title">
@@ -250,7 +206,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right" >
                                                     <a class="dropdown-item" th:href="@{'/task/edit/' + ${task.id}}">Rename
                                                         Task</a>
-                                                    <a class="dropdown-item text-danger" sec:authorize="hasAnyAuthority('Admin,Manage')"
+                                                    <a class="dropdown-item text-danger link-delete" th:entityId="${task.id}" th:entityName="task.name" sec:authorize="hasAnyAuthority('Admin,Manage')"
                                                        th:href="@{'/task/delete/' + ${task.id}}">Remove Task</a>
                                                 </div>
 
@@ -293,7 +249,7 @@
                             </div>
                             <!--end of content list-->
                         </div>
-                        <!--end of tab-->
+                        <div th:replace="admin/fragments :: user-modal-dialog"></div>
                     </div>
                 </div>
             </div>
@@ -301,6 +257,14 @@
 
     </div>
 </div>
+<script th:src="@{/admin/js/delete-function.js}"></script>
 <script th:replace="/admin/fragments ::script"></script>
-</body>
+<script>
+    $(document).ready(function () {
+        $(".link-delete").on("click", function (event) {
+            event.preventDefault();
+            showDeleteConfirmModal($(this),'')
+        });
+    });
+</script></body>
 </html>

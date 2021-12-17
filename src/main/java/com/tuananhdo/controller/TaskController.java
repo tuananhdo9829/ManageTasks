@@ -38,9 +38,10 @@ public class TaskController {
     private UserService userService;
 
     @GetMapping("/task_overview")
-    public String listAllTask(Model model) {
+    public String listAllTask(Model model,User user) {
         List<User> listAllUsers = userService.listAllUsers();
         List<Task> listAllTasks = taskService.listAllTasks();
+        model.addAttribute("user", user);
         model.addAttribute("listAllTasks", listAllTasks);
         model.addAttribute("listAllUsers", listAllUsers);
         return "web/task_overview";
