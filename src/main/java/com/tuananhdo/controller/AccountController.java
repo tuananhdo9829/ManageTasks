@@ -26,8 +26,8 @@ public class AccountController {
 
     @GetMapping("/users/account")
     public String accountDetails(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-        User users = getAuthenticationUser(myUserDetails);
-        model.addAttribute("users", users);
+        User user = getAuthenticationUser(myUserDetails);
+        model.addAttribute("user", user);
         return URL_ACCOUNT;
     }
 

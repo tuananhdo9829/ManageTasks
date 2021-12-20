@@ -5,9 +5,12 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Setter
@@ -21,27 +24,27 @@ public class User {
     private Integer id;
 
     @Column(length = 30, unique = true)
-    @NotEmpty(message = "")
+    @NotBlank(message = "")
     @Size(min = 6 , message = "The username should have at least 6 characters")
     private String username;
 
     @Column(length = 30,nullable = false)
-    @NotEmpty(message = "")
+    @NotBlank(message = "")
     @Email(message = "Enter a valid email address")
     private String email;
 
     @Column(name = "first_name", length = 10)
-    @NotEmpty(message = "")
+    @NotBlank(message = "")
     @Size(min = 2 , message = "The first name should have at least 2 characters")
     private String firstName;
 
     @Column(name = "last_name", length = 10)
-    @NotEmpty(message = "")
+    @NotBlank(message = "")
     @Size(min = 2 , message = "The last name should have at least 2 characters")
     private String lastName;
 
     @Column(nullable = false, length = 64)
-    @NotEmpty(message = "")
+    @NotBlank(message = "")
     @Length(min = 8,message = "Password must be at least 8 characters")
     private String password;
 
@@ -70,11 +73,9 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "users_roles", joinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id")
+            name = "users_roles", joinColumns = @JoinColumn(name = "user_id")
+            , inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    @NotNull
-    @Valid
     private Set<Role> roles = new HashSet<>();
 
 
@@ -91,6 +92,18 @@ public class User {
         this.roles.add(role);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public String toString() {

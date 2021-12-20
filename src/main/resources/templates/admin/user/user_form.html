@@ -20,16 +20,20 @@
                                aria-controls="profile" aria-selected="true">[[${pageTitle}]]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab" aria-controls="password" aria-selected="false">Password</a>
+                            <a class="nav-link" id="password-tab" data-toggle="tab" href="#password" role="tab"
+                               aria-controls="password" aria-selected="false">Password</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">Email Notifications</a>
+                            <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications"
+                               role="tab" aria-controls="notifications" aria-selected="false">Email Notifications</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="billing-tab" data-toggle="tab" href="#billing" role="tab" aria-controls="billing" aria-selected="false">Billing Details</a>
+                            <a class="nav-link" id="billing-tab" data-toggle="tab" href="#billing" role="tab"
+                               aria-controls="billing" aria-selected="false">Billing Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="integrations-tab" data-toggle="tab" href="#integrations" role="tab" aria-controls="integrations" aria-selected="false">Integrations</a>
+                            <a class="nav-link" id="integrations-tab" data-toggle="tab" href="#integrations" role="tab"
+                               aria-controls="integrations" aria-selected="false">Integrations</a>
                         </li>
                     </ul>
                 </div>
@@ -37,7 +41,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="tab-content">
-                                <form th:action="@{/users/save}" th:object="${users}" method="post"
+                                <form th:action="@{/users/save}" th:object="${user}" method="post" onsubmit="return checkUnique(this)"
                                       enctype="multipart/form-data">
                                     <input type="hidden" id="id" th:field="*{id}">
                                     <div class="tab-pane fade show active" role="tabpanel" id="profile">
@@ -45,12 +49,13 @@
                                             <div class="media-body ml-3">
                                                 <div class="custom-file custom-file-naked d-block mb-1">
                                                     <input type="hidden" th:field="*{photos}">
-                                                    <input type="file" class="custom-file-input d-none" name="image" accept="image/png, image/jpg" id="avatar-file" th:id="${users.id}" required>
+                                                    <input type="file" class="custom-file-input d-none" name="image"
+                                                           accept="image/png, image/jpg" id="fileImage" required>
                                                     <img alt="Photo Preview" id="thumbnail"
-                                                         th:src="@{${users.photosImagePath}}"
+                                                         th:src="@{${user.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
-                                                    <label class="custom-file-label position-relative" th:for="${users.id}" >
-                                                        <span class="btn btn-primary">Upload avatar</span>
+                                                    <label class="custom-file-label position-relative" for="fileImage">
+                                                        <span class="btn btn-primary" >Upload avatar</span>
                                                     </label>
                                                 </div>
                                                 <small>For best results, use an image at least 256px by 256px in either
@@ -62,7 +67,7 @@
                                             <label class="col-3">UserName</label>
                                             <div class="col">
                                                 <input type="text" placeholder="Enter your username"
-                                                       name="profile-last-name" class="form-control"
+                                                       name="username" class="form-control"
                                                        th:field="*{username}"
                                                        th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : '' "/>
                                             </div>
@@ -98,7 +103,7 @@
                                             <label class="col-3">Email</label>
                                             <div class="col">
                                                 <input type="email" placeholder="Enter your email address"
-                                                       name="profile-email" class="form-control"
+                                                       name="email" class="form-control"
                                                        th:field="*{email}"
                                                        th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : '' "/>
                                             </div>
@@ -117,11 +122,11 @@
                                         <hr>
                                         <p>Roles</p>
                                         <div class="row">
-                                            <th:block th:each="roles : ${listAllRoles}">
+                                            <th:block th:each="role : ${listAllRoles}">
                                                 <div class="col">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" th:field="*{roles}"
-                                                               th:value="${roles.id}"> [[${roles.name}]]
+                                                               th:value="${role.id}"> [[${role.name}]]
                                                     </div>
                                                 </div>
                                             </th:block>
@@ -134,7 +139,33 @@
                             </div>
 
                         </div>
-
+                        <form class="modal fade" id="user-modal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="">Warning</h5>
+                                        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </div>
+                                    <!--end of modal head-->
+                                    <div class="modal-body text-center" id="modalTitle">
+                                        <p>Send an invite link via email to add members to this team</p>
+                                        <div>
+                                            <div class="text-right text-small mt-2">
+                                                <a href="#" role="button">Add another recipient</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end of modal body-->
+                                    <div class="modal-footer">
+                                        <button role="button" class="btn btn-primary" data-dismiss="modal"  type="submit">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
@@ -142,31 +173,36 @@
         </div>
     </div>
 </div>
+<script th:replace="/admin/fragments ::script"></script>
+<script th:src="@{/admin/js/load-image.js}"></script>
+<script>
+    function checkUnique(form) {
+        let url = "[[@{/users/check_unique}]]";
+        let userId = $("#id").val();
+        let userEmail = $("#email").val();
+        let userName = $("#username").val();
+        csrfValue = $("input[name='_csrf']").val();
 
-<script type="javascript">
-    $(document).ready(function () {
-        $("#fileImage").change(function () {
-
-            fileSize = this.files[0].size;
-            if (fileSize > 1048576) {
-                this.setCustomValidity("You must choose an image less than 1MB !")
-                this.reportValidity();
-            } else {
-                this.setCustomValidity("");
-                showImageThumbnail(this);
+        let params = {id : userId ,name: userName, email: userEmail, _csrf:csrfValue}
+        $.post(url, params, function (response) {
+            if (response === "OK"){
+                form.submit();
+            }
+            else if (response === "DuplicateEmail"){
+                showWarningModal("There is another user having same email: " +userEmail)
+            }
+            else if (response === "DuplicateUsername"){
+                showWarningModal("There is another user having same username: " +userName)
             }
         });
-    });
+        return false;
+    }
 
-    function showImageThumbnail(fileInput) {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            $("#thumbnail").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(file);
+    function showWarningModal(title,message){
+        $("#modalTitle").text(title);
+        $("#modalBody").text(message);
+        $("#user-modal").modal();
     }
 </script>
-<script th:replace="/admin/fragments ::script"></script>
 </body>
 </html>

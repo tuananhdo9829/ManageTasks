@@ -115,7 +115,7 @@
 
                         <div class="card-body">
                             <div class="tab-content">
-                                <form th:action="@{/users/update/account}" th:object="${users}" method="post"
+                                <form th:action="@{/users/update/account}" th:object="${user}" method="post"
                                       enctype="multipart/form-data">
                                     <input type="hidden" id="id" th:field="*{id}">
                                     <div class="tab-pane fade show active" role="tabpanel" id="profile">
@@ -126,7 +126,7 @@
                                                     <input type="file" name="image" accept="image/png, image/jpg"
                                                            id="fileImage">
                                                     <img alt="Photo Preview" id="thumbnail"
-                                                         th:src="@{${users.photosImagePath}}"
+                                                         th:src="@{${user.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
                                                 </div>
                                                 <small>For best results, use an image at least 256px by 256px in either
@@ -197,7 +197,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <div class="custom-control custom-radio">
-                                                    <span>[[${users.roles}]]</span>
+                                                    <span>[[${user.roles}]]</span>
                                                 </div>
                                             </div>
                                         </div>

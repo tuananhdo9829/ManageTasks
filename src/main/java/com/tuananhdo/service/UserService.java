@@ -36,7 +36,7 @@ public class UserService {
 
         return userRepository.findAll();
     }
-    
+
 
     public List<Role> listAllRoles() {
 
@@ -103,8 +103,35 @@ public class UserService {
         }
     }
 
+    public String checkUnique(Integer id, String email, String username) {
+        boolean isCreatingNew = (id == null || id == 0);
 
-    public void sendVerificationEmail(User user, String siteURL) throws MessagingException, UnsupportedEncodingException {
+        User getUserByEmail = userRepository.getUserByEmail(email);
+        if (isCreatingNew) {
+            if (getUserByEmail != null) {
+                return "DuplicateEmail";
+            } else {
+                User getUserByUsername = userRepository.getUserByUsername(username);
+                if (getUserByUsername != null) {
+                    return "DuplicateUsername";
+                }
+            }
+        } else {
+            if (getUserByEmail != null && getUserByEmail.getId().equals(id)) {
+                return "DuplicateEmail";
+            }
+            User getUserByUsername = userRepository.getUserByUsername(username);
+            if (getUserByUsername != null && getUserByUsername.getId().equals(id)) {
+                return "DuplicateUsername";
+            }
+        }
+        return "OK";
+
+    }
+
+
+    public void sendVerificationEmail(User user, String siteURL) throws
+            MessagingException, UnsupportedEncodingException {
         String subject = "CSeam Group Team";
         String senderName = "CS Dojo Kind Roy";
         String mailContent = "<p> Dear" + user.getUsername() + ", </p>";

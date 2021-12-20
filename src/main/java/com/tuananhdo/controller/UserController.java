@@ -44,26 +44,25 @@ public class UserController {
         List<Role> listAllRoles = userService.listAllRoles();
         User user = new User();
         user.setEnabled(true);
-        model.addAttribute("users", user);
+        model.addAttribute("user", user);
         model.addAttribute("listAllRoles", listAllRoles);
         model.addAttribute("pageTitle", "Create New User");
         return "admin/user/user_form";
     }
 
     @PostMapping("/users/save")
-    public String saveUser(@Valid @ModelAttribute("users") User users, BindingResult bindingResult, Model model, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
-
-//        if (bindingResult.hasErrors()) {
-//            List<Role> listAllRoles = userService.listAllRoles();
-//            model.addAttribute("listAllRoles", listAllRoles);
-//            model.addAttribute("pageTitle", "Create New User");
-//            return "admin/user/user_form";
-//        }
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            List<Role> listAllRoles = userService.listAllRoles();
+            model.addAttribute("listAllRoles", listAllRoles);
+            model.addAttribute("pageTitle", "Create New User");
+            return "admin/user/user_form";
+        }
         try {
             if (!multipartFile.isEmpty()) {
                 String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-                users.setPhotos(fileName);
-                User savedUser = userService.save(users);
+                user.setPhotos(fileName);
+                User savedUser = userService.save(user);
                 String uploadDir = "user-photos/" + savedUser.getId();
                 FileUploadUlti.cleanFileDir(uploadDir);
                 FileUploadUlti.saveFileDir(uploadDir, fileName, multipartFile);
@@ -79,9 +78,9 @@ public class UserController {
     @GetMapping("/users/edit/{id}")
     public String editUser(Model model, @PathVariable(name = "id") Integer id) throws UserNotFoundException {
         try {
-            User users = userService.getUserById(id);
+            User user = userService.getUserById(id);
             List<Role> listAllRoles = userService.listAllRoles();
-            model.addAttribute("users", users);
+            model.addAttribute("user", user);
             model.addAttribute("listAllRoles", listAllRoles);
             model.addAttribute("pageTitle", "Edit User ID : (" + id + ") ");
             return "admin/user/user_form";
