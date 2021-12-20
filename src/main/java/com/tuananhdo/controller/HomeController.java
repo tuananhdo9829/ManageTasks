@@ -35,14 +35,10 @@ public class HomeController {
     private final String URL_HOME = "/admin/home";
     private final String REDIRECT_URL_FORM = "admin/team/team_form";
 
-    @Autowired
-    private ProjectService projectService;
-    @Autowired
-    private TaskService taskService;
-    @Autowired
-    private TeamService teamService;
-    @Autowired
-    private UserService userService;
+    @Autowired private ProjectService projectService;
+    @Autowired private TaskService taskService;
+    @Autowired private TeamService teamService;
+    @Autowired private UserService userService;
 
     @GetMapping("/admin/home")
     public String homePage(Model model,User user, @AuthenticationPrincipal MyUserDetails myUserDetails) {

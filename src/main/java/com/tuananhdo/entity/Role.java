@@ -22,7 +22,7 @@ public class Role {
     private String name;
 
     @NotBlank(message = "Enter your role description")
-    @Size(min = 6 , message = "The role should have at least 6 characters")
+    @Size(min = 3 , message = "The role should have at least 6 characters")
     private String description;
 
 

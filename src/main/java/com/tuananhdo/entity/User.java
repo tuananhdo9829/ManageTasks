@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,7 +19,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(length = 30, unique = true)
@@ -51,7 +50,6 @@ public class User {
     @Column(length = 64)
     private String photos;
 
-    @AssertTrue(message = "Please checkbox")
     private boolean enabled;
 
     @Column(name = "verification_code",length = 64,updatable = false)
@@ -62,12 +60,13 @@ public class User {
 
     }
 
-    public User(String username, String email, String firstName, String lastName, String password) {
+    public User(String username, String email, String firstName, String lastName, String password,boolean enabled) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.enabled=enabled;
     }
 
 

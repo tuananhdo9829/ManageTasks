@@ -45,8 +45,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password").defaultSuccessUrl("/admin/home").failureUrl("/login?error")
-                .and().logout().permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().logout().permitAll();
     }
 
     public DaoAuthenticationProvider daoAuthenticationProvider() {

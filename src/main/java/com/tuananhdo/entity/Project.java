@@ -69,8 +69,8 @@ public class Project {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "participants_project", joinColumns = @JoinColumn(name = "projects_id", referencedColumnName = "id")
-            , inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id")
+            name = "participants_project", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
     public Set<User> users = new HashSet<>();
 
@@ -103,6 +103,22 @@ public class Project {
     }
 
 
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", projectStatus=" + projectStatus +
+                ", timeStart=" + timeStart +
+                ", timeEnd=" + timeEnd +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", users=" + users +
+                '}';
+    }
 
     public Project(Integer id) {
         this.id = id;

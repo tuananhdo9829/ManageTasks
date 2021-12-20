@@ -148,7 +148,20 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.user.getEmail();
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", createdTime=" + createdTime +
+                ", timeStart=" + timeStart +
+                ", timeEnd=" + timeEnd +
+                ", updatedTime=" + updatedTime +
+                ", createdBy='" + createdBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", assignTo='" + assignTo + '\'' +
+                ", project=" + project +
+                ", user=" + user +
+                '}';
     }
-
 }

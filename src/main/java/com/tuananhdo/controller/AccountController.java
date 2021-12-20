@@ -20,7 +20,9 @@ import java.util.Objects;
 @Controller
 public class AccountController {
 
-    private static final String URL_ACCOUNT = "/admin/user/user_account";
+    private static final String URL_ACCOUNT = "/users/account";
+    private static final String URL_HOME = "/admin/user/user_account";
+
 
     @Autowired private UserService userService;
 
@@ -28,7 +30,7 @@ public class AccountController {
     public String accountDetails(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         User user = getAuthenticationUser(myUserDetails);
         model.addAttribute("user", user);
-        return URL_ACCOUNT;
+        return URL_HOME;
     }
 
     private User getAuthenticationUser(MyUserDetails myUserDetails) {

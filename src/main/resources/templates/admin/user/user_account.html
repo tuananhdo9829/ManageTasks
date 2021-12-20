@@ -25,7 +25,7 @@
             <div class="d-block d-lg-none ml-2">
                 <div class="dropdown">
                     <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img alt="Image" th:src="@{${users.photosImagePath}}" class="avatar"/>
+                        <img alt="Image" th:src="@{${user.photosImagePath}}" class="avatar"/>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="nav-side-user.html" class="dropdown-item">Profile</a>
@@ -87,7 +87,7 @@
         <div class="d-none d-lg-block">
             <div class="dropup">
                 <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img alt="Image" th:src="@{${users.photosImagePath}}" class="avatar"/>
+                    <img alt="Image" th:src="@{${user.photosImagePath}}" class="avatar"/>
                 </a>
                 <div class="dropdown-menu">
                     <a href="nav-side-user.html" class="dropdown-item">Profile</a>
@@ -123,11 +123,14 @@
                                             <div class="media-body ml-3">
                                                 <div class="custom-file custom-file-naked d-block mb-1">
                                                     <input type="hidden" th:field="*{photos}">
-                                                    <input type="file" name="image" accept="image/png, image/jpg"
-                                                           id="fileImage">
+                                                    <input type="file" class="custom-file-input d-none" name="image"
+                                                           accept="image/png, image/jpg" id="fileImage" required>
                                                     <img alt="Photo Preview" id="thumbnail"
                                                          th:src="@{${user.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
+                                                    <label class="custom-file-label position-relative" for="fileImage">
+                                                        <span class="btn btn-primary" >Upload avatar</span>
+                                                    </label>
                                                 </div>
                                                 <small>For best results, use an image at least 256px by 256px in either
                                                     .jpg
@@ -219,6 +222,7 @@
     </div>
 </div>
 <script th:replace="/admin/fragments ::script"></script>
+<script th:src="@{/admin/js/load-image.js}"></script>
 <script>
     function checkPasswordMatch(confirmPassword) {
         if (confirmPassword.value !== $("#password").val()) {

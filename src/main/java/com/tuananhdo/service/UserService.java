@@ -39,7 +39,6 @@ public class UserService {
 
 
     public List<Role> listAllRoles() {
-
         return roleRepository.findAll();
 
     }
@@ -104,6 +103,7 @@ public class UserService {
     }
 
     public String checkUnique(Integer id, String email, String username) {
+
         boolean isCreatingNew = (id == null || id == 0);
 
         User getUserByEmail = userRepository.getUserByEmail(email);

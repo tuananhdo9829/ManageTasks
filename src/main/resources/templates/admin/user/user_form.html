@@ -125,7 +125,7 @@
                                             <th:block th:each="role : ${listAllRoles}">
                                                 <div class="col">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" th:field="*{roles}"
+                                                        <input type="radio" th:field="*{roles}"
                                                                th:value="${role.id}"> [[${role.name}]]
                                                     </div>
                                                 </div>
@@ -188,13 +188,13 @@
             if (response === "OK"){
                 form.submit();
             }
-            else if (response === "DuplicateEmail"){
-                showWarningModal("There is another user having same email: " +userEmail)
-            }
             else if (response === "DuplicateUsername"){
                 showWarningModal("There is another user having same username: " +userName)
             }
-        });
+            else if (response === "DuplicateEmail"){
+                showWarningModal("There is another user having same email: " +userEmail)
+            }
+        })
         return false;
     }
 

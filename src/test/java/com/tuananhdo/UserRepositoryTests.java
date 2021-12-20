@@ -1,8 +1,8 @@
 package com.tuananhdo;
 
-import com.tuananhdo.repository.UserRepository;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
+import com.tuananhdo.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -29,7 +29,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateOneUserWithOneRole() {
-        User user = new User("tuananhdo", "tuananhdo@gmail.com", "Tuan", "Do", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
+        User user = new User("tuananhdo", "tuananhdo9829@gmail.com", "Tuan", "Do", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
         Role roleAdmin = entityManager.find(Role.class, 1);
         user.addRole(roleAdmin);
         User savedUser = userRepository.save(user);
@@ -38,10 +38,10 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateFourUserWithOneRole() {
-        User staff1 = new User("staff5", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
-        User staff2 = new User("staff6", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
-        User staff3 = new User("staff7", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
-        User staff4 = new User("staff8", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
+        User staff1 = new User("staff5", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User staff2 = new User("staff6", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User staff3 = new User("staff7", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User staff4 = new User("staff8", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
         Role roleStaff = entityManager.find(Role.class, 2);
         staff1.addRole(roleStaff);
         staff2.addRole(roleStaff);
@@ -52,8 +52,8 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateTwoUserWithOneRole() {
-        User staff1 = new User("staff10", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
-        User staff2 = new User("staff12", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka");
+        User staff1 = new User("staff10", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User staff2 = new User("staff12", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
         Role roleStaff = entityManager.find(Role.class, 2);
         staff1.addRole(roleStaff);
         staff2.addRole(roleStaff);

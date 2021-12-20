@@ -63,8 +63,8 @@ public class ProjectController {
                 model.addAttribute("listAllUsers", listAllUsers);
                 return "/admin/project/project_form";
             }
-            User userCreatedProject = getUserCreatedProject(project, myUserDetails);
-            project.setUpdatedBy(userCreatedProject.getUsername());
+            User findUserCreatedProject = findUserCreatedProject(project, myUserDetails);
+            project.setUpdatedBy(findUserCreatedProject.getUsername());
             projectService.save(project);
             redirectAttributes.addFlashAttribute("message", "The project has been saved successfully !");
             return "redirect:/projects/home";
@@ -74,7 +74,7 @@ public class ProjectController {
         }
     }
 
-    private User getUserCreatedProject(Project project, MyUserDetails myUserDetails) {
+    private User findUserCreatedProject(Project project, MyUserDetails myUserDetails) {
         String username = myUserDetails.getUsername();
         User userCreatedProject = projectService.findProjectCreateByUser(username);
         if (username != null) {

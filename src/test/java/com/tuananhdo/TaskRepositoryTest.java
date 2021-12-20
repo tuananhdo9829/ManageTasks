@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,6 +55,35 @@ public class TaskRepositoryTest {
         listTasks.stream().forEach(System.out::println);
         assertThat(listTasks.size()).isGreaterThan(0);
     }
+
+    @Test
+    public void testShowLimitAndSortTask(){
+        List<Task> listTasks = taskRepository.findAll();
+        List<Task> showList = listTasks.stream().limit(2).distinct().sorted().collect(Collectors.toList());
+        System.out.println(showList);
+        assertThat(listTasks.size()).isGreaterThan(0);
+    }
+
+    @Test
+    public void testFindAllNameOfTask() {
+        List<Task> listTasks = taskRepository.findAll();
+        listTasks.stream().map(Task ::getName).sorted().collect(Collectors.toList());
+        System.out.println(listTasks);
+        assertThat(listTasks.size()).isGreaterThan(0);
+    }
+
+
+
+    @Test
+    public void testFindAllDescriptionOfTask() {
+        List<Task> listTasks = taskRepository.findAll();
+        listTasks.stream().map(Task ::getDescription).distinct().sorted().collect(Collectors.toList());
+        System.out.println(listTasks);
+        assertThat(listTasks.size()).isGreaterThan(0);
+
+    }
+
+
 
 
     @Test

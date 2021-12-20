@@ -6,10 +6,12 @@ import com.tuananhdo.entity.Task;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.TaskNotFoundException;
 import com.tuananhdo.exception.UserNotFoundException;
+import com.tuananhdo.security.MyUserDetails;
 import com.tuananhdo.service.ProjectService;
 import com.tuananhdo.service.TaskService;
 import com.tuananhdo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,7 @@ public class TaskController {
     private UserService userService;
 
     @GetMapping("/task_overview")
-    public String listAllTask(Model model,User user) {
+    public String listAllTask(Model model, User user) {
         List<User> listAllUsers = userService.listAllUsers();
         List<Task> listAllTasks = taskService.listAllTasks();
         model.addAttribute("user", user);
@@ -46,6 +48,7 @@ public class TaskController {
         model.addAttribute("listAllUsers", listAllUsers);
         return "web/task_overview";
     }
+
 
     @GetMapping("/task/new")
     public String createNewTask(Model model) {
@@ -69,7 +72,7 @@ public class TaskController {
 
 
     @PostMapping("/task/save")
-    public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws TaskNotFoundException, UnsupportedEncodingException, MessagingException, ParseException, UserNotFoundException {
+    public String saveTask(@AuthenticationPrincipal MyUserDetails myUserDetails, @Valid @ModelAttribute("task") Task task, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) throws TaskNotFoundException, UnsupportedEncodingException, MessagingException, ParseException, UserNotFoundException {
         if (bindingResult.hasErrors()) {
             List<Project> listAllProjects = projectService.listAllProjects();
             List<User> listAllUsers = userService.listAllUsers();
@@ -77,6 +80,7 @@ public class TaskController {
             model.addAttribute("listAllUsers", listAllUsers);
             return "admin/task/task_form";
         } else {
+            getUserCreatedTask(task, myUserDetails);
             taskService.save(task);
             redirectAttributes.addFlashAttribute("message", "The task has been saved successfully !");
         }
@@ -93,8 +97,20 @@ public class TaskController {
         model.addAttribute("listAllUsers", listAllUsers);
         model.addAttribute("pageTitle", "Edit Task ID " + id);
         model.addAttribute("titleButton", "Edit Task");
-
         return "admin/task/task_form";
+    }
+
+    private void getUserCreatedTask(Task task, MyUserDetails myUserDetails) {
+        String username = myUserDetails.getUsername();
+        User findUserCreatedTask = taskService.findUserCreatedTask(username);
+        if (task.getId() == null || task.getId() == 0) {
+            task.setCreatedBy(findUserCreatedTask.getUsername());
+            task.setCreatedTime(new Date());
+            task.setAssignTo(task.getUser().getUsername());
+        } else {
+            task.setUpdateBy(findUserCreatedTask.getUsername());
+            task.setUpdatedTime(new Date());
+        }
     }
 
     @GetMapping("/task/delete/{id}")

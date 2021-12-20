@@ -57,7 +57,7 @@
                                 <th:block th:each="task : ${listAllTasks}">
                                     <div class="card-list">
                                         <div class="card-list-head">
-                                            <h6 ></h6>
+                                            <h6>[[${task.project.name}]]</h6>
                                             <div class="dropdown" >
                                                 <button class="btn-options" type="button"
                                                         id="cardlist-dropdown-button-1"
