@@ -1,5 +1,6 @@
 package com.tuananhdo;
 
+import com.tuananhdo.entity.AuthenticationType;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.repository.UserRepository;
@@ -132,5 +133,14 @@ public class UserRepositoryTests {
                 () -> new UsernameNotFoundException("Could not find any user id " + id));
         userRepository.updateEnableStatus(18, false);
         assertThat(user.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void testUpdateAuthenticationType(){
+        Integer id = 2;
+        userRepository.updateAuthenticationType(id, AuthenticationType.GOOGLE);
+
+        User user = userRepository.findById(id).get();
+        assertThat(user.getAuthenticationType()).isEqualTo(AuthenticationType.GOOGLE);
     }
 }

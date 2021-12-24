@@ -1,5 +1,6 @@
 package com.tuananhdo.service;
 
+import com.tuananhdo.entity.AuthenticationType;
 import com.tuananhdo.entity.Role;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.exception.UserNotFoundException;
@@ -43,9 +44,6 @@ public class UserService {
 
     }
 
-    public User getUserByEmail(String email) {
-        return userRepository.getUserByEmail(email);
-    }
 
     public User getUserByUsername(String username) {
         return userRepository.getUserByUsername(username);
@@ -102,6 +100,10 @@ public class UserService {
         }
     }
 
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
     public String checkUnique(Integer id, String email, String username) {
 
         boolean isCreatingNew = (id == null || id == 0);
@@ -126,7 +128,6 @@ public class UserService {
             }
         }
         return "OK";
-
     }
 
 
@@ -164,5 +165,36 @@ public class UserService {
 
     public void updateUserEnableStatus(Integer id, boolean status) {
         userRepository.updateEnableStatus(id, status);
+    }
+
+    public void updateAuthentication(User user, AuthenticationType authenticationType) {
+        if (!user.getAuthenticationType().equals(authenticationType)) {
+            userRepository.updateAuthenticationType(user.getId(), authenticationType);
+        }
+    }
+
+    public void addNewUserUponOAuthLogin(String name, String email) {
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(null);
+        setName(name, user);
+        user.setFirstName(name);
+        user.setEnabled(true);
+        user.setAuthenticationType(AuthenticationType.GOOGLE);
+        user.setPassword("123456789");
+        userRepository.save(user);
+    }
+
+    private void setName(String name, User user) {
+        String [] nameArray = name.split(" ");
+        if (nameArray.length < 2){
+            user.setFirstName(name);
+            user.setLastName("");
+        }else {
+            String firstName = nameArray[0];
+            user.setFirstName(firstName);
+            String lastName = name.replaceFirst(firstName,"");
+            user.setLastName(lastName);
+        }
     }
 }

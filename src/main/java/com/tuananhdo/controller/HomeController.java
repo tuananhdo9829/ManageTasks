@@ -41,14 +41,13 @@ public class HomeController {
     @Autowired private UserService userService;
 
     @GetMapping("/admin/home")
-    public String homePage(Model model,User user, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+    public String homePage(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         List<Team> listAllTeams = teamService.listAllTeams();
         List<Project> listAllProjects = projectService.listAllProjects();
         List<Task> listAllTasks = taskService.listAllTasks();
         List<User> listAllUsers = userService.listAllUsers();
-        User users = getAuthenticationUser(myUserDetails);
-        model.addAttribute("users", users);
-        model.addAttribute("user", user);
+//        User user = getAuthenticationUser(myUserDetails);
+//        model.addAttribute("user", user);
         model.addAttribute("listAllTeams", listAllTeams);
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllTasks", listAllTasks);

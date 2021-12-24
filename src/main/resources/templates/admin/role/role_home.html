@@ -1,16 +1,16 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/admin/fragments ::head">
+<head th:replace="admin/fragments ::head">
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="layout layout-nav-side">
-    <div th:replace="/admin/fragments ::navbar_top"></div>
+    <div th:replace="admin/fragments ::navbar_top"></div>
     <div class="main-container">
-        <div th:replace="/admin/fragments ::navbar"></div>
+        <div th:replace="admin/fragments ::navbar"></div>
         <div class="container">
 
             <ul class="nav nav-tabs nav-fill" role="tablist">
@@ -81,7 +81,7 @@
         </div>
     </div>
 </div>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 </body>
 
 </html>

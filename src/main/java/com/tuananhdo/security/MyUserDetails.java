@@ -22,7 +22,6 @@ public class MyUserDetails implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
-
         }
         return authorities;
     }
@@ -65,7 +64,11 @@ public class MyUserDetails implements UserDetails {
         user.setFirstName(firstName);
     }
 
-    public void setLastName(String lastName){
+    public void setLastName(String lastName) {
         user.setLastName(lastName);
+    }
+
+    public User getUser() {
+        return this.user;
     }
 }

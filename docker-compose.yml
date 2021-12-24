@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  demo-docker:
+    image: mysql:8
+    platform: linux/x86_64
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=myproject
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=password
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - 3307:3307
+    networks:
+      - common-network
+
+  demo-docker-container:
+    image: demo-docker
+    build: .
+    depends_on:
+      - demo-docker
+    ports:
+      - 8888:8888
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:mysql://demo-docker:3307/myproject?allowPublicKeyRetrieval=true&useSSL=false
+    restart: always
+    networks:
+      - common-network
+
+networks:
+  common-network:
+    driver: bridge

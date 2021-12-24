@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head th:replace="/admin/fragments ::head">
+<head th:replace="admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -99,7 +99,7 @@
 
     </div>
     <div class="main-container">
-        <div th:replace="/admin/fragments ::navbar"></div>
+        <div th:replace="admin/fragments ::navbar"></div>
         <div class="container">
             <div class="row justify-content-center mt-5">
 
@@ -221,7 +221,7 @@
         </div>
     </div>
 </div>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 <script th:src="@{/admin/js/load-image.js}"></script>
 <script>
     function checkPasswordMatch(confirmPassword) {

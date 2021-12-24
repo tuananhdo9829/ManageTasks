@@ -16,6 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+//    @Autowired private OAuth2UserService oAuth2UserService;
+//    @Autowired private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+//    @Autowired private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new MyUserDetailsService();
@@ -26,11 +30,12 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 
-                .antMatchers("/admin/home", "/users/account").hasAnyAuthority("Admin", "Manage", "Staff")
+                .antMatchers( "/users/account").hasAnyAuthority("Admin", "Manage", "Staff")
 
                 .antMatchers("/users/home", "/users/new", "/users/edit/**", "/users/delete/**").hasAnyAuthority("Admin", "Manage")
 
@@ -44,8 +49,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
-                .passwordParameter("password").defaultSuccessUrl("/admin/home").failureUrl("/login?error")
-                .and().logout().permitAll();
+                .passwordParameter("password").defaultSuccessUrl("/admin/home")
+                .failureUrl("/login?error").and()
+                .logout().permitAll();
     }
 
     public DaoAuthenticationProvider daoAuthenticationProvider() {

@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-<head th:replace="/admin/fragments ::head">
+<head th:replace="admin/fragments ::head">
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
 <div class="layout layout-nav-side">
-    <div th:replace="/admin/fragments ::navbar_top"></div>
+    <div th:replace="admin/fragments ::navbar_top"></div>
 
     <div class="main-container">
-        <div th:replace="/admin/fragments ::navbar"></div>
+        <div th:replace="admin/fragments ::navbar"></div>
 
         <div class="container">
             <div class="row justify-content-center">
@@ -160,7 +160,7 @@
     </div>
 </div>
 <script th:src="@{/admin/js/delete-function.js}"></script>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 <script>
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {

@@ -20,8 +20,8 @@ import java.util.Objects;
 @Controller
 public class AccountController {
 
-    private static final String URL_ACCOUNT = "/users/account";
-    private static final String URL_HOME = "/admin/user/user_account";
+    private static final String URL_ACCOUNT = "users/account";
+    private static final String URL_HOME = "admin/user/user_account";
 
 
     @Autowired private UserService userService;

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/admin/fragments ::head">
+<head th:replace="admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -15,9 +15,7 @@
                     <div th:if="${message != null}" class="alert alert-success text-center">
                         [[${message}]]
                     </div>
-                    <button class="btn btn-lg btn-block btn-primary">
-                        <img alt="Google" th:src="@{/admin/img/logo/logo-google.svg}" class="rounded align-top mr-2" />Continue with Google
-                    </button>
+
 
                     <hr>
                     <form th:action="@{/sign_up}" method="post" th:object="${user}">
@@ -44,7 +42,7 @@
         </div>
     </div>
 </div>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 
 </body>
 </html>

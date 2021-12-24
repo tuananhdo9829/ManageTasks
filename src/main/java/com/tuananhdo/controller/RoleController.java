@@ -23,7 +23,7 @@ public class RoleController {
     public String listAllRoles(Model model) {
         List<Role> listAllRoles = roleService.listAllRoles();
         model.addAttribute("listRoles", listAllRoles);
-        return "/admin/role/role_home";
+        return "admin/role/role_home";
     }
 
     @GetMapping("/roles/new")
@@ -31,7 +31,7 @@ public class RoleController {
         Role role = new Role();
         model.addAttribute("roles", role);
         model.addAttribute("pageTitle", "Create New Role");
-        return "/admin/role/role_form";
+        return "admin/role/role_form";
     }
 
     @PostMapping("/roles/save")
@@ -47,7 +47,7 @@ public class RoleController {
             Role role = roleService.getRoleById(id);
             model.addAttribute("roles", role);
             model.addAttribute("pageTitle", "Edit Role With ID :" + id);
-            return "/admin/role/role_form";
+            return "admin/role/role_form";
 
         } catch (RoleNotFoundException exception) {
             throw new RoleNotFoundException("Could not find any role  :" + exception.getMessage());

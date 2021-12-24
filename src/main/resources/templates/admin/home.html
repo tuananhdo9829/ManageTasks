@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="/admin/fragments :: head">
+<head th:replace="admin/fragments :: head">
     <meta charset="UTF-8">
     <title>Task Management</title>
 </head>
 <body>
 <div class="layout layout-nav-side">
-    <div th:replace="/admin/fragments ::navbar_top"></div>
+    <div th:replace="admin/fragments ::navbar_top"></div>
     <div class="main-container">
-        <div th:replace="/admin/fragments ::navbar"></div>
+        <div th:replace="admin/fragments ::navbar"></div>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-11 col-xl-10">
                     <div class="page-header mb-4">
                         <div class="media">
-                            <img alt="Image" th:src="@{${users.photosImagePath}}" class="avatar avatar-lg mt-1" />
+<!--                            <img alt="Image" th:src="@{${user.photosImagePath}}" class="avatar avatar-lg mt-1" />-->
                             <div class="media-body ml-3">
                                 &nbsp;
-                                <h2>Welcome : <span class="mb-0" style="color: purple" sec:authentication="principal.authorities"></span></h2>
+<!--                                <h2>Welcome : <span class="mb-0" style="color: purple" sec:authentication="name"></span></h2>-->
                             </div>
                         </div>
                         <p class="lead">A small web studio crafting lovely template products.</p>
                         <div th:replace="admin/fragments :: list_users"></div>
                     </div>
-                    <div th:replace="admin/fragments :: form_send_mail"></div>
 
                     <div th:if="${message != null}" class="alert alert-success text-center">
                         [[${message}]]
@@ -258,7 +257,7 @@
     </div>
 </div>
 <script th:src="@{/admin/js/delete-function.js}"></script>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 <script>
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {

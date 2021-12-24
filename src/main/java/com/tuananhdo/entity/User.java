@@ -23,8 +23,6 @@ public class User {
     private Integer id;
 
     @Column(length = 30, unique = true)
-    @NotBlank(message = "")
-    @Size(min = 6 , message = "The username should have at least 6 characters")
     private String username;
 
     @Column(length = 30,nullable = false)
@@ -55,6 +53,9 @@ public class User {
     @Column(name = "verification_code",length = 64,updatable = false)
     private String verificationCode;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "authentication_type",length = 10 )
+    private AuthenticationType authenticationType;
 
     public User() {
 
@@ -120,4 +121,5 @@ public class User {
         if (id == null || photos == null) return "/admin/img/avatar-female-3.jpg";
         return "/user-photos/" + this.id + "/" + this.photos;
     }
+
 }

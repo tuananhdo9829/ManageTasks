@@ -35,7 +35,7 @@ public class ProjectController {
         model.addAttribute("user", new User());
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllUsers", listAllUsers);
-        return "/admin/project/project_home";
+        return "admin/project/project_home";
     }
 
     @GetMapping("/projects/new")
@@ -45,7 +45,7 @@ public class ProjectController {
         model.addAttribute("listAllUsers", listAllUsers);
         model.addAttribute("projects", project);
         model.addAttribute("pageTitle", "Create New Projects");
-        return "/admin/project/project_form";
+        return "admin/project/project_form";
     }
 
     private Project getCurrentDateTime() {
@@ -61,7 +61,7 @@ public class ProjectController {
             if (bindingResult.hasErrors()) {
                 List<User> listAllUsers = projectService.listAllUsers();
                 model.addAttribute("listAllUsers", listAllUsers);
-                return "/admin/project/project_form";
+                return "admin/project/project_form";
             }
             User findUserCreatedProject = findUserCreatedProject(project, myUserDetails);
             project.setUpdatedBy(findUserCreatedProject.getUsername());
@@ -91,7 +91,7 @@ public class ProjectController {
         model.addAttribute("pageTitle", "Edit Project ID :" + id);
         model.addAttribute("projects", projects);
         model.addAttribute("listAllUsers", listAllUsers);
-        return "/admin/project/project_form";
+        return "admin/project/project_form";
     }
 
     @GetMapping("/projects/delete/{id}")

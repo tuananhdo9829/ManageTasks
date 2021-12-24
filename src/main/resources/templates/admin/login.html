@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/admin/fragments ::head">
+<head th:replace="admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -12,6 +12,9 @@
                 <div class="text-center">
                     <h1 class="h2">Welcome Back &#x1f44b;</h1>
                     <p class="lead">Log in to your account to continue</p>
+                    <button class="btn btn-lg btn-block btn-primary">
+                        <img alt="Google" th:src="@{/admin/img/logo/logo-google.svg}" class="rounded align-top mr-2" /><a th:href="@{/oauth2/authorization/google}">Continue with Google</a>
+                    </button>
                     <div th:if="${param.error}">
                         <p class="text-danger">User account or password incorrect</p>
                     </div>
@@ -41,7 +44,7 @@
         </div>
     </div>
 </div>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 
 </body>
 </html>

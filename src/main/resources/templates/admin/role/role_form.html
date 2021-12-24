@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/admin/fragments ::head">
+<head th:replace="admin/fragments ::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
 <div class="layout layout-nav-side">
-    <div th:replace="/admin/fragments ::navbar_top"></div>
+    <div th:replace="admin/fragments ::navbar_top"></div>
 
     <div class="main-container">
-        <div th:replace="/admin/fragments ::navbar"></div>
+        <div th:replace="admin/fragments ::navbar"></div>
         <div th:if="${message !=null}">
             <span class="alert alert-success text-center"></span>
         </div>
@@ -65,6 +65,6 @@
         </div>
     </div>
 </div>
-<script th:replace="/admin/fragments ::script"></script>
+<script th:replace="admin/fragments ::script"></script>
 </body>
 </html>
