@@ -9,8 +9,8 @@ services:
       - MYSQL_DATABASE=myproject
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=password
-    #    volumes:
-    #      - ~/mysql-container:/var/lib/mysql
+        volumes:
+          - ~/mysql-container:/var/lib/mysql
     ports:
       - 3307:3306
     networks:
