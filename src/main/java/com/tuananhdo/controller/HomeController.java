@@ -32,9 +32,6 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    private final String URL_HOME = "/admin/home";
-    private final String REDIRECT_URL_FORM = "admin/team/team_form";
-
     @Autowired private ProjectService projectService;
     @Autowired private TaskService taskService;
     @Autowired private TeamService teamService;
@@ -52,7 +49,7 @@ public class HomeController {
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllTasks", listAllTasks);
         model.addAttribute("listAllUsers", listAllUsers);
-        return URL_HOME;
+        return "admin/home";
     }
 
     @PostMapping("/team/send/mail")
@@ -60,7 +57,7 @@ public class HomeController {
         String siteURL = Utility.getSiteURL(request);
         taskService.sendMailForUsers(user, siteURL, email);
         redirectAttributes.addFlashAttribute("message", "Send e-mail successfully !");
-        return "redirect:" + URL_HOME;
+        return "redirect:/admin/home";
     }
 
     private User getAuthenticationUser(MyUserDetails myUserDetails) {
@@ -76,7 +73,7 @@ public class HomeController {
         model.addAttribute("team", team);
         model.addAttribute("listAllProjects", listAllProjects);
         model.addAttribute("listAllUsers", listAllUsers);
-        return REDIRECT_URL_FORM;
+        return "admin/team/team_form";
     }
 
 
@@ -85,11 +82,11 @@ public class HomeController {
         if (bindingResult.hasErrors()) {
             List<User> listAllUsers = userService.listAllUsers();
             model.addAttribute("listAllUsers", listAllUsers);
-            return REDIRECT_URL_FORM;
+            return "admin/team/team_form";
         }
         teamService.saveTeam(team);
         redirectAttributes.addFlashAttribute("message", "The Team has been saved successfully !");
-        return "redirect:" + URL_HOME;
+        return "redirect:/admin/home";
     }
 
     @GetMapping("/teams/edit/{id}")
@@ -98,13 +95,13 @@ public class HomeController {
         List<User> listAllUsers = userService.listAllUsers();
         model.addAttribute("team", team);
         model.addAttribute("listAllUsers", listAllUsers);
-        return REDIRECT_URL_FORM;
+        return "admin/team/team_form";
     }
 
     @GetMapping("/teams/delete/{id}")
     public String deleteTeams(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) throws TeamNotFoundException {
         teamService.deleteTeam(id);
         redirectAttributes.addFlashAttribute("message", "The Team has been deleted successfully !");
-        return "redirect:" + URL_HOME;
+        return "redirect:/admin/home";
     }
 }
