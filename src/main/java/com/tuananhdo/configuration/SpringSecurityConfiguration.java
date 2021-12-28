@@ -45,7 +45,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/task/edit/**","/task_overview").hasAnyAuthority("Admin", "Manage","Staff")
 
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/login")
                 .usernameParameter("username")
