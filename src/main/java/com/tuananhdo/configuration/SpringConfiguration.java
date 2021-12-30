@@ -20,10 +20,11 @@ public class SpringConfiguration implements WebMvcConfigurer {
         Path userPhotoDir = Paths.get(dirName);
         String userPhotoPath = userPhotoDir.toFile().getAbsolutePath();
         File file = new File("/" + userPhotoPath);
-        if (!file.exists()){
+        if (!file.exists()) {
             Files.createDirectories(userPhotoDir);
+        } else {
+            return;
         }
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:" + userPhotoPath + "/");
     }
-
 }
