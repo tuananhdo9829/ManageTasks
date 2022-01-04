@@ -16,7 +16,6 @@ services:
     networks:
       - user-mysql
   myproject-container:
-    image: tuananhdoroy/myproject
     build: .
     depends_on:
       - mysql-standalone

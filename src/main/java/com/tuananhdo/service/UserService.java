@@ -69,9 +69,9 @@ public class UserService {
     public User save(User user) throws UserNotFoundException {
         boolean isUpdatingUser = (user.getId() != null);
         if (isUpdatingUser) {
-            User isExisUser = userRepository.findById(user.getId()).get();
+            User isExitsUser = userRepository.findById(user.getId()).get();
             if (user.getPassword().isEmpty()) {
-                user.setPassword(isExisUser.getPassword());
+                user.setPassword(isExitsUser.getPassword());
             } else {
                 encodePassword(user);
             }
