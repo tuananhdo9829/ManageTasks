@@ -44,6 +44,7 @@ public class ProjectController {
         Project project = getCurrentDateTime();
         model.addAttribute("listAllUsers", listAllUsers);
         model.addAttribute("projects", project);
+        model.addAttribute("projects", project);
         model.addAttribute("pageTitle", "Create New Projects");
         return "admin/project/project_form";
     }

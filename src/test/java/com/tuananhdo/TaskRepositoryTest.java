@@ -103,6 +103,7 @@ public class TaskRepositoryTest {
                 () -> new TaskNotFoundException("Could not find any with task id :" + id));
         task.setName(name);
         task.setDescription(description);
+        task.setDescription(description);
         Task updatedTask = taskRepository.save(task);
         assertThat(updatedTask.getName()).isEqualTo(name);
         assertThat(updatedTask.getDescription()).isEqualTo(description);
