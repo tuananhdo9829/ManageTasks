@@ -92,6 +92,7 @@ public class ProjectController {
         model.addAttribute("projects", projects);
         model.addAttribute("listAllUsers", listAllUsers);
         return "admin/project/project_form";
+
     }
 
     @GetMapping("/projects/delete/{id}")
