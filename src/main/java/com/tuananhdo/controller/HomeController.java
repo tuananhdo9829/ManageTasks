@@ -82,6 +82,7 @@ public class HomeController {
         if (bindingResult.hasErrors()) {
             List<User> listAllUsers = userService.listAllUsers();
             model.addAttribute("listAllUsers", listAllUsers);
+            //comment here
             return "admin/team/team_form";
         }
         teamService.saveTeam(team);
