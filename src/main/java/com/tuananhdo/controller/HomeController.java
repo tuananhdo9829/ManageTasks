@@ -12,6 +12,8 @@ import com.tuananhdo.service.TaskService;
 import com.tuananhdo.service.TeamService;
 import com.tuananhdo.service.UserService;
 import com.tuananhdo.util.Utility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    Logger logger = LoggerFactory.getLogger(HomeController.class);
     @Autowired private ProjectService projectService;
     @Autowired private TaskService taskService;
     @Autowired private TeamService teamService;
