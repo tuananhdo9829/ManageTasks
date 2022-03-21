@@ -4,6 +4,8 @@ import com.tuananhdo.service.UserService;
 import com.tuananhdo.entity.User;
 import com.tuananhdo.security.MyUserDetails;
 import com.tuananhdo.util.FileUploadUlti;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import java.util.Objects;
 @Controller
 public class AccountController {
 
+    Logger logger = LoggerFactory.getLogger(AccountController.class);
+
     private static final String URL_ACCOUNT = "users/account";
     private static final String URL_HOME = "admin/user/user_account";
 
@@ -30,6 +34,10 @@ public class AccountController {
     public String accountDetails(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         User user = getAuthenticationUser(myUserDetails);
         model.addAttribute("user", user);
+        logger.debug("debug");
+        logger.info("info");
+        logger.error("error");
+        logger.warn("warn");
         return URL_HOME;
     }
 
