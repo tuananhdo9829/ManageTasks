@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2022-03-29 00:45:27.396  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m44s787ms).
 2022-03-29 00:52:24.611  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s144ms).
 2022-03-29 02:16:19.962  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h23m55s351ms).
@@ -46,3 +47,16 @@
 2022-03-29 22:17:56.588  INFO 20708 --- [Thread-21] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2022-03-29 22:17:56.597  INFO 20708 --- [Thread-21] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
 2022-03-29 22:17:56.628  INFO 20708 --- [Thread-21] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+=======
+2022-03-21 00:23:01.673  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56m51s155ms).
+2022-03-21 01:45:22.794  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h22m21s121ms).
+2022-03-21 03:04:52.392  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h19m29s598ms).
+2022-03-21 04:27:19.192  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h22m26s800ms).
+2022-03-21 05:46:36.496  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h19m17s304ms).
+2022-03-21 07:12:14.001  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h25m37s505ms).
+2022-03-21 08:11:14.939  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59m938ms).
+2022-03-21 09:02:18.598  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51m3s659ms).
+2022-03-21 09:19:25.111  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m6s513ms).
+2022-03-21 12:13:33.290  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m36s573ms).
+2022-03-21 12:59:51.695  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46m18s406ms).
+>>>>>>> benka
