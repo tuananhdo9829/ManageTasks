@@ -22,7 +22,7 @@
                         <div th:replace="admin/fragments :: list_users"></div>
                     </div>
                     <hr>
-<!--                    <div th:replace="admin/fragments :: form_send_mail"></div>-->
+                    <!--                    <div th:replace="admin/fragments :: form_send_mail"></div>-->
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#projects" role="tab"
@@ -65,44 +65,51 @@
                                 </div>
                                 <div class="content-list-body row">
                                     <th:block th:each="project : ${listAllProjects}">
-                                    <div class="col-lg-6">
-                                        <div class="card card-project">
-                                            <div th:replace="admin/fragment_status :: progress_project(${project.projectStatus})"></div>
-                                            <div class="card-body">
-                                                <div class="dropdown card-options" sec:authorize="hasAnyAuthority('Admin,Manage')">
-                                                    <button class="btn-options" type="button"
-                                                            id="project-dropdown-button-1" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                        <i class="material-icons">more_vert</i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item " th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
-                                                        <a class="dropdown-item link-delete" th:entityId="${project.id}" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
+                                        <div class="col-lg-6">
+                                            <div class="card card-project">
+                                                <div th:replace="admin/fragment_status :: progress_project(${project.projectStatus})"></div>
+                                                <div class="card-body">
+                                                    <div class="dropdown card-options"
+                                                         sec:authorize="hasAnyAuthority('Admin,Manage')">
+                                                        <button class="btn-options" type="button"
+                                                                id="project-dropdown-button-1" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                            <i class="material-icons">more_vert</i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item "
+                                                               th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
+                                                            <a class="dropdown-item link-delete"
+                                                               th:entityId="${project.id}"
+                                                               th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="card-title">
-                                                    <a href="#"><h5 data-filter-by="text">[[${project.name}]]</h5></a>
-                                                </div>
-                                                <ul class="avatars">
-
-                                                    <li th:each="avatar : ${project.users}">
-                                                        <a href="#" data-toggle="tooltip" th:title="${avatar.username}">
-                                                            <img alt="Kenny Tran" class="avatar" th:src="@{${avatar.photosImagePath}}" />
+                                                    <div class="card-title">
+                                                        <a href="#"><h5 data-filter-by="text">[[${project.name}]]</h5>
                                                         </a>
-                                                    </li>
-
-
-                                                </ul>
-                                                <div class="card-meta d-flex justify-content-between">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="material-icons mr-1">playlist_add_check</i>
-                                                        <span class="text-small">[[${#lists.size(project.users) + ' Members'}]]</span>
                                                     </div>
-                                                    <span class="text-small" data-filter-by="text">Due [[${project.timeEnd.getDate() - project.timeStart.getDate()} + ' days']]</span>
+                                                    <ul class="avatars">
+
+                                                        <li th:each="avatar : ${project.users}">
+                                                            <a href="#" data-toggle="tooltip"
+                                                               th:title="${avatar.username}">
+                                                                <img alt="Kenny Tran" class="avatar"
+                                                                     th:src="@{${avatar.photosImagePath}}"/>
+                                                            </a>
+                                                        </li>
+
+
+                                                    </ul>
+                                                    <div class="card-meta d-flex justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="material-icons mr-1">playlist_add_check</i>
+                                                            <span class="text-small">[[${#lists.size(project.users) + ' Members'}]]</span>
+                                                        </div>
+                                                        <span class="text-small" data-filter-by="text">Due [[${project.timeEnd.getDate() - project.timeStart.getDate()} + ' days']]</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
                                     </th:block>
                                 </div>
@@ -135,17 +142,20 @@
                                 <!--end of content list head-->
                                 <div class="content-list-body row">
                                     <th:block th:each="user : ${listAllUsers}">
-                                    <div class="col-6">
-                                        <a class="media media-member" th:href="@{'/users/edit/'+${user.id}}">
-                                            <img alt="Claire Connors" th:src="@{${user.photosImagePath}}"
-                                                 class="avatar avatar-lg"/>
-                                            <div class="media-body">
-                                                <h6 class="mb-0" data-filter-by="text">[[${user.username}]]</h6>
-                                                <span data-filter-by="text" class="text-body">[[${user.roles}]]</span>
-                                                <span data-filter-by="text" class="text-body "><a class="link-delete" th:entityId="${user.id}" th:href="@{'/users/delete/'+${user.id}}">Delete</a></span>
-                                            </div>
-                                        </a>
-                                    </div>
+                                        <div class="col-6">
+                                            <a class="media media-member" th:href="@{'/users/edit/'+${user.id}}">
+                                                <img alt="Claire Connors" th:src="@{${user.photosImagePath}}"
+                                                     class="avatar avatar-lg"/>
+                                                <div class="media-body">
+                                                    <h6 class="mb-0" data-filter-by="text">[[${user.username}]]</h6>
+                                                    <span data-filter-by="text"
+                                                          class="text-body">[[${user.roles}]]</span>
+                                                    <span data-filter-by="text" class="text-body "><a
+                                                            class="link-delete" th:entityId="${user.id}"
+                                                            th:href="@{'/users/delete/'+${user.id}}">Delete</a></span>
+                                                </div>
+                                            </a>
+                                        </div>
 
                                     </th:block>
                                 </div>
@@ -153,7 +163,7 @@
                             <!--end of content list-->
                         </div>
                     </div>
-                <div th:replace="admin/fragments :: user-modal-dialog"></div>
+                    <div th:replace="admin/fragments :: user-modal-dialog"></div>
                 </div>
             </div>
         </div>
@@ -165,7 +175,7 @@
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {
             event.preventDefault();
-            showDeleteConfirmModal($(this),'Product')
+            showDeleteConfirmModal($(this), 'Product')
         });
     });
 </script>

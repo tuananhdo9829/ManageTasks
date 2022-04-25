@@ -20,13 +20,16 @@
                     <hr>
                     <form th:action="@{/sign_up}" method="post" th:object="${user}">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Username" th:field="*{username}" name="create-account-email" />
+                            <input class="form-control" type="text" placeholder="Username" th:field="*{username}"
+                                   name="create-account-email"/>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="email" placeholder="Email Address" th:field="*{email}" name="create-account-email" />
+                            <input class="form-control" type="email" placeholder="Email Address" th:field="*{email}"
+                                   name="create-account-email"/>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Password" th:field="*{password}" name="create-account-password" />
+                            <input class="form-control" type="password" placeholder="Password" th:field="*{password}"
+                                   name="create-account-password"/>
                             <div class="text-left">
                                 <small>Your password should be at least 8 characters</small>
                             </div>

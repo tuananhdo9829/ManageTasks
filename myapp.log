@@ -1,0 +1,48 @@
+2022-03-29 00:45:27.396  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m44s787ms).
+2022-03-29 00:52:24.611  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s144ms).
+2022-03-29 02:16:19.962  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h23m55s351ms).
+2022-03-29 03:36:21.761  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h20m1s799ms).
+2022-03-29 04:58:23.791  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h22m2s30ms).
+2022-03-29 06:19:17.882  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h20m54s91ms).
+2022-03-29 07:41:38.870  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h22m20s988ms).
+2022-03-29 09:00:52.732  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h19m13s862ms).
+2022-03-29 10:19:23.163  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m30s431ms).
+2022-03-29 11:41:49.310  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h22m26s147ms).
+2022-03-29 13:05:13.579  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h23m24s269ms).
+2022-03-29 14:14:01.893  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h8m48s314ms).
+2022-03-29 15:07:23.590  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53m21s697ms).
+2022-03-29 16:01:57.579  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=54m33s989ms).
+2022-03-29 16:44:36.607  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=42m39s28ms).
+2022-03-29 17:19:30.526  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=34m53s919ms).
+2022-03-29 18:26:13.291  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h6m42s765ms).
+2022-03-29 18:35:42.319  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m29s28ms).
+2022-03-29 19:17:17.496  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=41m35s177ms).
+2022-03-29 19:51:40.045  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m22s266ms).
+2022-03-29 20:40:49.514  WARN 20708 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m9s229ms).
+2022-03-29 22:16:29.407  INFO 20708 --- [Thread-14] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-03-29 22:16:29.416  INFO 20708 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-03-29 22:16:29.458  INFO 20708 --- [Thread-14] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-03-29 22:17:13.036  INFO 20708 --- [restartedMain] com.tuananhdo.MyprojectApplication       : Starting MyprojectApplication using Java 1.8.0_301 on NLRoy.local with PID 20708 (/Users/tadroy/Desktop/ManageTasks/target/classes started by tadroy in /Users/tadroy/Desktop/ManageTasks)
+2022-03-29 22:17:13.038  INFO 20708 --- [restartedMain] com.tuananhdo.MyprojectApplication       : No active profile set, falling back to default profiles: default
+2022-03-29 22:17:13.298  INFO 20708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-03-29 22:17:13.336  INFO 20708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 34 ms. Found 5 JPA repository interfaces.
+2022-03-29 22:17:13.524  INFO 20708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
+2022-03-29 22:17:13.527  INFO 20708 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-03-29 22:17:13.528  INFO 20708 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.54]
+2022-03-29 22:17:13.536  INFO 20708 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2022-03-29 22:17:13.539  INFO 20708 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 481 ms
+2022-03-29 22:17:13.564  INFO 20708 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2022-03-29 22:17:13.642  INFO 20708 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2022-03-29 22:17:13.643  INFO 20708 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/myproject'
+2022-03-29 22:17:13.671  INFO 20708 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-03-29 22:17:13.676  INFO 20708 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-03-29 22:17:13.926  INFO 20708 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-03-29 22:17:13.927  INFO 20708 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-03-29 22:17:14.169  INFO 20708 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12937b9, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e1ec824, org.springframework.security.web.header.HeaderWriterFilter@6b2a029c, org.springframework.security.web.csrf.CsrfFilter@228094ea, org.springframework.security.web.authentication.logout.LogoutFilter@6a7c5c2d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4e4003b7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78105b4b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@43158837, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7ef6fe11, org.springframework.security.web.session.SessionManagementFilter@589f2019, org.springframework.security.web.access.ExceptionTranslationFilter@6cad44a8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4eba2448]
+2022-03-29 22:17:14.321  INFO 20708 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-03-29 22:17:14.334  INFO 20708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
+2022-03-29 22:17:14.340  INFO 20708 --- [restartedMain] com.tuananhdo.MyprojectApplication       : Started MyprojectApplication in 1.378 seconds (JVM running for 443763.415)
+2022-03-29 22:17:14.346  INFO 20708 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2022-03-29 22:17:56.588  INFO 20708 --- [Thread-21] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-03-29 22:17:56.597  INFO 20708 --- [Thread-21] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2022-03-29 22:17:56.628  INFO 20708 --- [Thread-21] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.

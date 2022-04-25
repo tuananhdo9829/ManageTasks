@@ -41,7 +41,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="tab-content">
-                                <form th:action="@{/users/save}" th:object="${user}" method="post" onsubmit="return checkUnique(this)"
+                                <form th:action="@{/users/save}" th:object="${user}" method="post"
+                                      onsubmit="return checkUnique(this)"
                                       enctype="multipart/form-data">
                                     <input type="hidden" id="id" th:field="*{id}">
                                     <div class="tab-pane fade show active" role="tabpanel" id="profile">
@@ -55,7 +56,7 @@
                                                          th:src="@{${user.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
                                                     <label class="custom-file-label position-relative" for="fileImage">
-                                                        <span class="btn btn-primary" >Upload avatar</span>
+                                                        <span class="btn btn-primary">Upload avatar</span>
                                                     </label>
                                                 </div>
                                                 <small>For best results, use an image at least 256px by 256px in either
@@ -144,7 +145,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="">Warning</h5>
-                                        <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close btn btn-round" data-dismiss="modal"
+                                                aria-label="Close">
                                             <i class="material-icons">close</i>
                                         </button>
                                     </div>
@@ -159,7 +161,8 @@
                                     </div>
                                     <!--end of modal body-->
                                     <div class="modal-footer">
-                                        <button role="button" class="btn btn-primary" data-dismiss="modal"  type="submit">
+                                        <button role="button" class="btn btn-primary" data-dismiss="modal"
+                                                type="submit">
                                             Close
                                         </button>
                                     </div>
@@ -183,22 +186,20 @@
         let userName = $("#username").val();
         csrfValue = $("input[name='_csrf']").val();
 
-        let params = {id : userId ,name: userName, email: userEmail, _csrf:csrfValue}
+        let params = {id: userId, name: userName, email: userEmail, _csrf: csrfValue}
         $.post(url, params, function (response) {
-            if (response === "OK"){
+            if (response === "OK") {
                 form.submit();
-            }
-            else if (response === "DuplicateUsername"){
-                showWarningModal("There is another user having same username: " +userName)
-            }
-            else if (response === "DuplicateEmail"){
-                showWarningModal("There is another user having same email: " +userEmail)
+            } else if (response === "DuplicateUsername") {
+                showWarningModal("There is another user having same username: " + userName)
+            } else if (response === "DuplicateEmail") {
+                showWarningModal("There is another user having same email: " + userEmail)
             }
         })
         return false;
     }
 
-    function showWarningModal(title,message){
+    function showWarningModal(title, message) {
         $("#modalTitle").text(title);
         $("#modalBody").text(message);
         $("#user-modal").modal();

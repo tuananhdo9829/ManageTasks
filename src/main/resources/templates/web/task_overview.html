@@ -22,7 +22,7 @@
                     </div>
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                     </ul>
-<!--                    <div th:replace="admin/fragments :: form_send_mail"></div>-->
+                    <!--                    <div th:replace="admin/fragments :: form_send_mail"></div>-->
 
                     <div class="tab-content">
                         <div class="tab-pane fade show active" role="tabpanel"
@@ -53,22 +53,24 @@
                             <div th:if="${message != null}" class="alert alert-success text-center">
                                 [[${message}]]
                             </div>
-                            <div class="content-list-body" >
+                            <div class="content-list-body">
                                 <th:block th:each="task : ${listAllTasks}">
                                     <div class="card-list">
                                         <div class="card-list-head">
                                             <h6>[[${task.project.name}]]</h6>
-                                            <div class="dropdown" >
+                                            <div class="dropdown">
                                                 <button class="btn-options" type="button"
                                                         id="cardlist-dropdown-button-1"
                                                         data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
                                                     <i class="material-icons">more_vert</i>
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-right" >
+                                                <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" th:href="@{'/task/edit/' + ${task.id}}">Rename
                                                         Task</a>
-                                                    <a class="dropdown-item text-danger link-delete" th:entityId="${task.id}" sec:authorize="hasAnyAuthority('Admin,Manage')"
+                                                    <a class="dropdown-item text-danger link-delete"
+                                                       th:entityId="${task.id}"
+                                                       sec:authorize="hasAnyAuthority('Admin,Manage')"
                                                        th:href="@{'/task/delete/' + ${task.id}}">Remove Task</a>
                                                 </div>
 
@@ -76,14 +78,15 @@
                                         </div>
                                         <div class="card-list-body">
                                             <div class="card card-task">
-                                             <div th:replace="admin/fragment_status :: progress_task(${task.status})"></div>
+                                                <div th:replace="admin/fragment_status :: progress_task(${task.status})"></div>
                                                 <div class="card-body">
                                                     <div class="card-title">
                                                         <a href="#"><h6 data-filter-by="text">[[${task.name}]]</h6>
                                                         </a>
                                                         <span class="text-small">[[${task.description}]]</span><br>
                                                         <div th:replace="admin/fragment_status :: status_small(${task.status})"></div>
-                                                        <span class="text-small" style="color: lightseagreen ;" th:text="${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}">Duo Date:</span>
+                                                        <span class="text-small" style="color: lightseagreen ;"
+                                                              th:text="${task.timeEnd.getDate() - task.timeStart.getDate()} + ' Days ' +${task.dateTimeEnd}">Duo Date:</span>
 
                                                     </div>
                                                     <div class="card-meta">
@@ -124,7 +127,7 @@
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {
             event.preventDefault();
-            showDeleteConfirmModal($(this),'Task')
+            showDeleteConfirmModal($(this), 'Task')
         });
     });
 </script>

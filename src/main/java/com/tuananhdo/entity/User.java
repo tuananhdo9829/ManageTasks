@@ -25,24 +25,24 @@ public class User {
     @Column(length = 30, unique = true)
     private String username;
 
-    @Column(length = 30,nullable = false)
+    @Column(length = 30, nullable = false)
     @NotBlank(message = "")
     @Email(message = "Enter a valid email address")
     private String email;
 
     @Column(name = "first_name", length = 10)
     @NotBlank(message = "")
-    @Size(min = 2 , message = "The first name should have at least 2 characters")
+    @Size(min = 2, message = "The first name should have at least 2 characters")
     private String firstName;
 
     @Column(name = "last_name", length = 10)
     @NotBlank(message = "")
-    @Size(min = 2 , message = "The last name should have at least 2 characters")
+    @Size(min = 2, message = "The last name should have at least 2 characters")
     private String lastName;
 
     @Column(nullable = false, length = 64)
     @NotBlank(message = "")
-    @Length(min = 8,message = "Password must be at least 8 characters")
+    @Length(min = 8, message = "Password must be at least 8 characters")
     private String password;
 
     @Column(length = 64)
@@ -50,24 +50,24 @@ public class User {
 
     private boolean enabled;
 
-    @Column(name = "verification_code",length = 64,updatable = false)
+    @Column(name = "verification_code", length = 64, updatable = false)
     private String verificationCode;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "authentication_type",length = 10 )
+    @Column(name = "authentication_type", length = 10)
     private AuthenticationType authenticationType;
 
     public User() {
 
     }
 
-    public User(String username, String email, String firstName, String lastName, String password,boolean enabled) {
+    public User(String username, String email, String firstName, String lastName, String password, boolean enabled) {
         this.username = username;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.enabled=enabled;
+        this.enabled = enabled;
     }
 
 

@@ -29,7 +29,7 @@ public class TeamService {
         return teamRepository.findById(id).orElseThrow(
                 () -> new TeamNotFoundException("Could not find with team id " + id));
     }
-    
+
     public void deleteTeam(Integer id) throws TeamNotFoundException {
         teamRepository.deleteById(id);
     }

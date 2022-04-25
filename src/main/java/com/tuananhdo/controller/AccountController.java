@@ -24,7 +24,8 @@ public class AccountController {
     private static final String URL_HOME = "admin/user/user_account";
 
 
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/users/account")
     public String accountDetails(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {

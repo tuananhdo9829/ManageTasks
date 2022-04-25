@@ -13,7 +13,8 @@
                     <h1 class="h2">Welcome Back &#x1f44b;</h1>
                     <p class="lead">Log in to your account to continue</p>
                     <button class="btn btn-lg btn-block btn-primary">
-                        <img alt="Google" th:src="@{/admin/img/logo/logo-google.svg}" class="rounded align-top mr-2" /><a th:href="@{/oauth2/authorization/google}">Continue with Google</a>
+                        <img alt="Google" th:src="@{/admin/img/logo/logo-google.svg}" class="rounded align-top mr-2"/><a
+                            th:href="@{/oauth2/authorization/google}">Continue with Google</a>
                     </button>
                     <div th:if="${param.error}">
                         <p class="text-danger">User account or password incorrect</p>
@@ -24,10 +25,10 @@
                     &nbsp;
                     <form th:action="@{/login}" method="post">
                         <div class="form-group">
-                            <input class="form-control"  type="text" placeholder="Your Username" name="username" />
+                            <input class="form-control" type="text" placeholder="Your Username" name="username"/>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Password" name="password" />
+                            <input class="form-control" type="password" placeholder="Password" name="password"/>
                             <div class="text-right">
                                 <small><a href="#">Forgot password?</a>
                                 </small>

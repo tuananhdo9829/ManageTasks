@@ -25,7 +25,7 @@ public class FileUploadUlti {
         } catch (IOException e) {
             LOGGER.info("Could not create directory file :" + path);
         }
-        try (InputStream inputStream = multipartFile.getInputStream();){
+        try (InputStream inputStream = multipartFile.getInputStream();) {
             Path pathFile = path.resolve(fileName);
             Files.copy(inputStream, pathFile, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

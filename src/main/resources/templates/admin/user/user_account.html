@@ -56,11 +56,11 @@
 
 
                 <th:block sec:authorize="hasAnyAuthority('Admin','Manage')">
-                    <li class="nav-item" >
+                    <li class="nav-item">
                         <a class="nav-link" th:href="@{/roles/home}">Role</a>
                     </li>
                 </th:block>
-                
+
 
             </ul>
             <hr>
@@ -129,7 +129,7 @@
                                                          th:src="@{${user.photosImagePath}}"
                                                          class="avatar avatar-lg"/>
                                                     <label class="custom-file-label position-relative" for="fileImage">
-                                                        <span class="btn btn-primary" >Upload avatar</span>
+                                                        <span class="btn btn-primary">Upload avatar</span>
                                                     </label>
                                                 </div>
                                                 <small>For best results, use an image at least 256px by 256px in either

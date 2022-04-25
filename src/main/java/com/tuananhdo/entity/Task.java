@@ -25,12 +25,12 @@ public class Task {
 
     @Column(nullable = false, length = 35, unique = true)
     @NotEmpty(message = "")
-    @Size(min = 6,message = "Should have at least 6 characters")
+    @Size(min = 6, message = "Should have at least 6 characters")
     private String name;
 
     @Column(nullable = false, length = 150)
     @NotEmpty(message = "")
-    @Size(min = 6,message = "Should have at least 6 characters")
+    @Size(min = 6, message = "Should have at least 6 characters")
     private String description;
 
     @Enumerated(EnumType.STRING)

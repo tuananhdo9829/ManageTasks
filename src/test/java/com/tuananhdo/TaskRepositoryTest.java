@@ -57,7 +57,7 @@ public class TaskRepositoryTest {
     }
 
     @Test
-    public void testShowLimitAndSortTask(){
+    public void testShowLimitAndSortTask() {
         List<Task> listTasks = taskRepository.findAll();
         List<Task> showList = listTasks.stream().limit(2).distinct().sorted().collect(Collectors.toList());
         System.out.println(showList);
@@ -67,23 +67,20 @@ public class TaskRepositoryTest {
     @Test
     public void testFindAllNameOfTask() {
         List<Task> listTasks = taskRepository.findAll();
-        listTasks.stream().map(Task ::getName).sorted().collect(Collectors.toList());
+        listTasks.stream().map(Task::getName).sorted().collect(Collectors.toList());
         System.out.println(listTasks);
         assertThat(listTasks.size()).isGreaterThan(0);
     }
-
 
 
     @Test
     public void testFindAllDescriptionOfTask() {
         List<Task> listTasks = taskRepository.findAll();
-        listTasks.stream().map(Task ::getDescription).distinct().sorted().collect(Collectors.toList());
+        listTasks.stream().map(Task::getDescription).distinct().sorted().collect(Collectors.toList());
         System.out.println(listTasks);
         assertThat(listTasks.size()).isGreaterThan(0);
 
     }
-
-
 
 
     @Test

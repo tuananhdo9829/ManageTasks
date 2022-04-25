@@ -30,7 +30,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateOneUserWithOneRole() {
-        User user = new User("tuananhdo", "tuananhdo9829@gmail.com", "Tuan", "Do", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User user = new User("tuananhdo", "tuananhdo9829@gmail.com", "Tuan", "Do", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
         Role roleAdmin = entityManager.find(Role.class, 1);
         user.addRole(roleAdmin);
         User savedUser = userRepository.save(user);
@@ -39,10 +39,10 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateFourUserWithOneRole() {
-        User staff1 = new User("staff5", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
-        User staff2 = new User("staff6", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
-        User staff3 = new User("staff7", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
-        User staff4 = new User("staff8", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User staff1 = new User("staff5", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
+        User staff2 = new User("staff6", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
+        User staff3 = new User("staff7", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
+        User staff4 = new User("staff8", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
         Role roleStaff = entityManager.find(Role.class, 2);
         staff1.addRole(roleStaff);
         staff2.addRole(roleStaff);
@@ -53,8 +53,8 @@ public class UserRepositoryTests {
 
     @Test
     public void testCreateTwoUserWithOneRole() {
-        User staff1 = new User("staff10", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
-        User staff2 = new User("staff12", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka",true);
+        User staff1 = new User("staff10", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
+        User staff2 = new User("staff12", "staff1@gmail.com", "staff1", "staff1", "$2a$10$zL0Z9wUeH1JerwZKLLmTzeftfWq4lGCdHyg8McC0zHLXKxaUyhhka", true);
         Role roleStaff = entityManager.find(Role.class, 2);
         staff1.addRole(roleStaff);
         staff2.addRole(roleStaff);
@@ -136,7 +136,7 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void testUpdateAuthenticationType(){
+    public void testUpdateAuthenticationType() {
         Integer id = 2;
         userRepository.updateAuthenticationType(id, AuthenticationType.GOOGLE);
 

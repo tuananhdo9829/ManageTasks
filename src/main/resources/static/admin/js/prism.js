@@ -1,4 +1,3 @@
-
 /* **********************************************
      Begin prism-core.js
 ********************************************** */
@@ -17,7 +16,7 @@ var _self = (typeof window !== 'undefined')
  * @author Lea Verou http://lea.verou.me
  */
 
-var Prism = (function (_self){
+var Prism = (function (_self) {
 
 // Private helper vars
     var lang = /\blang(?:uage)?-([\w-]+)\b/i;
@@ -43,7 +42,7 @@ var Prism = (function (_self){
 
             objId: function (obj) {
                 if (!obj['__id']) {
-                    Object.defineProperty(obj, '__id', { value: ++uniqueId });
+                    Object.defineProperty(obj, '__id', {value: ++uniqueId});
                 }
                 return obj['__id'];
             },
@@ -137,7 +136,7 @@ var Prism = (function (_self){
                 root[inside] = ret;
 
                 // Update references in other language definitions
-                _.languages.DFS(_.languages, function(key, value) {
+                _.languages.DFS(_.languages, function (key, value) {
                     if (value === old && key != inside) {
                         this[key] = ret;
                     }
@@ -162,8 +161,7 @@ var Prism = (function (_self){
                         if (propertyType === 'Object' && !visited[objId(property)]) {
                             visited[objId(property)] = true;
                             DFS(property, callback, null, visited);
-                        }
-                        else if (propertyType === 'Array' && !visited[objId(property)]) {
+                        } else if (propertyType === 'Array' && !visited[objId(property)]) {
                             visited[objId(property)] = true;
                             DFS(property, callback, i, visited);
                         }
@@ -173,11 +171,11 @@ var Prism = (function (_self){
         },
         plugins: {},
 
-        highlightAll: function(async, callback) {
+        highlightAll: function (async, callback) {
             _.highlightAllUnder(document, async, callback);
         },
 
-        highlightAllUnder: function(container, async, callback) {
+        highlightAllUnder: function (container, async, callback) {
             var env = {
                 callback: callback,
                 selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
@@ -187,12 +185,12 @@ var Prism = (function (_self){
 
             var elements = env.elements || container.querySelectorAll(env.selector);
 
-            for (var i=0, element; element = elements[i++];) {
+            for (var i = 0, element; element = elements[i++];) {
                 _.highlightElement(element, async === true, env.callback);
             }
         },
 
-        highlightElement: function(element, async, callback) {
+        highlightElement: function (element, async, callback) {
             // Find language
             var language, grammar, parent = element;
 
@@ -201,7 +199,7 @@ var Prism = (function (_self){
             }
 
             if (parent) {
-                language = (parent.className.match(lang) || [,''])[1].toLowerCase();
+                language = (parent.className.match(lang) || [, ''])[1].toLowerCase();
                 grammar = _.languages[language];
             }
 
@@ -255,7 +253,7 @@ var Prism = (function (_self){
             if (async && _self.Worker) {
                 var worker = new Worker(_.filename);
 
-                worker.onmessage = function(evt) {
+                worker.onmessage = function (evt) {
                     insertHighlightedCode(evt.data);
                 };
 
@@ -264,8 +262,7 @@ var Prism = (function (_self){
                     code: env.code,
                     immediateClose: true
                 }));
-            }
-            else {
+            } else {
                 insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
             }
         },
@@ -284,7 +281,7 @@ var Prism = (function (_self){
 
         matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
             for (var token in grammar) {
-                if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+                if (!grammar.hasOwnProperty(token) || !grammar[token]) {
                     continue;
                 }
 
@@ -370,7 +367,7 @@ var Prism = (function (_self){
                             continue;
                         }
 
-                        if(lookbehind) {
+                        if (lookbehind) {
                             lookbehindLength = match[1] ? match[1].length : 0;
                         }
 
@@ -388,7 +385,7 @@ var Prism = (function (_self){
                             args.push(before);
                         }
 
-                        var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
+                        var wrapped = new Token(token, inside ? _.tokenize(match, inside) : match, alias, match, greedy);
 
                         args.push(wrapped);
 
@@ -408,7 +405,7 @@ var Prism = (function (_self){
             }
         },
 
-        tokenize: function(text, grammar) {
+        tokenize: function (text, grammar) {
             var strarr = [text];
 
             var rest = grammar.rest;
@@ -444,7 +441,7 @@ var Prism = (function (_self){
                     return;
                 }
 
-                for (var i=0, callback; callback = callbacks[i++];) {
+                for (var i = 0, callback; callback = callbacks[i++];) {
                     callback(env);
                 }
             }
@@ -460,17 +457,17 @@ var Prism = (function (_self){
         this.content = content;
         this.alias = alias;
         // Copy of the full string this token was created from
-        this.length = (matchedStr || "").length|0;
+        this.length = (matchedStr || "").length | 0;
         this.greedy = !!greedy;
     }
 
-    Token.stringify = function(o, language, parent) {
+    Token.stringify = function (o, language, parent) {
         if (typeof o == 'string') {
             return o;
         }
 
         if (Array.isArray(o)) {
-            return o.map(function(element) {
+            return o.map(function (element) {
                 return Token.stringify(element, language, o);
             }).join('');
         }
@@ -492,7 +489,7 @@ var Prism = (function (_self){
 
         _.hooks.run('wrap', env);
 
-        var attributes = Object.keys(env.attributes).map(function(name) {
+        var attributes = Object.keys(env.attributes).map(function (name) {
             return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
         }).join(' ');
 
@@ -531,14 +528,13 @@ var Prism = (function (_self){
         _.filename = script.src;
 
         if (!_.manual && !script.hasAttribute('data-manual')) {
-            if(document.readyState !== "loading") {
+            if (document.readyState !== "loading") {
                 if (window.requestAnimationFrame) {
                     window.requestAnimationFrame(_.highlightAll);
                 } else {
                     window.setTimeout(_.highlightAll, 16);
                 }
-            }
-            else {
+            } else {
                 document.addEventListener('DOMContentLoaded', _.highlightAll);
             }
         }
@@ -607,7 +603,7 @@ Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
     Prism.languages.markup['entity'];
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function(env) {
+Prism.hooks.add('wrap', function (env) {
 
     if (env.type === 'entity') {
         env.attributes['title'] = env.content.replace(/&amp;/, '&');
@@ -861,7 +857,7 @@ Prism.languages.js = Prism.languages.javascript;
     /**
      * @param {Element} [container=document]
      */
-    self.Prism.fileHighlight = function(container) {
+    self.Prism.fileHighlight = function (container) {
         container = container || document;
 
         var Extensions = {
@@ -922,11 +918,9 @@ Prism.languages.js = Prism.languages.javascript;
                         Prism.highlightElement(code);
                         // mark as loaded
                         pre.setAttribute('data-src-loaded', '');
-                    }
-                    else if (xhr.status >= 400) {
+                    } else if (xhr.status >= 400) {
                         code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                    }
-                    else {
+                    } else {
                         code.textContent = '✖ Error: File does not exist or is empty';
                     }
                 }

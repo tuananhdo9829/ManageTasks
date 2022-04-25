@@ -6,9 +6,12 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('autosize'), require('@shopify/draggable/lib/draggable'), require('@shopify/draggable/lib/plugins'), require('list.js'), require('flatpickr'), require('prismjs')) :
         typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'autosize', '@shopify/draggable/lib/draggable', '@shopify/draggable/lib/plugins', 'list.js', 'flatpickr', 'prismjs'], factory) :
             (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.theme = {}, global.jQuery, global.autosize, global.Draggable, global.SwapAnimation, global.List, global.flatpickr, global.Prism));
-}(this, (function (exports, jQuery, autosize, Draggable, SwapAnimation, List, flatpickr, Prism) { 'use strict';
+}(this, (function (exports, jQuery, autosize, Draggable, SwapAnimation, List, flatpickr, Prism) {
+    'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+    function _interopDefaultLegacy(e) {
+        return e && typeof e === 'object' && 'default' in e ? e : {'default': e};
+    }
 
     var jQuery__default = /*#__PURE__*/_interopDefaultLegacy(jQuery);
     var autosize__default = /*#__PURE__*/_interopDefaultLegacy(autosize);
@@ -666,7 +669,7 @@
     exports.mrKanban = mrKanban;
     exports.mrUtil = mrUtil;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
+    Object.defineProperty(exports, '__esModule', {value: true});
 
 })));
 //# sourceMappingURL=theme.js.map

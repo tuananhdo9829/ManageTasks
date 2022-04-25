@@ -77,7 +77,7 @@
             </form>
             <div class="dropdown mt-2" sec:authorize="hasAnyAuthority('Admin','Manage')">
                 <a class="btn btn-primary btn-block" th:href="@{/projects/new}" type="button" id="newContentButton"
-                        aria-haspopup="true" aria-expanded="false">
+                   aria-haspopup="true" aria-expanded="false">
                     Add New
                 </a>
             </div>
@@ -114,7 +114,7 @@
         <div class="dropdown-menu dropdown-menu-right">
 
             <a class="dropdown-item" th:href="@{/users/account}">Account Details</a>
-                <a class="dropdown-item"  data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
             <a class="dropdown-item" href="#">Share</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-danger" href="javascript: document.loggoutForm.submit();">Leave</a>
@@ -165,7 +165,8 @@
         <div class="media-body ml-3">
             <div class="custom-file custom-file-naked d-block mb-1">
                 <input type="hidden" th:field="*{photos}">
-                <input type="file" class="custom-file-input d-none" name="image" accept="image/png, image/jpg" th:id="${users.id}" id="fileImage" required>
+                <input type="file" class="custom-file-input d-none" name="image" accept="image/png, image/jpg"
+                       th:id="${users.id}" id="fileImage" required>
                 <img alt="Photo Preview" id="thumbnail"
                      th:src="@{${users.photosImagePath}}"
                      class="avatar avatar-lg"/>
@@ -210,7 +211,8 @@
     <div class="d-flex align-items-center">
         <ul class="avatars">
             <li th:each="users : ${listAllUsers}">
-                <a th:href="@{'/users/edit/'+${users.id}}" data-toggle="tooltip" data-placement="top" th:title="${users.username}">
+                <a th:href="@{'/users/edit/'+${users.id}}" data-toggle="tooltip" data-placement="top"
+                   th:title="${users.username}">
                     <img alt="Claire Connors" class="avatar" th:src="@{${users.photosImagePath}}"/>
                 </a>
             </li>

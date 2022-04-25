@@ -186,14 +186,14 @@ public class UserService {
     }
 
     private void setName(String name, User user) {
-        String [] nameArray = name.split(" ");
-        if (nameArray.length < 2){
+        String[] nameArray = name.split(" ");
+        if (nameArray.length < 2) {
             user.setFirstName(name);
             user.setLastName("");
-        }else {
+        } else {
             String firstName = nameArray[0];
             user.setFirstName(firstName);
-            String lastName = name.replaceFirst(firstName,"");
+            String lastName = name.replaceFirst(firstName, "");
             user.setLastName(lastName);
         }
     }

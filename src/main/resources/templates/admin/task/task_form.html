@@ -43,9 +43,10 @@
                                     <h6>General Details</h6>
 
                                     <div class="form-group row">
-                                        <label class="col-3">Choose Project:      </label>
-                                        <select class="form-control col " th:field="*{project}" th:classappend="${#fields.hasErrors('project')} ? 'is-invalid' : '' " >
-                                            <option value="0">Choose Project </option>
+                                        <label class="col-3">Choose Project: </label>
+                                        <select class="form-control col " th:field="*{project}"
+                                                th:classappend="${#fields.hasErrors('project')} ? 'is-invalid' : '' ">
+                                            <option value="0">Choose Project</option>
                                             <th:block th:each="project : ${listAllProjects}">
                                                 <option th:value="${project.id}">[[${project.name}]]</option>
                                             </th:block>
@@ -53,23 +54,26 @@
                                     </div>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Name</label>
-                                        <input class="form-control col  "  type="text" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+                                        <input class="form-control col  " type="text" th:field="*{name}"
+                                               th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
                                                placeholder="Enter Your Task"
                                                name="project-name"/>
                                     </div>
 
                                     <div class="form-group row">
                                         <label class="col-3">Description</label>
-                                        <textarea class="form-control col "  rows="3" th:field="*{description} " th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
+                                        <textarea class="form-control col " rows="3" th:field="*{description} "
+                                                  th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : '' "
                                                   placeholder="Enter Your Description"
-                                                  name="project-description" ></textarea>
+                                                  name="project-description"></textarea>
                                     </div>
 
 
                                     <div class="form-group row">
                                         <label class="col-3">Status:</label>
                                         <select class="form-control col " th:field="*{status}">
-                                                <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}" th:value="${os}" th:text="${os.name}"></option>
+                                            <option th:each="os :${T(com.tuananhdo.entity.TaskStatus).values()}"
+                                                    th:value="${os}" th:text="${os.name}"></option>
                                         </select>
                                     </div>
 
@@ -82,14 +86,14 @@
                                                name="task-start"
                                                placeholder="Select a date" data-flatpickr
                                                th:data-default-date="${#dates.format(#dates.createNow(),'yyyy-MM-dd')}"
-                                               data-alt-input="true" />
+                                               data-alt-input="true"/>
                                     </div>
                                     <div class="form-group row align-items-center">
                                         <label class="col-3">Due Date</label>
                                         <input class="form-control col" type="date" th:field="*{dateTimeEnd}"
                                                name="task-due"
                                                placeholder="Select a date" data-flatpickr
-                                               data-alt-input="true" />
+                                               data-alt-input="true"/>
 
                                     </div>
                                     <div class="alert alert-warning text-small" role="alert">
@@ -127,19 +131,19 @@
                                         </div>
 
                                         <div class="form-group-users">
-                                                <th:block th:each="user : ${listAllUsers}">
-                                                    <div class=" custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input "
-                                                               th:field="*{user.id}" th:value="${user.id}"
-                                                               th:id="${user.id}">
-                                                        <label class="custom-control-label" th:for="${user.id}">
+                                            <th:block th:each="user : ${listAllUsers}">
+                                                <div class=" custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input "
+                                                           th:field="*{user.id}" th:value="${user.id}"
+                                                           th:id="${user.id}">
+                                                    <label class="custom-control-label" th:for="${user.id}">
                                   <span class="d-flex align-items-center">
                                     <img alt="Claire Connors" th:src="@{${user.photosImagePath}}" class="avatar mr-2"/>
                                     <span class="h6 mb-0" data-filter-by="text">[[${user.username}]]</span>
                                   </span>
-                                                        </label>
-                                                    </div>
-                                                </th:block>
+                                                    </label>
+                                                </div>
+                                            </th:block>
                                         </div>
                                     </div>
 

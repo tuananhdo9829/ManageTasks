@@ -63,6 +63,6 @@ public class RolesRepositoryTests {
     @Test
     public void testDeleteRole() {
         Integer roleId = 2;
-         repository.deleteById(roleId);
+        repository.deleteById(roleId);
     }
 }

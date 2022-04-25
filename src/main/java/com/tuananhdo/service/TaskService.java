@@ -49,7 +49,7 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public User findUserCreatedTask(String username){
+    public User findUserCreatedTask(String username) {
         return userRepository.getUserByUsername(username);
     }
 

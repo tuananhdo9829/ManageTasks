@@ -15,10 +15,10 @@
                 <div class="col-lg-11 col-xl-10">
                     <div class="page-header mb-4">
                         <div class="media">
-<!--                            <img alt="Image" th:src="@{${user.photosImagePath}}" class="avatar avatar-lg mt-1" />-->
+                            <!--                            <img alt="Image" th:src="@{${user.photosImagePath}}" class="avatar avatar-lg mt-1" />-->
                             <div class="media-body ml-3">
                                 &nbsp;
-<!--                                <h2>Welcome : <span class="mb-0" style="color: purple" sec:authentication="name"></span></h2>-->
+                                <!--                                <h2>Welcome : <span class="mb-0" style="color: purple" sec:authentication="name"></span></h2>-->
                             </div>
                         </div>
                         <p class="lead">A small web studio crafting lovely template products.</p>
@@ -31,17 +31,21 @@
 
                     <ul class="nav nav-tabs nav-fill" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams" aria-selected="true">Teams</a>
+                            <a class="nav-link active" data-toggle="tab" href="#teams" role="tab" aria-controls="teams"
+                               aria-selected="true">Teams</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#projects" role="tab" aria-controls="projects" aria-selected="false">Projects</a>
+                            <a class="nav-link" data-toggle="tab" href="#projects" role="tab" aria-controls="projects"
+                               aria-selected="false">Projects</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">Tasks</a>
+                            <a class="nav-link" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks"
+                               aria-selected="false">Tasks</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="teams" role="tabpanel" data-filter-list="content-list-body">
+                        <div class="tab-pane fade show active" id="teams" role="tabpanel"
+                             data-filter-list="content-list-body">
                             <div class="row content-list-head">
                                 <div class="col-auto" sec:authorize="hasAnyAuthority('Admin,Manage')">
                                     <h3>Teams</h3>
@@ -59,7 +63,8 @@
                             <i class="material-icons">filter_list</i>
                           </span>
                                         </div>
-                                        <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams">
+                                        <input type="search" class="form-control filter-list-input"
+                                               placeholder="Filter teams" aria-label="Filter teams">
                                     </div>
                                 </form>
                             </div>
@@ -67,36 +72,41 @@
                             <div class="content-list-body row">
 
                                 <th:block th:each="team : ${listAllTeams}">
-                                <div class="col-md-6">
-                                    <div class="card card-team">
-                                        <div class="card-body" >
-                                            <div class="dropdown card-options" sec:authorize="hasAnyAuthority('Admin,Manage')">
-                                                <button class="btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="material-icons">more_vert</i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right" >
-                                                    <a class="dropdown-item" th:href="@{'/teams/edit/'+${team.id}}">Manage</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger link-delete" th:entityId="${team.id}" th:href="@{'/teams/delete/'+${team.id}}">Delete</a>
+                                    <div class="col-md-6">
+                                        <div class="card card-team">
+                                            <div class="card-body">
+                                                <div class="dropdown card-options"
+                                                     sec:authorize="hasAnyAuthority('Admin,Manage')">
+                                                    <button class="btn-options" type="button" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                        <i class="material-icons">more_vert</i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" th:href="@{'/teams/edit/'+${team.id}}">Manage</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item text-danger link-delete"
+                                                           th:entityId="${team.id}"
+                                                           th:href="@{'/teams/delete/'+${team.id}}">Delete</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-title">
-                                                <a href="#"><h5 data-filter-by="text">[[${team.name}]]</h5></a>
-                                                <span>[[${team.name}]]</span>
-                                                <span >[[${#lists.size(team.users) + ' Members'}]]</span>
-                                            </div>
-                                            <ul class="avatars">
+                                                <div class="card-title">
+                                                    <a href="#"><h5 data-filter-by="text">[[${team.name}]]</h5></a>
+                                                    <span>[[${team.name}]]</span>
+                                                    <span>[[${#lists.size(team.users) + ' Members'}]]</span>
+                                                </div>
+                                                <ul class="avatars">
 
-                                                <li th:each="avatar : ${team.users}">
-                                                    <a href="#" data-toggle="tooltip" th:title="${avatar.username}">
-                                                        <img alt="Kenny Tran" class="avatar" th:src="@{${avatar.photosImagePath}}" />
-                                                    </a>
-                                                </li>
+                                                    <li th:each="avatar : ${team.users}">
+                                                        <a href="#" data-toggle="tooltip" th:title="${avatar.username}">
+                                                            <img alt="Kenny Tran" class="avatar"
+                                                                 th:src="@{${avatar.photosImagePath}}"/>
+                                                        </a>
+                                                    </li>
 
-                                            </ul>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 </th:block>
                             </div>
                             <!--end of content-list-body-->
@@ -114,7 +124,8 @@
                               <i class="material-icons">filter_list</i>
                             </span>
                                             </div>
-                                            <input type="search" class="form-control filter-list-input" placeholder="Filter projects" aria-label="Filter Projects">
+                                            <input type="search" class="form-control filter-list-input"
+                                                   placeholder="Filter projects" aria-label="Filter Projects">
                                         </div>
                                     </form>
                                 </div>
@@ -127,15 +138,19 @@
                                                 <div th:replace="admin/fragment_status :: progress_project(${project.projectStatus})"></div>
 
                                                 <div class="card-body">
-                                                    <div class="dropdown card-options" sec:authorize="hasAuthority('Admin')">
+                                                    <div class="dropdown card-options"
+                                                         sec:authorize="hasAuthority('Admin')">
                                                         <button class="btn-options" type="button"
                                                                 id="project-dropdown-button-1" data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
                                                             <i class="material-icons">more_vert</i>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
-                                                            <a class="dropdown-item link-delete" th:entityId="${project.id}" th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
+                                                            <a class="dropdown-item"
+                                                               th:href="@{'/projects/edit/'+${project.id}}">Edit</a>
+                                                            <a class="dropdown-item link-delete"
+                                                               th:entityId="${project.id}"
+                                                               th:href="@{'/projects/delete/'+${project.id}}">Remove</a>
                                                         </div>
                                                     </div>
                                                     <div class="card-title">
@@ -145,8 +160,10 @@
 
                                                     <ul class="avatars">
                                                         <li th:each="avatar : ${project.users}">
-                                                            <a href="#" data-toggle="tooltip" th:title="${avatar.username}">
-                                                                <img alt="Kenny Tran" class="avatar" th:src="@{${avatar.photosImagePath}}" />
+                                                            <a href="#" data-toggle="tooltip"
+                                                               th:title="${avatar.username}">
+                                                                <img alt="Kenny Tran" class="avatar"
+                                                                     th:src="@{${avatar.photosImagePath}}"/>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -162,7 +179,8 @@
                                                                   th:text="${#lists.size(project.users)} + ' Members'"></span>
 
                                                         </div>
-                                                        <span class="text-small" th:text="${project.timeEnd.getDate() - project.timeStart.getDate() + ' Days'}">Due 4 days</span>
+                                                        <span class="text-small"
+                                                              th:text="${project.timeEnd.getDate() - project.timeStart.getDate() + ' Days'}">Due 4 days</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,7 +203,8 @@
                             <i class="material-icons">filter_list</i>
                           </span>
                                         </div>
-                                        <input type="search" class="form-control filter-list-input" placeholder="Filter tasks" aria-label="Filter Tasks">
+                                        <input type="search" class="form-control filter-list-input"
+                                               placeholder="Filter tasks" aria-label="Filter Tasks">
                                     </div>
                                 </form>
                             </div>
@@ -195,17 +214,19 @@
                                     <div class="card-list">
                                         <div class="card-list-head">
                                             <h6>[[${task.project.name}]]</h6>
-                                            <div class="dropdown" sec:authorize="hasAnyAuthority('Admin','Manage')" >
+                                            <div class="dropdown" sec:authorize="hasAnyAuthority('Admin','Manage')">
                                                 <button class="btn-options" type="button"
                                                         id="cardlist-dropdown-button-1"
                                                         data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
                                                     <i class="material-icons">more_vert</i>
                                                 </button>
-                                                <div class="dropdown-menu dropdown-menu-right" >
+                                                <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" th:href="@{'/task/edit/' + ${task.id}}">Rename
                                                         Task</a>
-                                                    <a class="dropdown-item text-danger link-delete" th:entityId="${task.id}" th:entityName="task.name" sec:authorize="hasAnyAuthority('Admin,Manage')"
+                                                    <a class="dropdown-item text-danger link-delete"
+                                                       th:entityId="${task.id}" th:entityName="task.name"
+                                                       sec:authorize="hasAnyAuthority('Admin,Manage')"
                                                        th:href="@{'/task/delete/' + ${task.id}}">Remove Task</a>
                                                 </div>
 
@@ -262,8 +283,9 @@
     $(document).ready(function () {
         $(".link-delete").on("click", function (event) {
             event.preventDefault();
-            showDeleteConfirmModal($(this),'')
+            showDeleteConfirmModal($(this), '')
         });
     });
-</script></body>
+</script>
+</body>
 </html>

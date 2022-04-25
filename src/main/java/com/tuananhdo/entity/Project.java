@@ -33,12 +33,12 @@ public class Project {
 
     @Column(nullable = false, length = 35, unique = true)
     @NotBlank(message = "")
-    @Size(min = 2,message = "Should have at least 2 characters")
+    @Size(min = 2, message = "Should have at least 2 characters")
     private String name;
 
     @Column(nullable = false, length = 200)
     @NotBlank(message = "")
-    @Size(min = 2,message = "Should have at least 2 characters")
+    @Size(min = 2, message = "Should have at least 2 characters")
     private String description;
 
     @Column(name = "created_time")
